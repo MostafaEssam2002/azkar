@@ -5,10 +5,10 @@ const RowZekr = () => {
     return (
         <div style={{
             display: "flex",
-            width:"350px",
+            width:"150px",
             height:"250px"
         }}>
-            <CounterButton num={100} />
+            <CounterButton num={100} id={1} />
         </div>
     )
 }

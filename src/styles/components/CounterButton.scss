@@ -1,14 +1,8 @@
-.counterSection {
-    user-select: none;
-}
+.counterSection,
 .counterSectionDecremented {
-    user-select: none;
-}
-.counterSection {
     width: 100%;
     height: 100%;
     aspect-ratio: 1 / 2.2;
-    background-color: #22c7b8;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -17,51 +11,25 @@
     position: relative;
     overflow: hidden;
     transition: 0.3s;
+    user-select: none;
 }
-.counterSectionDecremented {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 1 / 2.2;
-    background-color: #3498db;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    position: relative;
-    overflow: hidden;
-    transition: 0.3s;
-    .counterSectionButton {
-        background: transparent;
-        border: none;
-        font-size: clamp(3rem, 7vw, 5rem);
-        font-weight: bold;
-        color: #FFFFFF;
-        cursor: pointer;
-        line-height: 1;
-        font-family: monospace;
-        transition: 0.2s;
-    }
-    .counterShadow {
-        font-size: clamp(3rem, 7vw, 5rem);
-        font-weight: bold;
-        color: #FFFFFF;
-        line-height: 1;
-        font-family: monospace;
-        pointer-events: none;
-        user-select: none;
-        margin-top: -28px;
-        opacity: 0.2;
-    }
-}
-/* hover على الكارت نفسه */
 
-.counterSection:hover {
-    background-color: #e74c3c;
+/* الحالة العادية */
+.counterSection {
+    background-color: #22c7b8;
 }
+
+/* الحالة بعد النقص */
+.counterSectionDecremented {
+    background-color: #3498db;
+}
+
+/* Hover */
+.counterSection:hover,
 .counterSectionDecremented:hover {
     background-color: #e74c3c;
 }
+
 /* الرقم الأساسي */
 .counterSectionButton {
     background: transparent;
@@ -73,24 +41,35 @@
     line-height: 1;
     font-family: monospace;
     transition: 0.2s;
+    pointer-events: none;
 }
-/* الرقم الشفاف */
+
+/* shadow الرقم */
 .counterShadow {
     font-size: clamp(3rem, 7vw, 5rem);
     font-weight: bold;
     color: #2C3E50;
+    opacity: 0.2;
     line-height: 1;
     font-family: monospace;
-    pointer-events: none;
-    user-select: none;
     margin-top: -28px;
-    opacity: 0.2;
+    pointer-events: none;
 }
-/* زرار الريست */
-.counterSectionReset {
+
+/* footer */
+.counterFooter {
     position: absolute;
-    bottom: 15px;
-    left: 15px;
+    bottom: 0.8rem;
+    left: 0.8rem;
+    right: 0.8rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* زرار reset */
+.counterSectionReset {
     width: clamp(40px, 5vw, 50px);
     height: clamp(40px, 5vw, 50px);
     border-radius: 50%;
@@ -105,28 +84,30 @@
 .counterSectionReset:hover {
     transform: rotate(-120deg);
 }
+
+/* ID */
+.counterId {
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+}
+
+/* حالة الديكرمنت (مهم) */
+.counterSectionDecremented .counterSectionButton,
+.counterSectionDecremented .counterShadow {
+    color: #ffffff;
+}
+
+.counterSectionDecremented .counterId {
+    color: rgba(255, 255, 255, 0.8);
+}
+
 /* موبايل */
 @media (max-width: 768px) {
-    .counterSection {
-        width: 100px;
-        padding: 0.7rem;
+    .counterFooter {
+        bottom: 0.5rem;
+        left: 0.5rem;
+        right: 0.5rem;
     }
-
-    .counterSectionReset {
-        bottom: 10px;
-        left: 10px;
-    }
-}
-.counterContent {
-    width: 100%;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    cursor: pointer;
-}
-.counterSectionButton,
-.counterShadow {
-    pointer-events: none;
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CounterButton = ({ num }) => {
+const CounterButton = ({ num, id }) => {
     const [count, setCount] = useState(num);
 
     const handleCount = () => {
@@ -8,24 +8,37 @@ const CounterButton = ({ num }) => {
             setCount(count - 1);
         }
     };
+
+    const handleReset = (e) => {
+        e.stopPropagation();
+        setCount(num);
+    };
+
     return (
-        <div className={count < num ? "counterSectionDecremented":"counterSection"} onClick={handleCount}>
+        <div
+            className={count < num ? "counterSectionDecremented" : "counterSection"}
+            onClick={handleCount}
+        >
             <button className="counterSectionButton">
                 {String(count).padStart(2, "0")}
             </button>
+
             <div className="counterShadow">
                 {num}
             </div>
-            <button
-                className="counterSectionReset"
-                onClick={(e) => {
-                    e.stopPropagation(); // يمنع decrement
-                    setCount(num);
-                }}
-            >
-                ↺
-            </button>
 
+            <div className="counterFooter">
+                <button
+                    className="counterSectionReset"
+                    onClick={handleReset}
+                >
+                    ↺
+                </button>
+
+                <span className="counterId">
+                    {id}
+                </span>
+            </div>
         </div>
     );
 };
