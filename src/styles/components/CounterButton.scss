@@ -1,113 +1,169 @@
 .counterSection,
 .counterSectionDecremented {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 1 / 2.2;
-    border-radius: 12px;
+    width: clamp(100px, 14vw, 180px);
+    height: auto;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+
     padding: 1rem;
     position: relative;
     overflow: hidden;
+
     transition: 0.3s;
     user-select: none;
+    flex-shrink: 0;
 }
 
-/* الحالة العادية */
+/* الحالة الأساسية */
 .counterSection {
-    background-color: #22c7b8;
+    background: linear-gradient(
+        135deg,
+        #18bc9c 0%,
+        #16a085 100%
+    );
 }
 
-/* الحالة بعد النقص */
+/* بعد الضغط */
 .counterSectionDecremented {
-    background-color: #3498db;
+    background: linear-gradient(
+        135deg,
+        #3498db 0%,
+        #2980b9 100%
+    );
 }
 
 /* Hover */
 .counterSection:hover,
 .counterSectionDecremented:hover {
-    background-color: #e74c3c;
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* wrapper الرقم */
+.counterNumberWrapper {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 0.5rem;
 }
 
 /* الرقم الأساسي */
 .counterSectionButton {
     background: transparent;
     border: none;
-    font-size: clamp(3rem, 7vw, 5rem);
+
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: bold;
-    color: #2C3E50;
-    cursor: pointer;
-    line-height: 1;
     font-family: monospace;
-    transition: 0.2s;
+
+    color: #ffffff;
+
+    line-height: 1;
+
+    z-index: 2;
+
     pointer-events: none;
 }
 
-/* shadow الرقم */
+/* الانعكاس */
 .counterShadow {
-    font-size: clamp(3rem, 7vw, 5rem);
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1);
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: bold;
-    color: #2C3E50;
-    opacity: 0.2;
-    line-height: 1;
     font-family: monospace;
-    margin-top: -28px;
+    line-height: 1;
+    color: rgb(255, 255, 255);
+    opacity: 0.2;
     pointer-events: none;
 }
 
 /* footer */
 .counterFooter {
-    position: absolute;
-    bottom: 0.8rem;
-    left: 0.8rem;
-    right: 0.8rem;
+    width: 100%;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
+    margin-top: auto;
 }
 
-/* زرار reset */
+/* زر reset */
 .counterSectionReset {
-    width: clamp(40px, 5vw, 50px);
-    height: clamp(40px, 5vw, 50px);
+    width: clamp(38px, 6vw, 52px);
+    height: clamp(38px, 6vw, 52px);
+
     border-radius: 50%;
-    border: none;
+
+    border: 2px solid rgba(255,255,255,0.6);
+
     background: transparent;
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    color: #1b7f78;
+
+    color: #ffffff;
+
+    font-size: clamp(1.2rem, 4vw, 1.7rem);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     cursor: pointer;
+
     transition: 0.3s;
 }
 
 .counterSectionReset:hover {
     transform: rotate(-120deg);
+
+    background: rgba(255,255,255,0.15);
+
+    border-color: #ffffff;
 }
 
 /* ID */
 .counterId {
-    font-size: 1rem;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+
     font-weight: bold;
-    color: rgba(0, 0, 0, 0.4);
-    pointer-events: none;
+
+    color: rgba(255,255,255,0.8);
 }
 
-/* حالة الديكرمنت (مهم) */
-.counterSectionDecremented .counterSectionButton,
-.counterSectionDecremented .counterShadow {
-    color: #ffffff;
-}
-
-.counterSectionDecremented .counterId {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-/* موبايل */
+/* responsive */
 @media (max-width: 768px) {
-    .counterFooter {
-        bottom: 0.5rem;
-        left: 0.5rem;
-        right: 0.5rem;
+    .counterSection,
+    .counterSectionDecremented {
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .counterSection,
+    .counterSectionDecremented {
+        width: clamp(90px, 18vw, 120px);
+        padding: 0.7rem;
+        flex-shrink: 0;
+        align-self: stretch;
+        min-height: 100%;
+    }
+
+    .counterSectionButton {
+        font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+    }
+
+    .counterSectionReset {
+        width: clamp(34px, 7vw, 44px);
+        height: clamp(34px, 7vw, 44px);
     }
 }

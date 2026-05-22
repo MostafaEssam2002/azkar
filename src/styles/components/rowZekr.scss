@@ -1,0 +1,36 @@
+/* Row Zekr Container */
+.rowZekrContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: stretch;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .rowZekrContainer {
+        gap: 1.5rem;
+        padding: 0 0.8rem;
+    }
+}
+
+/* Tablet صغير */
+@media (max-width: 768px) {
+    .rowZekrContainer {
+        gap: 1rem;
+        padding: 0 0.5rem;
+    }
+}
+
+/* موبايل */
+@media (max-width: 480px) {
+    .rowZekrContainer {
+        gap: 0.3rem;
+        padding: 0 0.1rem;
+        align-items: center;
+    }
+}
+    

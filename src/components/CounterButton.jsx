@@ -9,28 +9,36 @@ const CounterButton = ({ num, id }) => {
         }
     };
 
-    const handleReset = (e) => {
+    const resetCounter = (e) => {
         e.stopPropagation();
         setCount(num);
     };
 
     return (
         <div
-            className={count < num ? "counterSectionDecremented" : "counterSection"}
+            className={
+                count < num
+                    ? "counterSectionDecremented"
+                    : "counterSection"
+            }
             onClick={handleCount}
         >
-            <button className="counterSectionButton">
-                {String(count).padStart(2, "0")}
-            </button>
+            {/* الرقم + الانعكاس */}
+            <div className="counterNumberWrapper">
+                <button className="counterSectionButton">
+                    {count}
+                </button>
 
-            <div className="counterShadow">
-                {num}
+                <span className="counterShadow">
+                    {num}
+                </span>
             </div>
 
+            {/* footer */}
             <div className="counterFooter">
                 <button
                     className="counterSectionReset"
-                    onClick={handleReset}
+                    onClick={resetCounter}
                 >
                     ↺
                 </button>
