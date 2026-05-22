@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CounterButton = ({ num, id }) => {
     const [count, setCount] = useState(num);
+
+    useEffect(() => {
+        setCount(num);
+    }, [num]);
 
     const handleCount = () => {
         if (count > 0) {
@@ -36,12 +40,12 @@ const CounterButton = ({ num, id }) => {
 
             {/* footer */}
             <div className="counterFooter">
-                <button
+                <span 
                     className="counterSectionReset"
                     onClick={resetCounter}
                 >
                     ↺
-                </button>
+                </span>
 
                 <span className="counterId">
                     {id}

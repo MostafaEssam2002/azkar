@@ -1,15 +1,12 @@
 import CounterButton from './CounterButton';
 import ZekrContent from './ZekrContent';
-const RowZekr = () => {
+const RowZekr = ({ count, description, content,basmala,reference , id }) => {
     return (
         <>
+        {console.log(`$Zekr.content = ${content}`)}
         <div className="rowZekrContainer">
-            <CounterButton num={100} id={1} />
-            <ZekrContent basmala={false} />
-        </div>
-        <div className="rowZekrContainer">
-            <CounterButton num={100} id={1} />
-            <ZekrContent basmala={true} />
+            <CounterButton num={count} id={id+1} />
+            <ZekrContent basmala={basmala} content={content} description={description} reference={reference} />
         </div>
         </>
     )

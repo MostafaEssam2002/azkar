@@ -1,0 +1,48 @@
+.azkar-box{
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-block: 1.2rem;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.azkar-box button{
+    flex: 1 1 10rem;
+    min-width: 12rem;
+    max-width: 16rem;
+    background-color: #0ca786;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: .75rem;
+    padding: .9rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.azkar-box button:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+    box-shadow: 0 8px 18px rgba(0,0,0,.12);
+}
+
+.azkar-box button:active{
+    transform: translateY(0);
+    background-color: #e74c3c;
+    border-color: rgba(231,76,60,.9);
+}
+
+.azkar-box button:focus-visible{
+    outline: 2px solid rgba(231,76,60,.45);
+    outline-offset: 3px;
+}

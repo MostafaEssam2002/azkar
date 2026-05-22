@@ -1,29 +1,32 @@
-import { useEffect, useRef } from 'react'
-// import './App.css'
-import getData from './api/getData';
-import Morning from './pages/Morning';
-import RowZekr from './components/RowZekr';
-
+import ZekrType from "./pages/ZekrType";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import NavBar from "./components/NavBar";
 function App() {
-  const hasFetched = useRef(false);
-
-  
-  useEffect(()=>{
-    if (hasFetched.current) return;
-    hasFetched.current = true;
-    const fetchData = async ()=>{
-      const result = await getData("https://raw.githubusercontent.com/nawafalqari/azkar-api/56df51279ab6eb86dc2f6202c7de26c8948331c1/azkar.json")
-      console.log(result);
-    }
-    fetchData()
-  },[])
-  return (
-    <>
-      <h1>Hello world </h1>
-      <Morning />
-      <RowZekr />
-    </>
-  )
+      const routing = createBrowserRouter([
+        // redirect root to /azkar
+        { path: "/", element: <Navigate to="/azkar" replace /> },
+        {
+          path: "/azkar",
+          children: [
+            { index: true, element: <ZekrType type="أذكار الصباح" /> },
+            { path: "أذكار-الصباح", element: <ZekrType type="أذكار الصباح" /> },
+            { path: "أذكار-المساء", element: <ZekrType type="أذكار المساء" /> },
+            { path: "أذكار-بعد-السلام-من-الصلاة-المفروضة", element: <ZekrType type="أذكار بعد السلام من الصلاة المفروضة" /> },
+            { path: "تسابيح", element: <ZekrType type="تسابيح" /> },
+            { path: "أذكار-النوم", element: <ZekrType type="أذكار النوم" /> },
+            { path: "أذكار-الاستيقاظ", element: <ZekrType type="أذكار الاستيقاظ" /> },
+            { path: "أدعية-القرآن", element: <ZekrType type="أدعية قرآنية" /> },
+            { path: "أدعية-الأنبياء", element: <ZekrType type="أدعية الأنبياء" /> },
+          ],
+        },
+      ])
+    return (
+        <>
+          <NavBar></NavBar>
+          <RouterProvider router={routing}>
+          </RouterProvider>
+        </>
+    );
 }
 
-export default App
+export default App;

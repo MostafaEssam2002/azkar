@@ -22,9 +22,24 @@ html{
   
   font-size: 10px;
 }
-body{
-  // background-color: red;
+body {
     transition: .4s;
+    white-space: pre-line;
+    margin: 0;
+    padding-top: 2rem;
+}
+
+.zekrType{
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-top: 1em;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 h1{
     font-size: 2.5em;

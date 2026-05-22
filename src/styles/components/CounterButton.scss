@@ -16,7 +16,7 @@
     user-select: none;
     flex-shrink: 0;
 }
-
+ 
 /* الحالة الأساسية */
 .counterSection {
     background: linear-gradient(
@@ -39,9 +39,9 @@
 .counterSection:hover,
 .counterSectionDecremented:hover {
     transform: translateY(-2px);
+    background :#e74c3c  ;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 
-    box-shadow:
-        0 8px 16px rgba(0,0,0,0.2);
 }
 
 /* wrapper الرقم */
@@ -52,7 +52,7 @@
     flex-direction: column;
     align-items: center;
 
-    margin-top: 0.5rem;
+    margin-top: -0.9rem;
 }
 
 /* الرقم الأساسي */
@@ -62,7 +62,7 @@
 
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: bold;
-    font-family: monospace;
+    font-family: "DS-Digital", monospace;
 
     color: #ffffff;
 
@@ -76,12 +76,12 @@
 /* الانعكاس */
 .counterShadow {
     position: absolute;
-    top: 80%;
+    top: 75%;
     left: 50%;
     transform: translateX(-50%) scaleY(1);
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: bold;
-    font-family: monospace;
+    font-family: "DS-Digital", monospace;
     line-height: 1;
     color: rgb(255, 255, 255);
     opacity: 0.2;
@@ -96,17 +96,19 @@
     align-items: center;
     justify-content: space-between;
 
-    margin-top: auto;
+    // margin-top: 0;
+    margin-bottom: -1.1rem;
 }
 
 /* زر reset */
 .counterSectionReset {
+    text-decoration: none  ;
     width: clamp(38px, 6vw, 52px);
     height: clamp(38px, 6vw, 52px);
 
-    border-radius: 50%;
+    // border-radius: 50%;
 
-    border: 2px solid rgba(255,255,255,0.6);
+    // border: 2px solid rgba(255,255,255,0.6);
 
     background: transparent;
 
@@ -125,10 +127,6 @@
 
 .counterSectionReset:hover {
     transform: rotate(-120deg);
-
-    background: rgba(255,255,255,0.15);
-
-    border-color: #ffffff;
 }
 
 /* ID */
