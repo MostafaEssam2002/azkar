@@ -2,7 +2,7 @@ const ReciterCard = ({id, name, ar_name, rawi, timing_url, server, surahs_count}
     return (
         <div className="reciter-card" dir="rtl">
         <div className="card-image">
-            <img src="public/book.png" alt="Quran"/>
+            <img src="/book.png" alt="Quran"/>
         </div>
         <div className="card-content">
         <div className="top-row">
