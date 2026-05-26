@@ -9,3 +9,5 @@ https://www.hisnmuslim.com/api/ar/27.json
                                                                                                                                        وده موقع انا صممته قرأن وتفسير ممكن يساعدك :  https://qurank-kareem.netlify.app/  
 وده لينك الموقع علي github : https://github.com/Mohamed20a/qurank-kareem
 https://web.facebook.com/groups/ElzeroWebSchool/posts/5919848848144130/?_rdc=1&_rdr#
+
+https://www.mp3quran.net/eng/api

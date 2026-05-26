@@ -1,0 +1,352 @@
+.reciter-card {
+    width: 100%;
+    background: white;
+    border-radius: 1.25rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: stretch;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+    position: relative;
+}
+
+.reciter-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+/* ===== IMAGE ===== */
+.card-image {
+    width: clamp(6rem, 15vw, 11.25rem);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f8f8;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===== CONTENT ===== */
+.card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(0.75rem, 3vw, 1.875rem);
+    gap: clamp(0.5rem, 2vw, 1.25rem);
+    min-width: 0;
+}
+
+/* ===== TOP ROW ===== */
+.top-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.classification {
+    background: transparent;
+    color: #888;
+    font-size: clamp(0.65rem, 1.5vw, 0.8125rem);
+    font-weight: 500;
+}
+
+.title-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
+}
+
+.reciter-id {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #1d5e4f;
+    color: white;
+    padding: 0.4rem 0.9rem;
+    border-radius: 0.5rem;
+    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+    font-weight: 700;
+    display: inline-block;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.title-box h2 {
+    font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+    line-height: 1.4;
+    color: #101828;
+    font-weight: 700;
+    text-align: right;
+    word-break: break-word;
+    width: 100%;
+    margin: 0;
+}
+
+/* ===== INFO ROW ===== */
+.info-row,
+.links-row {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.5rem, 2vw, 1.875rem);
+    flex-wrap: wrap;
+}
+
+.info-item,
+.link-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+}
+
+.info-item i,
+.link-item i {
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+    color: #1d5e4f;
+    min-width: 1rem;
+    flex-shrink: 0;
+}
+
+.info-item span,
+.link-item span {
+    display: block;
+    font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+    color: #888;
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.info-item p {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    font-weight: 600;
+    color: #111;
+    word-break: break-word;
+}
+
+.link-item div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+}
+
+.link-item a {
+    font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+    text-decoration: none;
+    color: #1d5e4f;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+.link-item a:hover {
+    color: #0f3a33;
+    text-decoration: underline;
+}
+
+/* ===== DIVIDERS ===== */
+.divider {
+    width: 1px;
+    align-self: stretch;
+    background: #e5e7eb;
+    min-height: 1.5rem;
+    flex-shrink: 0;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background: #e5e7eb;
+    flex-shrink: 0;
+}
+
+/* ===== BOTTOM ROW ===== */
+.bottom-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(0.5rem, 2vw, 1.875rem);
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.listen-btn {
+    border: none;
+    background: #1d5e4f;
+    color: white;
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 3vw, 1.75rem);
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: clamp(0.7rem, 1.5vw, 0.875rem);
+    font-family: "Cairo", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.listen-btn:hover {
+    background: #0f3a33;
+    transform: translateY(-2px);
+}
+
+.listen-btn:active {
+    transform: translateY(0);
+}
+
+.listen-btn i {
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+}
+
+.surah-count {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: right;
+    flex-direction: row-reverse;
+}
+
+.surah-count i {
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+    color: #1d5e4f;
+    flex-shrink: 0;
+}
+
+.surah-count span {
+    font-size: clamp(0.65rem, 1.3vw, 0.8125rem);
+    font-weight: 500;
+    color: #888;
+    white-space: nowrap;
+}
+
+.count-box {
+    background: #f0f0f0;
+    color: #1d5e4f;
+    min-width: clamp(2.2rem, 5vw, 3.125rem);
+    height: clamp(2.2rem, 5vw, 3.125rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.625rem;
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+    font-weight: bold;
+    flex-shrink: 0;
+}
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+/* Large Tablet: 768px - 1024px */
+@media (max-width: 64rem) {
+    .info-item,
+    .link-item {
+        min-width: 120px;
+    }
+}
+
+/* Small Tablet / Large Phone: 480px - 768px */
+@media (max-width: 48rem) {
+    .reciter-card {
+        border-radius: 1rem;
+    }
+    .card-image {
+        width: clamp(7rem, 20vw, 9rem);
+    }
+
+    .info-row,
+    .links-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .info-item,
+    .link-item {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .bottom-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+/* Mobile: 360px - 480px */
+@media (max-width: 30rem) {
+
+    .reciter-card {
+        border-radius: 0.875rem;
+    }
+
+    .card-image {
+        width: clamp(5.5rem, 22vw, 7rem);
+    }
+
+    .bottom-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .listen-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .surah-count {
+        justify-content: flex-end;
+    }
+}
+
+/* Extra Small: < 360px */
+@media (max-width: 22.5rem) {
+    .card-image {
+        width: clamp(4.5rem, 24vw, 5.5rem);
+    }
+
+    .card-content {
+        padding: 0.6rem;
+        gap: 0.4rem;
+    }
+}
+
+
+
+
+.spinnerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+

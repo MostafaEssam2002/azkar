@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
-
 const CounterButton = ({ num, id }) => {
     const [count, setCount] = useState(num);
-
-    useEffect(() => {
-        setCount(num);
-    }, [num]);
-
+    useEffect(() => {setCount(num);}, [num]);
     const handleCount = () => {
         if (count > 0) {
             setCount(count - 1);
         }
     };
-
     const resetCounter = (e) => {
         e.stopPropagation();
         setCount(num);
@@ -46,7 +40,6 @@ const CounterButton = ({ num, id }) => {
                 >
                     ↺
                 </span>
-
                 <span className="counterId">
                     {id}
                 </span>
@@ -54,5 +47,4 @@ const CounterButton = ({ num, id }) => {
         </div>
     );
 };
-
 export default CounterButton;

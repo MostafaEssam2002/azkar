@@ -1,0 +1,430 @@
+.quran-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: clamp(12px, 3vw, 24px) clamp(10px, 2vw, 20px);
+    background-color: #e8e0d0;
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(139,109,56,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(139,109,56,0.08) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* ================= BOOK CONTAINER ================= */
+.book-container {
+    position: relative;
+    filter: drop-shadow(0 20px 50px rgba(0,0,0,0.4)) drop-shadow(0 6px 16px rgba(0,0,0,0.2));
+}
+
+/* غلاف الكتاب - الجزء العلوي */
+.book-container::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    right: -6px;
+    top: -8px;
+    height: 10px;
+    background: linear-gradient(
+        to right,
+        #5C3D0E 0%,
+        #8B6020 15%,
+        #C49030 50%,
+        #8B6020 85%,
+        #5C3D0E 100%
+    );
+    border-radius: 4px 4px 0 0;
+    z-index: 6;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.4);
+}
+
+/* غلاف الكتاب - الجزء السفلي */
+.book-container::after {
+    content: "";
+    position: absolute;
+    left: -6px;
+    right: -6px;
+    bottom: -8px;
+    height: 10px;
+    background: linear-gradient(
+        to right,
+        #5C3D0E 0%,
+        #8B6020 15%,
+        #C49030 50%,
+        #8B6020 85%,
+        #5C3D0E 100%
+    );
+    border-radius: 0 0 4px 4px;
+    z-index: 6;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* ================= PAGES LIST ================= */
+.pages-list {
+    display: flex;
+    gap: 0;
+    border-radius: 4px 10px 10px 4px;
+    position: relative;
+}
+
+/* خط وسط الكتاب - العمود الفقري */
+.pages-list::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 12px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+        to right,
+        #8B6914 0%,
+        #C4952A 20%,
+        #E8C96A 40%,
+        #C4952A 60%,
+        #8B6914 100%
+    );
+    z-index: 5;
+    box-shadow:
+        -4px 0 12px rgba(0,0,0,0.3),
+         4px 0 12px rgba(0,0,0,0.3);
+}
+
+/* ظل داخلي على جانبي العمود الفقري */
+.pages-list::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0,0,0,0.08) 35%,
+        rgba(0,0,0,0.12) 45%,
+        rgba(0,0,0,0.12) 55%,
+        rgba(0,0,0,0.08) 65%,
+        transparent 100%
+    );
+    z-index: 4;
+    pointer-events: none;
+}
+
+/* ================= PAGE WRAPPER ================= */
+.page-wrapper {
+    /* نسبة صفحة المصحف 3:4.2 تقريباً */
+    width: clamp(240px, calc(44vw - 16px), 540px);
+    aspect-ratio: 3 / 4.2;
+    height: auto;
+    max-height: calc(92vh - 140px);
+    position: relative;
+    overflow: visible;
+}
+
+/* ================= PAGE INNER ================= */
+.page-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #fffef8;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+/* تأثير انحناء الصفحة عند الوسط - الصفحة اليمنى */
+.right-page .page-inner {
+    border-radius: 6px 0 0 6px;
+    box-shadow:
+        inset -8px 0 20px rgba(0,0,0,0.12),
+        inset -2px 0 6px rgba(0,0,0,0.08),
+        -6px 0 20px rgba(0,0,0,0.15);
+    background-image: linear-gradient(
+        to left,
+        rgba(200,175,120,0.15) 0%,
+        rgba(200,175,120,0.05) 8%,
+        transparent 20%
+    );
+}
+
+/* تأثير انحناء الصفحة عند الوسط - الصفحة اليسرى */
+.left-page .page-inner {
+    border-radius: 0 6px 6px 0;
+    box-shadow:
+        inset 8px 0 20px rgba(0,0,0,0.12),
+        inset 2px 0 6px rgba(0,0,0,0.08),
+        6px 0 20px rgba(0,0,0,0.15);
+    background-image: linear-gradient(
+        to right,
+        rgba(200,175,120,0.15) 0%,
+        rgba(200,175,120,0.05) 8%,
+        transparent 20%
+    );
+}
+
+/* تأثير تقوّس الصفحة من الأعلى */
+.right-page .page-inner::before,
+.left-page .page-inner::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 30px;
+    background: linear-gradient(
+        to bottom,
+        rgba(180,155,100,0.15),
+        transparent
+    );
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* ظل أثناء الحركة */
+.page-inner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.2),
+        transparent 60%
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 2;
+}
+
+.flip-next::after,
+.flip-prev::after {
+    opacity: 1;
+}
+
+.page-item {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center top;
+    display: block;
+}
+
+/* ================= FLIP ANIMATIONS ================= */
+.flip-next {
+    transform-origin: right center;
+    animation: flipNext 0.9s ease-in-out forwards;
+    z-index: 10;
+    position: relative;
+}
+
+@keyframes flipNext {
+    0%   { transform: rotateY(0deg); }
+    40%  { transform: rotateY(50deg); }
+    70%  { transform: rotateY(120deg); }
+    100% { transform: rotateY(180deg); }
+}
+
+.flip-prev {
+    transform-origin: left center;
+    animation: flipPrev 0.9s ease-in-out forwards;
+    z-index: 10;
+    position: relative;
+}
+
+@keyframes flipPrev {
+    0%   { transform: rotateY(0deg); }
+    40%  { transform: rotateY(-50deg); }
+    70%  { transform: rotateY(-120deg); }
+    100% { transform: rotateY(-180deg); }
+}
+
+/* ================= BUTTONS ================= */
+.buttons-container {
+    margin-top: clamp(16px, 3vw, 28px);
+    display: flex;
+    justify-content: center;
+    gap: clamp(10px, 2vw, 16px);
+    flex-wrap: wrap;
+}
+
+.nav-button {
+    padding: clamp(10px, 1.5vw, 13px) clamp(24px, 4vw, 40px);
+    border: none;
+    border-radius: 12px;
+    background: #146b53;
+    color: white;
+    font-size: clamp(14px, 1.6vw, 17px);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(20,107,83,0.35);
+    font-family: inherit;
+}
+
+.nav-button:hover:not(:disabled) {
+    background: #0e4f3d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(20,107,83,0.4);
+}
+
+.nav-button:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(20,107,83,0.3);
+}
+
+.nav-button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+/* ================= TABLET (481px – 768px) ================= */
+@media (max-width: 768px) and (min-width: 481px) {
+    .page-wrapper {
+        width: clamp(200px, calc(43vw - 10px), 360px);
+        aspect-ratio: 3 / 4.2;
+        height: auto;
+        max-height: calc(85vh - 140px);
+    }
+
+    .buttons-container {
+        margin-top: clamp(14px, 3vw, 22px);
+    }
+
+    .nav-button {
+        padding: clamp(9px, 1.5vw, 11px) clamp(18px, 3vw, 26px);
+        font-size: clamp(13px, 1.6vw, 15px);
+    }
+}
+
+/* ================= MOBILE (≤480px) - صفحة واحدة فقط ================= */
+@media (max-width: 480px) {
+    .quran-page {
+        padding: 12px 10px;
+        justify-content: center;
+    }
+
+    /* إخفاء الـ spine والظل الأوسط - مش محتاجينهم في صفحة واحدة */
+    .pages-list::before,
+    .pages-list::after {
+        display: none;
+    }
+
+    /* صفحة واحدة تملأ العرض */
+    .page-wrapper {
+        width: clamp(260px, 88vw, 420px) !important;
+        aspect-ratio: 3 / 4.2;
+        height: auto;
+        max-height: calc(88vh - 120px);
+    }
+
+    /* إخفاء الصفحة الثانية - بتتحكم فيها الـ JS بـ class */
+    .page-wrapper.mobile-hidden {
+        display: none;
+    }
+
+    /* الصفحة الوحيدة تاخد border-radius كامل */
+    .page-wrapper:not(.mobile-hidden) .page-inner {
+        border-radius: 6px !important;
+        box-shadow:
+            inset 0 0 20px rgba(0,0,0,0.06),
+            0 4px 20px rgba(0,0,0,0.15) !important;
+        background-image: none !important;
+    }
+
+    /* غلاف الكتاب أعلى وأسفل يكملوا الشكل */
+    .book-container::before {
+        left: -6px;
+        right: -6px;
+        top: -8px;
+        bottom: auto;
+        width: auto;
+        height: 10px;
+        border-radius: 4px 4px 0 0;
+        box-shadow: 0 -4px 12px rgba(0,0,0,0.4);
+        background: linear-gradient(
+            to right,
+            #5C3D0E 0%,
+            #8B6020 15%,
+            #C49030 50%,
+            #8B6020 85%,
+            #5C3D0E 100%
+        );
+    }
+
+    .book-container::after {
+        left: -6px;
+        right: -6px;
+        bottom: -8px;
+        top: auto;
+        width: auto;
+        height: 10px;
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        background: linear-gradient(
+            to right,
+            #5C3D0E 0%,
+            #8B6020 15%,
+            #C49030 50%,
+            #8B6020 85%,
+            #5C3D0E 100%
+        );
+    }
+
+    /* animation على الموبايل - تقليب أفقي بسيط */
+    .flip-next {
+        transform-origin: center center;
+        animation: flipNextMobile 0.6s ease-in-out forwards;
+    }
+
+    .flip-prev {
+        transform-origin: center center;
+        animation: flipPrevMobile 0.6s ease-in-out forwards;
+    }
+
+    @keyframes flipNextMobile {
+        0%   { transform: rotateY(0deg); opacity: 1; }
+        40%  { transform: rotateY(70deg); opacity: 0.3; }
+        100% { transform: rotateY(0deg); opacity: 1; }
+    }
+
+    @keyframes flipPrevMobile {
+        0%   { transform: rotateY(0deg); opacity: 1; }
+        40%  { transform: rotateY(-70deg); opacity: 0.3; }
+        100% { transform: rotateY(0deg); opacity: 1; }
+    }
+
+    .buttons-container {
+        margin-top: 16px;
+        gap: 12px;
+    }
+
+    .nav-button {
+        padding: 11px 32px;
+        font-size: 15px;
+    }
+}
+
+/* ================= SHORT SCREENS ================= */
+@media (max-height: 600px) {
+    .quran-page {
+        padding: 8px 10px;
+        min-height: auto;
+        height: auto;
+    }
+
+    .page-wrapper {
+        aspect-ratio: 3 / 4.2;
+        height: auto;
+        max-height: 70vh;
+    }
+
+    .buttons-container {
+        margin-top: 10px;
+    }
+}

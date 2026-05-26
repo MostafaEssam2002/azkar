@@ -1,7 +1,7 @@
-import { Fragment, useEffect, useRef, useState } from "react";
 import azkarData from "../data/adkar.json";
-import RowZekr from "../components/RowZekr";
-import AzkarBox from "../components/AzkarBox";
+import { Fragment, useEffect, useRef, useState } from "react";
+import AzkarBox from './../components/azkar/AzkarBox';
+import RowZekr from './../components/azkar/RowZekr';
 const ZekrType = ({ type }) => {
     const [azkar, setAzkar] = useState([]);
     useEffect(() => {
@@ -9,7 +9,6 @@ const ZekrType = ({ type }) => {
     }, [type]);
     return (
         <>
-
             <div className="zekrType">
                 <AzkarBox />
                 <div className="pageTitle">
