@@ -1,4 +1,4 @@
-import quranData from "../../../src/data/quran.json";
+// import quranData from "../../../src/data/quran.json";
 import ReciterCard from './ReciterCard';
 const Main = () => {
     return (

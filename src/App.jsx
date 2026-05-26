@@ -1,7 +1,7 @@
 import ZekrType from "./pages/ZekrType";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import Main from "./components/quran/main";
+// import Main from "./components/quran/Main";
 import QuranPage from "./pages/QuranPage";
 function App() {
       const routing = createBrowserRouter([
