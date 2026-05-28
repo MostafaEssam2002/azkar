@@ -1,0 +1,493 @@
+// =============================================
+// AudioPlayer — Quran Player 2026
+// Aesthetic: Islamic Luxury · Deep Navy & Gold
+// =============================================
+
+@use "sass:math";
+
+// ─── Design Tokens ───────────────────────────
+$primary-bg:       #0c1220;
+$surface:          #131b2e;
+$surface-raised:   #1a2540;
+$border:           rgba(255, 255, 255, 0.07);
+$border-hover:     rgba(255, 255, 255, 0.15);
+
+$gold:             #c8a96e;
+$gold-light:       #e2c98f;
+$gold-dim:         rgba(200, 169, 110, 0.18);
+$gold-glow:        rgba(200, 169, 110, 0.06);
+
+$text-primary:     #f0ead8;
+$text-secondary:   #8a9bb8;
+$text-muted:       #4a5670;
+
+$font-arabic:      'Amiri', 'Scheherazade New', serif;
+$font-ui:          'DM Sans', 'Outfit', sans-serif;
+
+$radius-sm:        8px;
+$radius-md:        14px;
+$radius-lg:        22px;
+$radius-pill:      100px;
+
+$transition-fast:  150ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-base:  250ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow:  400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// ─── Mixins ──────────────────────────────────
+@mixin glass($blur: 12px, $opacity: 0.55) {
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  background: rgba(19, 27, 46, $opacity);
+}
+
+@mixin gold-border {
+  border: 1px solid rgba(200, 169, 110, 0.25);
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $gold;
+    outline-offset: 3px;
+    border-radius: $radius-sm;
+  }
+}
+
+// ─── Keyframes ───────────────────────────────
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(200, 169, 110, 0.45); }
+  70%  { box-shadow: 0 0 0 12px rgba(200, 169, 110, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(200, 169, 110, 0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ─── Root Card ───────────────────────────────
+.player-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 36px 32px 28px;
+  border-radius: $radius-lg;
+
+  background: $surface;
+  @include gold-border;
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(0, 0, 0, 0.4) inset,
+    0 1px 0 rgba(255, 255, 255, 0.06) inset;
+
+  animation: fade-up 0.5s $transition-slow both;
+
+  // Subtle geometric ornament top center
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, $gold, transparent);
+    border-radius: $radius-pill;
+  }
+}
+
+// ─── Badge ───────────────────────────────────
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 14px;
+  margin-bottom: 20px;
+  border-radius: $radius-pill;
+
+  font-family: $font-arabic;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: $gold;
+  background: $gold-dim;
+  border: 1px solid rgba(200, 169, 110, 0.3);
+
+  transition: background $transition-base;
+
+  &:hover {
+    background: rgba(200, 169, 110, 0.24);
+  }
+}
+
+// ─── Surah Title ─────────────────────────────
+.title {
+  font-family: $font-ui;
+  font-size: 18px;
+  font-weight: 600;
+  color: $text-primary;
+  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+  text-align: center;
+}
+
+// ─── Reader Name ─────────────────────────────
+.sub {
+  font-family: $font-ui;
+  font-size: 13px;
+  color: $text-secondary;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+// ─── Arabic Calligraphy Title ─────────────────
+.arabic {
+  font-family: $font-arabic;
+  font-size: 32px;
+  font-weight: 700;
+  color: $gold;
+  text-align: center;
+  margin: 0 0 32px;
+  line-height: 1.4;
+  direction: rtl;
+
+  // Shimmer effect on the arabic text
+  background: linear-gradient(
+    90deg,
+    $gold 0%,
+    $gold-light 40%,
+    #f5e6c0 50%,
+    $gold-light 60%,
+    $gold 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+// ─── Progress Bar ────────────────────────────
+.progress-bg {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  border-radius: $radius-pill;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: height $transition-fast;
+
+  &:hover {
+    height: 6px;
+
+    .progress-fill::after {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+  }
+}
+
+.progress-fill {
+  position: relative;
+  height: 100%;
+  border-radius: $radius-pill;
+  background: linear-gradient(90deg, #a07840, $gold, $gold-light);
+  transition: width 80ms linear;
+  min-width: 0;
+
+  // Scrubber thumb
+  &::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: $gold-light;
+    box-shadow: 0 0 8px rgba(200, 169, 110, 0.6);
+    transition: transform $transition-fast, opacity $transition-fast;
+    opacity: 0;
+  }
+}
+
+// ─── Time Display ────────────────────────────
+.times {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 28px;
+
+  span {
+    font-family: $font-ui;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    color: $text-muted;
+    letter-spacing: 0.04em;
+  }
+}
+
+// ─── Controls ────────────────────────────────
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 28px;
+
+  // Skip buttons
+  button:not(.play-btn) {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: $radius-md;
+    background: $surface-raised;
+    color: $text-secondary;
+    font-family: $font-ui;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      background $transition-base,
+      color $transition-base,
+      transform $transition-fast;
+
+    @include focus-ring;
+
+    &:hover {
+      background: rgba(200, 169, 110, 0.12);
+      color: $gold;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+// ─── Play / Pause Button ─────────────────────
+.play-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #b8913a, $gold, $gold-light);
+  color: $primary-bg;
+  font-size: 20px;
+
+  box-shadow:
+    0 4px 20px rgba(200, 169, 110, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.2) inset;
+
+  transition:
+    transform $transition-fast,
+    box-shadow $transition-base;
+
+  @include focus-ring;
+
+  &:hover {
+    transform: scale(1.07);
+    box-shadow:
+      0 8px 28px rgba(200, 169, 110, 0.5),
+      0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  // Pulsing ring when playing
+  &[data-playing="true"],
+  &.is-playing {
+    animation: pulse-ring 2s ease-out infinite;
+  }
+}
+
+// ─── Volume Wrapper ───────────────────────────
+//
+// Wrap the slider like this in JSX:
+//
+//   <div className="volume-wrapper">
+//     <button className="vol-btn" onClick={() => changeVolume({ target: { value: Math.max(0, volume - 0.1) } })}>−</button>
+//     <input type="range" min={0} max={1} step={0.05} value={volume} onChange={changeVolume} style={{ '--val': `${volume * 100}%` }} />
+//     <button className="vol-btn" onClick={() => changeVolume({ target: { value: Math.min(1, volume + 0.1) } })}>+</button>
+//   </div>
+//
+.volume-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.vol-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 169, 110, 0.3);
+  background: $surface-raised;
+  color: $gold;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background $transition-fast,
+    border-color $transition-fast,
+    transform $transition-fast;
+
+  @include focus-ring;
+
+  &:hover {
+    background: $gold-dim;
+    border-color: rgba(200, 169, 110, 0.6);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+// ─── Volume Slider ────────────────────────────
+//
+// How it works:
+//   The track is split into two zones via a CSS gradient driven by
+//   the custom property --val (set inline from React on every onChange).
+//
+//   In your component add this to the <input>:
+//     style={{ '--val': `${volume * 100}%` }}
+//
+//   Example:
+//     <input
+//       type="range" min={0} max={1} step={0.05}
+//       value={volume}
+//       onChange={changeVolume}
+//       style={{ '--val': `${volume * 100}%` }}
+//     />
+//
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  max-width: 200px;
+  height: 4px;
+  border-radius: $radius-pill;
+  outline: none;
+  cursor: pointer;
+
+  // Left of thumb  = gold fill  (--val driven)
+  // Right of thumb = dim track
+  background: linear-gradient(
+    to right,
+    $gold         0%,
+    $gold         var(--val, 100%),
+    rgba(255, 255, 255, 0.12) var(--val, 100%),
+    rgba(255, 255, 255, 0.12) 100%
+  );
+
+  transition: background 60ms linear;   // snappy, not laggy
+
+  @include focus-ring;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: $gold-light;
+    border: 2px solid $primary-bg;
+    box-shadow: 0 0 6px rgba(200, 169, 110, 0.5);
+    cursor: pointer;
+    transition: transform $transition-fast, box-shadow $transition-fast;
+
+    &:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 12px rgba(200, 169, 110, 0.7);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: $gold-light;
+    border: 2px solid $primary-bg;
+    box-shadow: 0 0 6px rgba(200, 169, 110, 0.5);
+    cursor: pointer;
+  }
+
+  &::-webkit-slider-runnable-track {
+    border-radius: $radius-pill;
+    height: 4px;
+  }
+
+  &::-moz-range-track {
+    border-radius: $radius-pill;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// ─── Responsive ──────────────────────────────
+@media (max-width: 480px) {
+  .player-card {
+    padding: 28px 20px 22px;
+    border-radius: $radius-md;
+  }
+
+  .arabic {
+    font-size: 26px;
+  }
+
+  .play-btn {
+    width: 52px;
+    height: 52px;
+    font-size: 18px;
+  }
+}
+
+// ─── Light Mode Override ──────────────────────
+// Uncomment to enable light mode support
+@media (prefers-color-scheme: light) {
+  .player-card {
+    background: #faf8f3;
+    border-color: rgba(180, 140, 70, 0.25);
+    box-shadow: 0 16px 48px rgba(100, 80, 30, 0.12);
+  }
+  .title   { color: #1a1510; }
+  .sub     { color: #6b5e45; }
+  .times span { color: #b0a080; }
+  .progress-bg { background: rgba(0, 0, 0, 0.08); }
+  .controls button:not(.play-btn) {
+    background: #ede8dc;
+    color: #6b5e45;
+  }
+}

@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider, Navigate, Outlet } from "react-rou
 import NavBar from "./components/NavBar";
 // import Main from "./components/quran/Main";
 import QuranPage from "./pages/QuranPage";
+import Test from './pages/Test';
 
 function App() {
       const routing = createBrowserRouter([
@@ -18,9 +19,10 @@ function App() {
             { index: true, element: <Navigate to="/azkar" replace /> },
             {
               path: "quran",
-              element: <QuranPage />,
+              element: <Outlet  />,
               children: [
                 { index: true, element: <QuranPage /> },
+                { path: "test", element: <Test /> },
                 { path: "part/:part_id", element: <QuranPage /> },
                 { path: "suwra/:suwra_id", element: <QuranPage /> },
               ]
