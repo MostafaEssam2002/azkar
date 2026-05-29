@@ -1,0 +1,300 @@
+// =============================================
+// Surah Card Component - SCSS Styles
+// =============================================
+
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap');
+
+// --- Animations ---
+@keyframes starOpen {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+// --- Variables ---
+$green-dark:    #1b5e20;
+$green-main:    #2e7d32;
+$green-mid:     #388e3c;
+$green-light:   #4caf50;
+$green-pale:    #e8f5e9;
+$green-ultra:   #f1f8f1;
+
+$gold-dark:     #8d6e00;
+$gold-main:     #c8a96e;
+$gold-light:    #f0d898;
+$gold-pale:     #fdf7e3;
+
+$card-bg:       #fdfdf8;
+$card-shadow:   rgba(46, 125, 50, 0.12);
+$border-color:  rgba(200, 169, 110, 0.35);
+
+$font-arabic:   'Amiri', 'Cairo', serif;
+$font-ui:       'Cairo', sans-serif;
+
+// --- Wrapper ---
+.surah-grid-wrapper {
+  background: linear-gradient(135deg, #f5f9f5 0%, #fdf7e8 50%, #f5f9f5 100%);
+  min-height: 100vh;
+  padding: 32px 20px;
+  direction: rtl;
+}
+
+// --- Grid ---
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+// --- Card Base ---
+.surah-card {
+  position: relative;
+  background: $card-bg;
+  border: 1.5px solid $border-color;
+  border-radius: 18px;
+  padding: 22px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow:
+    0 2px 12px $card-shadow,
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+
+  // Subtle background pattern
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(200, 169, 110, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(46, 125, 50, 0.05) 0%, transparent 50%);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 8px 28px rgba(46, 125, 50, 0.18),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  }
+
+  // Top border accent
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15%;
+    right: 15%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, $gold-main, transparent);
+    border-radius: 0 0 4px 4px;
+  }
+}
+
+// --- Corner Decorations ---
+.corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+
+  &.corner-tl { top: 4px; right: 4px; }
+  &.corner-tr { top: 4px; left: 4px; transform: scaleX(-1); }
+  &.corner-bl { bottom: 4px; right: 4px; transform: scaleY(-1); }
+  &.corner-br { bottom: 4px; left: 4px; transform: scale(-1); }
+}
+
+.corner-decor {
+  width: 100%;
+  height: 100%;
+}
+
+// --- Number Badge ---
+.card-number {
+  position: absolute;
+  top: -1px;
+  right: 50%;
+  transform: translateX(50%);
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(145deg, $green-mid, $green-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2.5px solid $gold-main;
+  box-shadow: 0 3px 10px rgba(27, 94, 32, 0.35);
+  z-index: 2;
+
+  span {
+    font-family: $font-ui;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+}
+
+// --- Names Section ---
+.card-names {
+  margin-top: 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.arabic-name {
+  font-family: $font-arabic;
+  font-size: 26px;
+  font-weight: 700;
+  color: $green-dark;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+}
+
+.transliteration {
+  font-family: $font-ui;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: $green-main;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+.translation {
+  font-family: $font-ui;
+  font-size: 11px;
+  color: #78909c;
+  margin: 0;
+  font-weight: 400;
+}
+
+// --- Place Badge ---
+.card-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: $green-ultra;
+  border: 1px solid rgba(46, 125, 50, 0.2);
+  border-radius: 12px;
+  padding: 7px 12px;
+  width: 100%;
+  box-sizing: border-box;
+  direction: rtl;
+}
+
+.badge-icon {
+  flex-shrink: 0;
+
+  .place-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+  }
+}
+
+.badge-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.badge-type {
+  font-family: $font-ui;
+  font-size: 13px;
+  font-weight: 700;
+  color: $green-dark;
+  background: rgba(76, 175, 80, 0.15);
+  border-radius: 6px;
+  padding: 1px 7px;
+}
+
+.badge-place {
+  font-family: $font-ui;
+  font-size: 10.5px;
+  color: #546e7a;
+  font-weight: 400;
+}
+
+// --- Footer ---
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(200, 169, 110, 0.4);
+  direction: rtl;
+
+  .quran-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+}
+
+.verses-label {
+  font-family: $font-ui;
+  font-size: 11.5px;
+  color: #607d8b;
+  font-weight: 400;
+  flex: 1;
+}
+
+.verses-count {
+  font-family: $font-arabic;
+  font-size: 18px;
+  font-weight: 700;
+  color: $green-dark;
+  line-height: 1;
+}
+
+// --- Makki vs Madani subtle color distinction ---
+.surah-card.makki {
+  border-color: rgba(200, 169, 110, 0.45);
+
+  &::after {
+    background: linear-gradient(90deg, transparent, #c8a96e, transparent);
+  }
+}
+
+.surah-card.madani {
+  border-color: rgba(46, 125, 50, 0.3);
+
+  &::after {
+    background: linear-gradient(90deg, transparent, #4caf50, transparent);
+  }
+}
+
+// --- Animation Classes ---
+.card-slide-in-right {
+  animation: starOpen 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.card-slide-in-left {
+  animation: starOpen 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}

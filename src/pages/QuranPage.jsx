@@ -1,46 +1,33 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import ReciterCard from '../components/quran/ReciterCard';
 import getData from './../api/getData';
-
 const QuranPage = () => {
     const ref = useRef(false);
-
     const [reciters, setReciters] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState('');
     const itemsPerPage = 6;
-
     useEffect(() => {
-
         async function fetchReciters() {
-
             if (ref.current) return;
             ref.current = true;
-
             try {
                 setLoading(true);
-
                 const res = await getData("/api/reciters");
-
                 const flattenedData = res.flat();
-
                 const filteredData = flattenedData.filter(
                     (reciter) =>
                         reciter.classification.name === "حسب السور"
                 );
-
                 setReciters(filteredData);
-
             } catch (error) {
                 console.error("Error fetching reciters:", error);
             } finally {
                 setLoading(false);
             }
         }
-
         fetchReciters();
-
     }, []);
 
     // فلترة القراء بناءً على نص البحث

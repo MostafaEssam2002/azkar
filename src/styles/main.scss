@@ -8,6 +8,12 @@
 @use "./components/_recitercard";
 @use "./components/_quran";
 @use "./components/_audioplayer";
+@use "./components/_surahcard";
 
 @import url("https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap");
 
+// =============================================
+// Surah Card Component - SCSS Styles
+// =============================================
+
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap');

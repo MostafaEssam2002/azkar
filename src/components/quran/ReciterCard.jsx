@@ -1,4 +1,6 @@
+import {   useNavigate } from 'react-router-dom';
 const ReciterCard = ({id, name, ar_name, rawi, timing_url, server, surahs_count}) => {
+    const navigate = useNavigate();
     return (
         <div className="reciter-card" dir="rtl">
         <div className="card-image">
@@ -50,7 +52,7 @@ const ReciterCard = ({id, name, ar_name, rawi, timing_url, server, surahs_count}
             </div>
         </div>
         <div className="bottom-row">
-            <button className="listen-btn">
+            <button className="listen-btn" onClick={() =>navigate(`/quran/test?url=${encodeURIComponent(server)}&name=${name}`)}>
                 <i className="fa-solid fa-headphones"></i>
                 استماع
             </button>

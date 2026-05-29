@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
-const AudioPlayer = ({ src, surahNumber , surahName , arabicTitle , reader   }) => {
+import { useSearchParams } from "react-router-dom";
+const AudioPlayer = ({ src, arabicTitle , surahNumber , surahName , reader}) => {
     const audioRef = useRef(null);
     const [playing, setPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
@@ -7,8 +8,16 @@ const AudioPlayer = ({ src, surahNumber , surahName , arabicTitle , reader   }) 
     const [duration, setDuration] = useState("—");
     const [volume, setVolume] = useState(1);
     const fmt = (s) => {
-        if (isNaN(s)) return "—";
-        return `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+    if (isNaN(s)) return "—";
+        const hrs  = Math.floor(s / 3600);
+        const mins = Math.floor((s % 3600) / 60);
+        const secs = Math.floor(s % 60);
+        if (hrs > 0) {
+            // 1:05:09
+            return `${hrs}:${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+        }
+        // 5:09
+        return `${mins}:${String(secs).padStart(2, "0")}`;
     };
     useEffect(() => {
         const audio = audioRef.current;

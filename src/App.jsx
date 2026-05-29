@@ -1,9 +1,9 @@
 import ZekrType from "./pages/ZekrType";
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar";
-// import Main from "./components/quran/Main";
 import QuranPage from "./pages/QuranPage";
 import Test from './pages/Test';
+import PlayAudio from "./pages/PlayAudio";
 
 function App() {
       const routing = createBrowserRouter([
@@ -23,6 +23,7 @@ function App() {
               children: [
                 { index: true, element: <QuranPage /> },
                 { path: "test", element: <Test /> },
+                { path: "test/play", element: <PlayAudio  /> },
                 { path: "part/:part_id", element: <QuranPage /> },
                 { path: "suwra/:suwra_id", element: <QuranPage /> },
               ]
