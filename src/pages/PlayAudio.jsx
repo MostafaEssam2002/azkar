@@ -12,23 +12,30 @@ const PlayAudio = () => {
     const surahNumber = parseInt(params.get('surahNumber'));
     const surahName   = params.get('surahName');
     const reader      = params.get('reader');
+    const surahsListParam = params.get('surahs_list');
+    const surahsList = surahsListParam ? JSON.parse(decodeURIComponent(surahsListParam)) : null;
     const [readerName] = useState(reader);
     const currentSurah = Number(surahNumber);
 
-    const relatedSurahs = useMemo(() =>
-        data.chapters
+    const relatedSurahs = useMemo(() => {
+        const chaptersToUse = surahsList 
+            ? data.chapters.filter(ch => surahsList.includes(String(ch.id)) || surahsList.includes(Number(ch.id)) || surahsList.includes(ch.id))
+            : data.chapters;
+        
+        return chaptersToUse
             .filter((surah) => surah.id !== currentSurah)
             .sort(() => Math.random() - 0.5)
-            .slice(0, 10),
-        [currentSurah]
-    );
+            .slice(0, 10);
+    }, [currentSurah, surahsList]);
 
     const handleShowMore = () => {
         const baseUrl = src.split('/').slice(0, -1).join('/');
         console.log(`Base URL = ${baseUrl}`);
-        navigate(`/quran/test?url=${baseUrl}`);
+        const queryParams = `url=${encodeURIComponent(baseUrl)}&name=${encodeURIComponent(reader)}`;
+        const finalUrl = surahsList ? `${queryParams}&surahs_list=${encodeURIComponent(JSON.stringify(surahsList))}` : queryParams;
+        navigate(`/quran/test?${finalUrl}`);
     };
-
+    console.log("hello from play audio page and surahsList = ",surahsList)
     return (
         <div className="player-wrapper">
             <AudioPlayer
@@ -43,6 +50,7 @@ const PlayAudio = () => {
                 currentSrc={src}
                 reader={readerName}
                 onShowMore={handleShowMore}
+                surahsList={surahsList}
             />
         </div>
     );

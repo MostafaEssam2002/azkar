@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import {   useNavigate } from 'react-router-dom';
-const ReciterCard = ({id, name, ar_name, rawi, timing_url, server, surahs_count}) => {
+const ReciterCard = ({id, name, ar_name, rawi, timing_url, server, surahs_count, surahs_list}) => {
     const navigate = useNavigate();
+    const [surahs_lists, setSurahsLists] = useState(surahs_list);
+    console.log(`hello from ReciterCard PAge ${surahs_lists}`); 
     return (
         <div className="reciter-card" dir="rtl">
         <div className="card-image">
@@ -52,7 +55,7 @@ const ReciterCard = ({id, name, ar_name, rawi, timing_url, server, surahs_count}
             </div>
         </div>
         <div className="bottom-row">
-            <button className="listen-btn" onClick={() =>navigate(`/quran/test?url=${encodeURIComponent(server)}&name=${name}`)}>
+            <button className="listen-btn" onClick={() =>navigate(`/quran/test?url=${encodeURIComponent(server)}&name=${name}&surahs_list=${encodeURIComponent(JSON.stringify(surahs_list))}`)}>
                 <i className="fa-solid fa-headphones"></i>
                 استماع
             </button>

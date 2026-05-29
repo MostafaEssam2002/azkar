@@ -2,7 +2,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { useCallback, useEffect, useState, useRef } from 'react';
 import SurahCard from './SurahCard';
-const SurahCarousel = ({ surahs = [], currentSrc, reader, onShowMore }) => {
+const SurahCarousel = ({ surahs = [], currentSrc, reader, onShowMore, surahsList }) => {
     const autoplayRef = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
     const [emblaRef, emblaApi] = useEmblaCarousel(
         { direction: 'rtl', align: 'start', loop: true },
@@ -56,6 +56,7 @@ const SurahCarousel = ({ surahs = [], currentSrc, reader, onShowMore }) => {
                                         surah={surah}
                                         audiUrl={audioUrl}
                                         reader={reader}
+                                        surahsList={surahsList}
                                     />
                                 </div>
                             );

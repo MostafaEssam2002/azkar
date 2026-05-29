@@ -14,3 +14,4 @@ export default defineConfig({
     }
   }
 })
+// https://api.quranpedia.net/v1/reciters

@@ -29,8 +29,8 @@ const QuranPage = () => {
         }
         fetchReciters();
     }, []);
-
     // فلترة القراء بناءً على نص البحث
+
     const filteredReciters = useMemo(() => {
         const query = searchQuery.trim();
         if (!query) return reciters;
@@ -38,7 +38,6 @@ const QuranPage = () => {
             reciter.name.toLowerCase().includes(query.toLowerCase())
         );
     }, [reciters, searchQuery]);
-
     // حساب البيانات المعروضة في الصفحة الحالية
     const totalPages = Math.ceil(filteredReciters.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -144,6 +143,7 @@ const QuranPage = () => {
                                     timing_url={reciter.timing_url}
                                     server={reciter.server}
                                     surahs_count={reciter.surahs_list?.length || 0}
+                                    surahs_list={reciter.surahs_list || []}
                                 />
                             ))}
                         </div>
