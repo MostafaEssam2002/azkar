@@ -3,9 +3,10 @@ import SurahCard from './../components/quran/SurahCard';
 import data from './../data/chapters.json';
 import { useState, useEffect, useRef } from 'react';
 const Test = () => {
+  console.log("Test page loaded");
   const [params] = useSearchParams();
   const url = params.get('url');
-  console.log('Received URL:', url);
+  const reader = params.get('name');
   
   const ITEMS_PER_PAGE = 4;
   const [displayedCount, setDisplayedCount] = useState(ITEMS_PER_PAGE);
@@ -56,8 +57,7 @@ const Test = () => {
           surah.id = formattedKey; // ← عشان الـ SurahCard يقدر يستخدمه زي ما هو متوقع
           return (
             <div key={formattedKey} className={animationClass}>
-              <SurahCard audiUrl={url+"/"+formattedKey+".mp3"} surah={surah} />
-              {/* {console.log(`surah.id= ${formattedKey}`)} */}
+              <SurahCard audiUrl={url+"/"+formattedKey+".mp3"} surah={surah} reader={reader} />
             </div>
           );
         })}

@@ -112,13 +112,12 @@ const DecorativeCorner = () => (
     </svg>
 );
 
-function SurahCard({ surah,audiUrl }) {
+function SurahCard({ surah, audiUrl, reader }) {
     const [params] = useSearchParams();
-    let name = params.get('name');
     const navigate = useNavigate();
     const isMakki = surah.revelation_place === "makkah";
     return (
-        <div onClick={()=>navigate(`/quran/test/play?src=${audiUrl}&arabicTitle=${surah.name_arabic}&surahNumber=${surah.id}&surahName=${surah.name_complex}&reader=${name}`)} className={`surah-card ${isMakki ? "makki" : "madani"}`}>
+        <div onClick={()=>navigate(`/quran/test/play?src=${audiUrl}&arabicTitle=${surah.name_arabic}&surahNumber=${surah.id}&surahName=${surah.name_complex}&reader=${reader}`)} className={`surah-card ${isMakki ? "makki" : "madani"}`}>
         <div className="corner corner-tl"><DecorativeCorner /></div>
         <div className="corner corner-tr"><DecorativeCorner /></div>
         <div className="corner corner-bl"><DecorativeCorner /></div>

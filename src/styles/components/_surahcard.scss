@@ -42,8 +42,16 @@ $font-ui:       'Cairo', sans-serif;
 // --- Wrapper ---
 .surah-grid-wrapper {
   background: linear-gradient(135deg, #f5f9f5 0%, #fdf7e8 50%, #f5f9f5 100%);
-  min-height: 100vh;
-  padding: 32px 20px;
+  width: 1126px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    border-inline: 1px solid var(--border);
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
   direction: rtl;
 }
 
