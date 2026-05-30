@@ -33,7 +33,7 @@ const PlayAudio = () => {
         console.log(`Base URL = ${baseUrl}`);
         const queryParams = `url=${encodeURIComponent(baseUrl)}&name=${encodeURIComponent(reader)}`;
         const finalUrl = surahsList ? `${queryParams}&surahs_list=${encodeURIComponent(JSON.stringify(surahsList))}` : queryParams;
-        navigate(`/quran/test?${finalUrl}`);
+        navigate(`/quran/surahsList?${finalUrl}`);
     };
     console.log("hello from play audio page and surahsList = ",surahsList)
     return (

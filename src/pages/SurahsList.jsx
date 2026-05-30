@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 import SurahCard from './../components/quran/SurahCard';
 import data from './../data/chapters.json';
 import { useState, useEffect, useRef } from 'react';
-const Test = () => {
+const SurahsList = () => {
   const [params] = useSearchParams();
   const url = params.get('url');
   const reader = params.get('name');
@@ -80,4 +80,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default SurahsList;

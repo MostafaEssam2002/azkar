@@ -5,12 +5,12 @@ const NavBar = () => {
     <nav>
       <ul>
         <li>
-          <Link to="/quran">القرآن</Link>
+          <Link to="/quran/read">القرآن</Link>
         </li>
         <li>
           <Link to="/azkar">الأذكار</Link>
         </li>
-        <li>تلاوة</li>
+        <li><Link to="/quran">تلاوة</Link></li>
         <li>الحديث</li>
         <li>مواقيت الصلاة</li>
       </ul>

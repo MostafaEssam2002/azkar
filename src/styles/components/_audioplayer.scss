@@ -4,6 +4,7 @@
 // =============================================
 
 @use "sass:math";
+@use "sass:color";
 
 // ─── Design Tokens ───────────────────────────
 $primary-bg:       #f5f0e8;
@@ -126,7 +127,7 @@ $transition-slow:  400ms cubic-bezier(0.4, 0, 0.2, 1);
 
   transition: background $transition-base;
 
-  &:hover { background: darken($green-dim, 4%); }
+  &:hover { background: color.adjust($green-dim, $lightness: -4%); }
 }
 
 // ─── Arabic Title ─────────────────────────────
@@ -282,7 +283,7 @@ $transition-slow:  400ms cubic-bezier(0.4, 0, 0.2, 1);
 
     @include focus-ring;
 
-    &:hover { background: darken($green-dim, 5%); }
+    &:hover { background: color.adjust($green-dim, $lightness: -5%); }
     &:active { transform: scale(0.95); }
   }
 }

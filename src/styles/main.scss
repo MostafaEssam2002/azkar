@@ -1,3 +1,4 @@
+
 @use "reset";
 @use "./components/_azkarbox";
 @use "./components/_counterbutton";
@@ -9,6 +10,11 @@
 @use "./components/_quran";
 @use "./components/_audioplayer";
 @use "./components/_surahcard";
+@use "./components/surahtext";
+
+// @use "./components/_surahcard";
+// @use "./components/_floatingpin";
+// @use "./components/_miniplayer";
 
 @import url("https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap");
 
@@ -17,3 +23,10 @@
 // =============================================
 
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap');
+
+
+// =============================================
+// Global Design Tokens & Variables
+// =============================================
+
+

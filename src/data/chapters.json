@@ -16,7 +16,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Opener"
-            }
+            },
+            "verses_global_range": [
+                1,
+                7
+            ]
         },
         {
             "id": 2,
@@ -34,7 +38,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Cow"
-            }
+            },
+            "verses_global_range": [
+                8,
+                293
+            ]
         },
         {
             "id": 3,
@@ -52,7 +60,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Family of Imran"
-            }
+            },
+            "verses_global_range": [
+                294,
+                493
+            ]
         },
         {
             "id": 4,
@@ -70,7 +82,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Women"
-            }
+            },
+            "verses_global_range": [
+                494,
+                669
+            ]
         },
         {
             "id": 5,
@@ -88,7 +104,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Table Spread"
-            }
+            },
+            "verses_global_range": [
+                670,
+                789
+            ]
         },
         {
             "id": 6,
@@ -106,7 +126,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Cattle"
-            }
+            },
+            "verses_global_range": [
+                790,
+                954
+            ]
         },
         {
             "id": 7,
@@ -124,7 +148,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Heights"
-            }
+            },
+            "verses_global_range": [
+                955,
+                1160
+            ]
         },
         {
             "id": 8,
@@ -142,7 +170,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Spoils of War"
-            }
+            },
+            "verses_global_range": [
+                1161,
+                1235
+            ]
         },
         {
             "id": 9,
@@ -160,7 +192,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Repentance"
-            }
+            },
+            "verses_global_range": [
+                1236,
+                1364
+            ]
         },
         {
             "id": 10,
@@ -178,7 +214,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Jonah"
-            }
+            },
+            "verses_global_range": [
+                1365,
+                1473
+            ]
         },
         {
             "id": 11,
@@ -196,7 +236,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Hud"
-            }
+            },
+            "verses_global_range": [
+                1474,
+                1596
+            ]
         },
         {
             "id": 12,
@@ -214,7 +258,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Joseph"
-            }
+            },
+            "verses_global_range": [
+                1597,
+                1707
+            ]
         },
         {
             "id": 13,
@@ -232,7 +280,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Thunder"
-            }
+            },
+            "verses_global_range": [
+                1708,
+                1750
+            ]
         },
         {
             "id": 14,
@@ -250,7 +302,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Abraham"
-            }
+            },
+            "verses_global_range": [
+                1751,
+                1802
+            ]
         },
         {
             "id": 15,
@@ -268,7 +324,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Rocky Tract"
-            }
+            },
+            "verses_global_range": [
+                1803,
+                1901
+            ]
         },
         {
             "id": 16,
@@ -286,7 +346,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Bee"
-            }
+            },
+            "verses_global_range": [
+                1902,
+                2029
+            ]
         },
         {
             "id": 17,
@@ -304,7 +368,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Night Journey"
-            }
+            },
+            "verses_global_range": [
+                2030,
+                2140
+            ]
         },
         {
             "id": 18,
@@ -322,7 +390,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Cave"
-            }
+            },
+            "verses_global_range": [
+                2141,
+                2250
+            ]
         },
         {
             "id": 19,
@@ -340,7 +412,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Mary"
-            }
+            },
+            "verses_global_range": [
+                2251,
+                2348
+            ]
         },
         {
             "id": 20,
@@ -358,7 +434,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Ta-Ha"
-            }
+            },
+            "verses_global_range": [
+                2349,
+                2483
+            ]
         },
         {
             "id": 21,
@@ -376,7 +456,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Prophets"
-            }
+            },
+            "verses_global_range": [
+                2484,
+                2595
+            ]
         },
         {
             "id": 22,
@@ -394,7 +478,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Pilgrimage"
-            }
+            },
+            "verses_global_range": [
+                2596,
+                2673
+            ]
         },
         {
             "id": 23,
@@ -412,7 +500,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Believers"
-            }
+            },
+            "verses_global_range": [
+                2674,
+                2791
+            ]
         },
         {
             "id": 24,
@@ -430,7 +522,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Light"
-            }
+            },
+            "verses_global_range": [
+                2792,
+                2855
+            ]
         },
         {
             "id": 25,
@@ -448,7 +544,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Criterion"
-            }
+            },
+            "verses_global_range": [
+                2856,
+                2932
+            ]
         },
         {
             "id": 26,
@@ -466,7 +566,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Poets"
-            }
+            },
+            "verses_global_range": [
+                2933,
+                3159
+            ]
         },
         {
             "id": 27,
@@ -484,7 +588,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Ant"
-            }
+            },
+            "verses_global_range": [
+                3160,
+                3252
+            ]
         },
         {
             "id": 28,
@@ -502,7 +610,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Stories"
-            }
+            },
+            "verses_global_range": [
+                3253,
+                3340
+            ]
         },
         {
             "id": 29,
@@ -520,7 +632,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Spider"
-            }
+            },
+            "verses_global_range": [
+                3341,
+                3409
+            ]
         },
         {
             "id": 30,
@@ -538,7 +654,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Romans"
-            }
+            },
+            "verses_global_range": [
+                3410,
+                3469
+            ]
         },
         {
             "id": 31,
@@ -556,7 +676,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Luqman"
-            }
+            },
+            "verses_global_range": [
+                3470,
+                3503
+            ]
         },
         {
             "id": 32,
@@ -574,7 +698,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Prostration"
-            }
+            },
+            "verses_global_range": [
+                3504,
+                3533
+            ]
         },
         {
             "id": 33,
@@ -592,7 +720,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Combined Forces"
-            }
+            },
+            "verses_global_range": [
+                3534,
+                3606
+            ]
         },
         {
             "id": 34,
@@ -610,7 +742,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Sheba"
-            }
+            },
+            "verses_global_range": [
+                3607,
+                3660
+            ]
         },
         {
             "id": 35,
@@ -628,7 +764,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Originator"
-            }
+            },
+            "verses_global_range": [
+                3661,
+                3705
+            ]
         },
         {
             "id": 36,
@@ -646,7 +786,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Ya Sin"
-            }
+            },
+            "verses_global_range": [
+                3706,
+                3788
+            ]
         },
         {
             "id": 37,
@@ -664,7 +808,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Those who set the Ranks"
-            }
+            },
+            "verses_global_range": [
+                3789,
+                3970
+            ]
         },
         {
             "id": 38,
@@ -682,7 +830,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Letter \"Saad\""
-            }
+            },
+            "verses_global_range": [
+                3971,
+                4058
+            ]
         },
         {
             "id": 39,
@@ -700,7 +852,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Troops"
-            }
+            },
+            "verses_global_range": [
+                4059,
+                4133
+            ]
         },
         {
             "id": 40,
@@ -718,7 +874,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Forgiver"
-            }
+            },
+            "verses_global_range": [
+                4134,
+                4218
+            ]
         },
         {
             "id": 41,
@@ -736,7 +896,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Explained in Detail"
-            }
+            },
+            "verses_global_range": [
+                4219,
+                4272
+            ]
         },
         {
             "id": 42,
@@ -754,7 +918,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Consultation"
-            }
+            },
+            "verses_global_range": [
+                4273,
+                4325
+            ]
         },
         {
             "id": 43,
@@ -772,7 +940,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Ornaments of Gold"
-            }
+            },
+            "verses_global_range": [
+                4326,
+                4414
+            ]
         },
         {
             "id": 44,
@@ -790,7 +962,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Smoke"
-            }
+            },
+            "verses_global_range": [
+                4415,
+                4473
+            ]
         },
         {
             "id": 45,
@@ -808,7 +984,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Crouching"
-            }
+            },
+            "verses_global_range": [
+                4474,
+                4510
+            ]
         },
         {
             "id": 46,
@@ -826,7 +1006,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Wind-Curved Sandhills"
-            }
+            },
+            "verses_global_range": [
+                4511,
+                4545
+            ]
         },
         {
             "id": 47,
@@ -844,7 +1028,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Muhammad"
-            }
+            },
+            "verses_global_range": [
+                4546,
+                4583
+            ]
         },
         {
             "id": 48,
@@ -862,7 +1050,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Victory"
-            }
+            },
+            "verses_global_range": [
+                4584,
+                4612
+            ]
         },
         {
             "id": 49,
@@ -880,7 +1072,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Rooms"
-            }
+            },
+            "verses_global_range": [
+                4613,
+                4630
+            ]
         },
         {
             "id": 50,
@@ -898,7 +1094,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Letter \"Qaf\""
-            }
+            },
+            "verses_global_range": [
+                4631,
+                4675
+            ]
         },
         {
             "id": 51,
@@ -916,7 +1116,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Winnowing Winds"
-            }
+            },
+            "verses_global_range": [
+                4676,
+                4735
+            ]
         },
         {
             "id": 52,
@@ -934,7 +1138,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Mount"
-            }
+            },
+            "verses_global_range": [
+                4736,
+                4784
+            ]
         },
         {
             "id": 53,
@@ -952,7 +1160,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Star"
-            }
+            },
+            "verses_global_range": [
+                4785,
+                4846
+            ]
         },
         {
             "id": 54,
@@ -970,7 +1182,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Moon"
-            }
+            },
+            "verses_global_range": [
+                4847,
+                4901
+            ]
         },
         {
             "id": 55,
@@ -988,7 +1204,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Beneficent"
-            }
+            },
+            "verses_global_range": [
+                4902,
+                4979
+            ]
         },
         {
             "id": 56,
@@ -1006,7 +1226,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Inevitable"
-            }
+            },
+            "verses_global_range": [
+                4980,
+                5075
+            ]
         },
         {
             "id": 57,
@@ -1024,7 +1248,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Iron"
-            }
+            },
+            "verses_global_range": [
+                5076,
+                5104
+            ]
         },
         {
             "id": 58,
@@ -1042,7 +1270,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Pleading Woman"
-            }
+            },
+            "verses_global_range": [
+                5105,
+                5126
+            ]
         },
         {
             "id": 59,
@@ -1060,7 +1292,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Exile"
-            }
+            },
+            "verses_global_range": [
+                5127,
+                5150
+            ]
         },
         {
             "id": 60,
@@ -1078,7 +1314,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "She that is to be examined"
-            }
+            },
+            "verses_global_range": [
+                5151,
+                5163
+            ]
         },
         {
             "id": 61,
@@ -1096,7 +1336,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Ranks"
-            }
+            },
+            "verses_global_range": [
+                5164,
+                5177
+            ]
         },
         {
             "id": 62,
@@ -1114,7 +1358,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Congregation, Friday"
-            }
+            },
+            "verses_global_range": [
+                5178,
+                5188
+            ]
         },
         {
             "id": 63,
@@ -1132,7 +1380,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Hypocrites"
-            }
+            },
+            "verses_global_range": [
+                5189,
+                5199
+            ]
         },
         {
             "id": 64,
@@ -1150,7 +1402,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Mutual Disillusion"
-            }
+            },
+            "verses_global_range": [
+                5200,
+                5217
+            ]
         },
         {
             "id": 65,
@@ -1168,7 +1424,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Divorce"
-            }
+            },
+            "verses_global_range": [
+                5218,
+                5229
+            ]
         },
         {
             "id": 66,
@@ -1186,7 +1446,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Prohibition"
-            }
+            },
+            "verses_global_range": [
+                5230,
+                5241
+            ]
         },
         {
             "id": 67,
@@ -1204,7 +1468,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Sovereignty"
-            }
+            },
+            "verses_global_range": [
+                5242,
+                5271
+            ]
         },
         {
             "id": 68,
@@ -1222,7 +1490,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Pen"
-            }
+            },
+            "verses_global_range": [
+                5272,
+                5323
+            ]
         },
         {
             "id": 69,
@@ -1240,7 +1512,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Reality"
-            }
+            },
+            "verses_global_range": [
+                5324,
+                5375
+            ]
         },
         {
             "id": 70,
@@ -1258,7 +1534,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Ascending Stairways"
-            }
+            },
+            "verses_global_range": [
+                5376,
+                5419
+            ]
         },
         {
             "id": 71,
@@ -1276,7 +1556,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Noah"
-            }
+            },
+            "verses_global_range": [
+                5420,
+                5447
+            ]
         },
         {
             "id": 72,
@@ -1294,7 +1578,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Jinn"
-            }
+            },
+            "verses_global_range": [
+                5448,
+                5475
+            ]
         },
         {
             "id": 73,
@@ -1312,7 +1600,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Enshrouded One"
-            }
+            },
+            "verses_global_range": [
+                5476,
+                5495
+            ]
         },
         {
             "id": 74,
@@ -1330,7 +1622,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Cloaked One"
-            }
+            },
+            "verses_global_range": [
+                5496,
+                5551
+            ]
         },
         {
             "id": 75,
@@ -1348,7 +1644,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Resurrection"
-            }
+            },
+            "verses_global_range": [
+                5552,
+                5591
+            ]
         },
         {
             "id": 76,
@@ -1366,7 +1666,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Man"
-            }
+            },
+            "verses_global_range": [
+                5592,
+                5622
+            ]
         },
         {
             "id": 77,
@@ -1384,7 +1688,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Emissaries"
-            }
+            },
+            "verses_global_range": [
+                5623,
+                5672
+            ]
         },
         {
             "id": 78,
@@ -1402,7 +1710,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Tidings"
-            }
+            },
+            "verses_global_range": [
+                5673,
+                5712
+            ]
         },
         {
             "id": 79,
@@ -1420,7 +1732,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Those who drag forth"
-            }
+            },
+            "verses_global_range": [
+                5713,
+                5758
+            ]
         },
         {
             "id": 80,
@@ -1438,7 +1754,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "He Frowned"
-            }
+            },
+            "verses_global_range": [
+                5759,
+                5800
+            ]
         },
         {
             "id": 81,
@@ -1456,7 +1776,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Overthrowing"
-            }
+            },
+            "verses_global_range": [
+                5801,
+                5829
+            ]
         },
         {
             "id": 82,
@@ -1474,7 +1798,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Cleaving"
-            }
+            },
+            "verses_global_range": [
+                5830,
+                5848
+            ]
         },
         {
             "id": 83,
@@ -1492,7 +1820,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Defrauding"
-            }
+            },
+            "verses_global_range": [
+                5849,
+                5884
+            ]
         },
         {
             "id": 84,
@@ -1510,7 +1842,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Sundering"
-            }
+            },
+            "verses_global_range": [
+                5885,
+                5909
+            ]
         },
         {
             "id": 85,
@@ -1528,7 +1864,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Mansions of the Stars"
-            }
+            },
+            "verses_global_range": [
+                5910,
+                5931
+            ]
         },
         {
             "id": 86,
@@ -1546,7 +1886,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Nightcommer"
-            }
+            },
+            "verses_global_range": [
+                5932,
+                5948
+            ]
         },
         {
             "id": 87,
@@ -1564,7 +1908,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Most High"
-            }
+            },
+            "verses_global_range": [
+                5949,
+                5967
+            ]
         },
         {
             "id": 88,
@@ -1582,7 +1930,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Overwhelming"
-            }
+            },
+            "verses_global_range": [
+                5968,
+                5993
+            ]
         },
         {
             "id": 89,
@@ -1600,7 +1952,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Dawn"
-            }
+            },
+            "verses_global_range": [
+                5994,
+                6023
+            ]
         },
         {
             "id": 90,
@@ -1618,7 +1974,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The City"
-            }
+            },
+            "verses_global_range": [
+                6024,
+                6043
+            ]
         },
         {
             "id": 91,
@@ -1636,7 +1996,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Sun"
-            }
+            },
+            "verses_global_range": [
+                6044,
+                6058
+            ]
         },
         {
             "id": 92,
@@ -1654,7 +2018,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Night"
-            }
+            },
+            "verses_global_range": [
+                6059,
+                6079
+            ]
         },
         {
             "id": 93,
@@ -1672,7 +2040,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Morning Hours"
-            }
+            },
+            "verses_global_range": [
+                6080,
+                6090
+            ]
         },
         {
             "id": 94,
@@ -1690,7 +2062,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Relief"
-            }
+            },
+            "verses_global_range": [
+                6091,
+                6098
+            ]
         },
         {
             "id": 95,
@@ -1708,7 +2084,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Fig"
-            }
+            },
+            "verses_global_range": [
+                6099,
+                6106
+            ]
         },
         {
             "id": 96,
@@ -1726,7 +2106,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Clot"
-            }
+            },
+            "verses_global_range": [
+                6107,
+                6125
+            ]
         },
         {
             "id": 97,
@@ -1744,7 +2128,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Power"
-            }
+            },
+            "verses_global_range": [
+                6126,
+                6130
+            ]
         },
         {
             "id": 98,
@@ -1762,7 +2150,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Clear Proof"
-            }
+            },
+            "verses_global_range": [
+                6131,
+                6138
+            ]
         },
         {
             "id": 99,
@@ -1780,7 +2172,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Earthquake"
-            }
+            },
+            "verses_global_range": [
+                6139,
+                6146
+            ]
         },
         {
             "id": 100,
@@ -1798,7 +2194,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Courser"
-            }
+            },
+            "verses_global_range": [
+                6147,
+                6157
+            ]
         },
         {
             "id": 101,
@@ -1816,7 +2216,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Calamity"
-            }
+            },
+            "verses_global_range": [
+                6158,
+                6168
+            ]
         },
         {
             "id": 102,
@@ -1834,7 +2238,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Rivalry in world increase"
-            }
+            },
+            "verses_global_range": [
+                6169,
+                6176
+            ]
         },
         {
             "id": 103,
@@ -1852,7 +2260,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Declining Day"
-            }
+            },
+            "verses_global_range": [
+                6177,
+                6179
+            ]
         },
         {
             "id": 104,
@@ -1870,7 +2282,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Traducer"
-            }
+            },
+            "verses_global_range": [
+                6180,
+                6188
+            ]
         },
         {
             "id": 105,
@@ -1888,7 +2304,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Elephant"
-            }
+            },
+            "verses_global_range": [
+                6189,
+                6193
+            ]
         },
         {
             "id": 106,
@@ -1906,7 +2326,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Quraysh"
-            }
+            },
+            "verses_global_range": [
+                6194,
+                6197
+            ]
         },
         {
             "id": 107,
@@ -1924,7 +2348,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Small kindnesses"
-            }
+            },
+            "verses_global_range": [
+                6198,
+                6204
+            ]
         },
         {
             "id": 108,
@@ -1942,7 +2370,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Abundance"
-            }
+            },
+            "verses_global_range": [
+                6205,
+                6207
+            ]
         },
         {
             "id": 109,
@@ -1960,7 +2392,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Disbelievers"
-            }
+            },
+            "verses_global_range": [
+                6208,
+                6213
+            ]
         },
         {
             "id": 110,
@@ -1978,7 +2414,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Divine Support"
-            }
+            },
+            "verses_global_range": [
+                6214,
+                6216
+            ]
         },
         {
             "id": 111,
@@ -1996,7 +2436,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Palm Fiber"
-            }
+            },
+            "verses_global_range": [
+                6217,
+                6221
+            ]
         },
         {
             "id": 112,
@@ -2014,7 +2458,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Sincerity"
-            }
+            },
+            "verses_global_range": [
+                6222,
+                6225
+            ]
         },
         {
             "id": 113,
@@ -2032,7 +2480,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "The Daybreak"
-            }
+            },
+            "verses_global_range": [
+                6226,
+                6230
+            ]
         },
         {
             "id": 114,
@@ -2050,7 +2502,11 @@
             "translated_name": {
                 "language_name": "english",
                 "name": "Mankind"
-            }
+            },
+            "verses_global_range": [
+                6231,
+                6236
+            ]
         }
     ]
 }
