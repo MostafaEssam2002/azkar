@@ -22,7 +22,7 @@ const QuranPage = () => {
                 );
                 setReciters(filteredData);
             } catch (error) {
-                console.error("Error fetching reciters:", error);
+                `continue`;
             } finally {
                 setLoading(false);
             }

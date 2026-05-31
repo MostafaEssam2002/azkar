@@ -29,6 +29,7 @@ const QuranView = ({
 
     const handleNumberClick = (e, aya) => {
         e.stopPropagation();
+        if (!chapter) return;
         const globalNumber = chapter.verses_global_range[0] + Number(aya.aya) - 1;
         const ayaEl = e.currentTarget.closest("[data-aya]");
         const rect  = ayaEl ? ayaEl.getBoundingClientRect() : e.currentTarget.getBoundingClientRect();
@@ -83,6 +84,7 @@ const QuranView = ({
             {/* Verses */}
             <div className="quran-text">
                 {verses.map((aya) => {
+                    if (!chapter) return null;
                     const globalNumber = chapter.verses_global_range[0] + Number(aya.aya) - 1;
                     return (
                         <AyaItem

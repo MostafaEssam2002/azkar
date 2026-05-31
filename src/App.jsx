@@ -5,6 +5,9 @@ import QuranPage from "./pages/QuranPage";
 import PlayAudio from "./pages/PlayAudio";
 import SurahsList from './pages/SurahsList';
 import SurahForReading from "./pages/SurahForReading";
+import Test from "./components/Test";
+
+import RadioApp from "./pages/RadioApp";
 
 function App() {
       const routing = createBrowserRouter([
@@ -24,6 +27,7 @@ function App() {
               children: [
                 { index: true, element: <QuranPage /> },
                 { path: "read", element: <SurahForReading /> },
+                { path: "radio", element: <RadioApp /> },
                 { path: "surahsList", element: <SurahsList /> },
                 { path: "surahsList/play", element: <PlayAudio  /> },
                 { path: "part/:part_id", element: <QuranPage /> },

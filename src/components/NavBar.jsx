@@ -11,7 +11,7 @@ const NavBar = () => {
           <Link to="/azkar">الأذكار</Link>
         </li>
         <li><Link to="/quran">تلاوة</Link></li>
-        <li>الحديث</li>
+        <li><Link to="/quran/radio">الاذاعه</Link></li>
         <li>مواقيت الصلاة</li>
       </ul>
     </nav>

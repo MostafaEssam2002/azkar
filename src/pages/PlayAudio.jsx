@@ -30,12 +30,10 @@ const PlayAudio = () => {
 
     const handleShowMore = () => {
         const baseUrl = src.split('/').slice(0, -1).join('/');
-        console.log(`Base URL = ${baseUrl}`);
         const queryParams = `url=${encodeURIComponent(baseUrl)}&name=${encodeURIComponent(reader)}`;
         const finalUrl = surahsList ? `${queryParams}&surahs_list=${encodeURIComponent(JSON.stringify(surahsList))}` : queryParams;
         navigate(`/quran/surahsList?${finalUrl}`);
     };
-    console.log("hello from play audio page and surahsList = ",surahsList)
     return (
         <div className="player-wrapper">
             <AudioPlayer

@@ -3,7 +3,6 @@ import {   useNavigate } from 'react-router-dom';
 const ReciterCard = ({id, name, ar_name, rawi, timing_url, server, surahs_count, surahs_list}) => {
     const navigate = useNavigate();
     const [surahs_lists, setSurahsLists] = useState(surahs_list);
-    console.log(`hello from ReciterCard PAge ${surahs_lists}`); 
     return (
         <div className="reciter-card" dir="rtl">
         <div className="card-image">

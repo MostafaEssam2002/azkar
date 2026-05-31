@@ -1,0 +1,921 @@
+{
+    "radios": [
+        {
+            "id": 1,
+            "name": "إذاعة إبراهيم الأخضر",
+            "url": "https://backup.qurango.net/radio/ibrahim_alakdar",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/إبراهيم الأخضر.jpg"
+        },
+        {
+            "id": 2,
+            "name": "إذاعة شيخ أبو بكر الشاطري",
+            "url": "https://backup.qurango.net/radio/shaik_abu_bakr_al_shatri",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/أبو بكر الشاطري.jpg"
+        },
+        {
+            "id": 3,
+            "name": "إذاعة أحمد العجمي",
+            "url": "https://backup.qurango.net/radio/ahmad_alajmy",
+            "recent_date": "2020-04-25 22:04:04",
+            "image" : "/reciters_images/أحمد العجمي.jpg"
+        },
+        {
+            "id": 4,
+            "name": "إذاعة أحمد الحواشي",
+            "url": "https://backup.qurango.net/radio/ahmad_alhawashi",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/أحمد الحواشي.jpg"
+        },
+        {
+            "id": 5,
+            "name": "إذاعة أحمد صابر",
+            "url": "https://backup.qurango.net/radio/ahmad_saber",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/"
+        },
+        {
+            "id": 6,
+            "name": "إذاعة أحمد نعينع",
+            "url": "https://backup.qurango.net/radio/ahmad_nauina",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/أحمد نعينع.jpg"
+        },
+        {
+            "id": 7,
+            "name": "إذاعة أكرم العلاقمي",
+            "url": "https://backup.qurango.net/radio/akram_alalaqmi",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/أكرم العلاقمي.png"
+        },
+        {
+            "id": 8,
+            "name": "إذاعة إدريس أبكر",
+            "url": "https://backup.qurango.net/radio/idrees_abkr",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/إدريس أبكر.png"
+        },
+        {
+            "id": 9,
+            "name": "إذاعة الزين محمد أحمد",
+            "url": "https://backup.qurango.net/radio/alzain_mohammad_ahmad",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/الزين محمد أحمد.jpg"
+        },
+        {
+            "id": 10,
+            "name": "إذاعة القارئ ياسين",
+            "url": "https://backup.qurango.net/radio/alqaria_yassen",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/"
+        },
+        {
+            "id": 11,
+            "name": "إذاعة العيون الكوشي",
+            "url": "https://backup.qurango.net/radio/aloyoon_alkoshi",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/العيون الكوشي.jpg"
+        },
+        {
+            "id": 12,
+            "name": "إذاعة توفيق الصايغ",
+            "url": "https://backup.qurango.net/radio/tawfeeq_assayegh",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/توفيق الصايغ.jpg"
+        },
+        {
+            "id": 13,
+            "name": "إذاعة جمال شاكر عبدالله",
+            "url": "https://backup.qurango.net/radio/jamal_shaker_abdullah",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/جمال شاكر عبدالله.png"
+        },
+        {
+            "id": 14,
+            "name": "إذاعة خالد القحطاني",
+            "url": "https://backup.qurango.net/radio/khaled_alqahtani",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/خالد القحطاني.jpg"
+        },
+        {
+            "id": 15,
+            "name": "إذاعة خالد عبدالكافي",
+            "url": "https://backup.qurango.net/radio/khalid_abdulkafi",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/خالد عبدالكافي.jpg"
+        },
+        {
+            "id": 16,
+            "name": "إذاعة خليفة الطنيجي",
+            "url": "https://backup.qurango.net/radio/khalifa_altunaiji",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/خليفة الطنيجي.png"
+        },
+        {
+            "id": 17,
+            "name": "إذاعة سعد الغامدي",
+            "url": "https://backup.qurango.net/radio/saad_alghamdi",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/الشيخ-سعد-الغامدي.jpg"
+        },
+        {
+            "id": 18,
+            "name": "إذاعة سعود الشريم",
+            "url": "https://backup.qurango.net/radio/saud_alshuraim",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/سعود-الشريم.jpg"
+        },
+        {
+            "id": 19,
+            "name": "إذاعة سهل ياسين",
+            "url": "https://backup.qurango.net/radio/sahl_yassin",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/سهل ياسين.jpg"
+        },
+        {
+            "id": 20,
+            "name": "إذاعة زكي داغستاني",
+            "url": "https://backup.qurango.net/radio/zaki_daghistani",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/زكي داغستاني.jpg"
+        },
+        {
+            "id": 21,
+            "name": "إذاعة سيد رمضان",
+            "url": "https://backup.qurango.net/radio/sayeed_ramadan",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/سيد رمضان.jpg"
+        },
+        {
+            "id": 22,
+            "name": "إذاعة شيرزاد عبدالرحمن طاهر",
+            "url": "https://backup.qurango.net/radio/shirazad_taher",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/شيرزاد عبدالرحمن طاهر.jpg"
+        },
+        {
+            "id": 23,
+            "name": "إذاعة صابر عبدالحكم",
+            "url": "https://backup.qurango.net/radio/saber_abdulhakm",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/صابر عبدالحكم.jpg"
+        },
+        {
+            "id": 24,
+            "name": "إذاعة صلاح البدير",
+            "url": "https://backup.qurango.net/radio/salah_albudair",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/صلاح البدير.jpg"
+        },
+        {
+            "id": 25,
+            "name": "إذاعة صلاح الهاشم",
+            "url": "https://backup.qurango.net/radio/salah_alhashim",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/صلاح الهاشم.jpg"
+        },
+        {
+            "id": 26,
+            "name": "إذاعة صلاح بو خاطر",
+            "url": "https://backup.qurango.net/radio/slaah_bukhatir",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/صلاح-بو-خاطر.jpg"
+        },
+        {
+            "id": 27,
+            "name": "إذاعة عادل ريان",
+            "url": "https://backup.qurango.net/radio/adel_ryyan",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عادل ريان.jpg"
+        },
+        {
+            "id": 28,
+            "name": "إذاعة عبدالبارئ الثبيتي",
+            "url": "https://backup.qurango.net/radio/abdelbari_altoubayti",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالباري الثبيتي.jpg"
+        },
+        {
+            "id": 29,
+            "name": "إذاعة عبدالبارئ محمد",
+            "url": "https://backup.qurango.net/radio/abdulbari_mohammad",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالبارئ محمد.jpg"
+        },
+        {
+            "id": 30,
+            "name": "إذاعة عبدالباسط عبدالصمد",
+            "url": "https://backup.qurango.net/radio/abdulbasit_abdulsamad_mojawwad",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالباسط عبدالصمد.jpg"
+        },
+        {
+            "id": 31,
+            "name": "إذاعة عبدالباسط عبدالصمد",
+            "url": "https://backup.qurango.net/radio/abdulbasit_abdulsamad_warsh",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالباسط عبدالصمد.jpg"
+        },
+        {
+            "id": 32,
+            "name": "إذاعة عبدالباسط عبدالصمد",
+            "url": "https://backup.qurango.net/radio/abdulbasit_abdulsamad",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالباسط عبدالصمد.jpg"
+        },
+        {
+            "id": 33,
+            "name": "إذاعة عبدالرحمن السديس",
+            "url": "https://backup.qurango.net/radio/abdulrahman_alsudaes",
+            "recent_date": "2020-04-25 22:04:04",
+            "image": "/reciters_images/عبدالرحمن السديس.jpg"
+        },
+        {
+            "id": 34,
+            "name": "إذاعة عبدالعزيز الأحمد",
+            "url": "https://backup.qurango.net/radio/abdul_aziz_alahmad",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالعزيز الأحمد.jpg"
+        },
+        {
+            "id": 35,
+            "name": "إذاعة عبدالله المطرود",
+            "url": "https://backup.qurango.net/radio/abdullah_almattrod",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالله المطرود.jpg"
+        },
+        {
+            "id": 36,
+            "name": "إذاعة عبدالله بصفر",
+            "url": "https://backup.qurango.net/radio/abdullah_basfer",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالله بصفر.jpg"
+        },
+        {
+            "id": 37,
+            "name": "إذاعة عبدالله خياط",
+            "url": "https://backup.qurango.net/radio/abdullah_khayyat",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالله خياط.jpg"
+        },
+        {
+            "id": 38,
+            "name": "إذاعة عبدالله عواد الجهني",
+            "url": "https://backup.qurango.net/radio/abdullah_aljohany",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالله عواد الجهني.jpg"
+        },
+        {
+            "id": 39,
+            "name": "إذاعة عبدالرشيد صوفي",
+            "url": "https://backup.qurango.net/radio/abdulrasheed_soufi_khalaf",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالرشيد صوفي.jpg"
+        },
+        {
+            "id": 40,
+            "name": "إذاعة عبدالرشيد صوفي",
+            "url": "https://backup.qurango.net/radio/abdulrasheed_soufi_assosi",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالرشيد صوفي.jpg"
+        },
+        {
+            "id": 41,
+            "name": "إذاعة عبدالمحسن الحارثي",
+            "url": "https://backup.qurango.net/radio/abdulmohsin_alharthy",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالمحسن الحارثي.jpg"
+        },
+        {
+            "id": 42,
+            "name": "إذاعة عبدالمحسن القاسم",
+            "url": "https://backup.qurango.net/radio/abdulmohsen_alqasim",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالمحسن القاسم.jpg"
+        },
+        {
+            "id": 43,
+            "name": "إذاعة عبدالمحسن العبيكان",
+            "url": "https://backup.qurango.net/radio/abdulmohsin_alobaikan",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالمحسن العبيكان.jpg"
+        },
+        {
+            "id": 44,
+            "name": "إذاعة عبدالهادي أحمد كناكري",
+            "url": "https://backup.qurango.net/radio/abdulhadi_kanakeri",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالهادي أحمد كناكري.jpg"
+        },
+        {
+            "id": 45,
+            "name": "إذاعة عبدالودود حنيف",
+            "url": "https://backup.qurango.net/radio/abdulwadood_haneef",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عبدالودود حنيف.jpg"
+        },
+        {
+            "id": 46,
+            "name": "إذاعة علي بن عبدالرحمن الحذيفي",
+            "url": "https://backup.qurango.net/radio/ali_alhuthaifi",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/علي بن عبدالرحمن الحذيفي.jpg"
+        },
+        {
+            "id": 47,
+            "name": "إذاعة علي الحذيفي",
+            "url": "https://backup.qurango.net/radio/ali_alhuthaifi_qalon",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/علي بن عبدالرحمن الحذيفي.jpg"
+        },
+        {
+            "id": 48,
+            "name": " إذاعة علي جابر",
+            "url": "https://backup.qurango.net/radio/ali_jaber",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/علي جابر.jpg"
+        },
+        {
+            "id": 49,
+            "name": " إذاعة علي حجاج السويسي",
+            "url": "https://backup.qurango.net/radio/ali_hajjaj_alsouasi",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/علي حجاج السويسي.jpg"
+        },
+        {
+            "id": 50,
+            "name": " إذاعة عماد زهير حافظ",
+            "url": "https://backup.qurango.net/radio/emad_hafez",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عماد زهير حافظ.jpg"
+        },
+        {
+            "id": 51,
+            "name": " إذاعة عمر القزابري",
+            "url": "https://backup.qurango.net/radio/omar_alqazabri",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/عمر القزابري.jpg"
+        },
+        {
+            "id": 52,
+            "name": " إذاعة فارس عباد",
+            "url": "https://backup.qurango.net/radio/fares_abbad",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/فارس عباد.jpg"
+        },
+        {
+            "id": 53,
+            "name": " إذاعة ناصر القطامي",
+            "url": "https://backup.qurango.net/radio/nasser_alqatami",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/ناصر القطامي.jpg"
+        },
+        {
+            "id": 54,
+            "name": " إذاعة نبيل الرفاعي",
+            "url": "https://backup.qurango.net/radio/nabil_al_rifay",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/نبيل الرفاعي.jpg"
+        },
+        {
+            "id": 55,
+            "name": " إذاعة نعمة الحسان",
+            "url": "https://backup.qurango.net/radio/neamah_alhassan",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/نعمة الحسان.jpg"
+        },
+        {
+            "id": 56,
+            "name": " إذاعة هاني الرفاعي",
+            "url": "https://backup.qurango.net/radio/hani_arrifai",
+            "recent_date": "2020-04-25 22:04:04",
+            "image":"/reciters_images/هاني الرفاعي.jpg"
+        },
+        {
+            "id": 57,
+            "name": " إذاعة وليد النائحي",
+            "url": "https://backup.qurango.net/radio/waleed_alnaehi",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/وليد النائحي.jpg"
+        },
+        {
+            "id": 58,
+            "name": " إذاعة ياسر الدوسري",
+            "url": "https://backup.qurango.net/radio/yasser_aldosari",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/ياسر الدوسري.jpg"
+        },
+        {
+            "id": 59,
+            "name": " إذاعة ياسر القرشي",
+            "url": "https://backup.qurango.net/radio/yasser_alqurashi",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/ياسر القرشي.jpg"
+        },
+        {
+            "id": 60,
+            "name": " إذاعة ياسر المزروعي ",
+            "url": "https://backup.qurango.net/radio/yasser_almazroyee",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/ياسر المزروعي.jpg"
+        },
+        {
+            "id": 61,
+            "name": " إذاعة يحيى حوا",
+            "url": "https://backup.qurango.net/radio/yahya_hawwa",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/يحيى حوا.jpg"
+        },
+        {
+            "id": 62,
+            "name": " إذاعة يوسف الشويعي",
+            "url": "https://backup.qurango.net/radio/yousef_alshoaey",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/يوسف الشويعي.jpg"
+        },
+        {
+            "id": 63,
+            "name": " إذاعة ماهر المعيقلي",
+            "url": "https://backup.qurango.net/radio/maher",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/ماهر المعيقلي.jpg"
+        },
+        {
+            "id": 64,
+            "name": " إذاعة محمد الطبلاوي",
+            "url": "https://backup.qurango.net/radio/mohammad_altablaway",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمد الطبلاوي.jpg"
+        },
+        {
+            "id": 65,
+            "name": " إذاعة محمد اللحيدان",
+            "url": "https://backup.qurango.net/radio/mohammed_allohaidan",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمد اللحيدان.jpg"
+        },
+        {
+            "id": 66,
+            "name": " إذاعة محمد أيوب",
+            "url": "https://backup.qurango.net/radio/mohammed_ayyub",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمد أيوب.jpg"
+        },
+        {
+            "id": 67,
+            "name": " إذاعة محمد صالح عالم شاه",
+            "url": "https://backup.qurango.net/radio/mohammad_saleh_alim_shah",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمد صالح عالم شاه.jpg"
+        },
+        {
+            "id": 68,
+            "name": " إذاعة محمد جبريل",
+            "url": "https://backup.qurango.net/radio/mohammed_jibreel",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمد جبريل.jpg"
+        },
+        {
+            "id": 69,
+            "name": " إذاعة محمد صديق المنشاوي",
+            "url": "https://backup.qurango.net/radio/mohammed_siddiq_alminshawi",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمد صديق المنشاوي.jpg"
+        },
+        {
+            "id": 70,
+            "name": " إذاعة محمد صديق المنشاوي",
+            "url": "https://backup.qurango.net/radio/mohammed_siddiq_alminshawi_mojawwad",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمد صديق المنشاوي.jpg"
+        },
+        {
+            "id": 71,
+            "name": " إذاعة محمد عبدالكريم",
+            "url": "https://backup.qurango.net/radio/mohammad_abdullkarem",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمد عبدالكريم.jpg"
+        },
+        {
+            "id": 72,
+            "name": " إذاعة محمد عبدالحكيم سعيد العبدالله",
+            "url": "https://backup.qurango.net/radio/mohammad_alabdullah_albizi",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمد عبدالحكيم سعيد العبدالله.jpg"
+        },
+        {
+            "id": 73,
+            "name": " إذاعة محمد عبدالحكيم سعيد العبدالله",
+            "url": "https://backup.qurango.net/radio/mohammad_alabdullah_aldorai",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمد عبدالحكيم سعيد العبدالله.jpg"
+        },
+        {
+            "id": 74,
+            "name": " إذاعة محمود خليل الحصري",
+            "url": "https://backup.qurango.net/radio/mahmoud_khalil_alhussary",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمود خليل الحصري.jpg"
+        },
+        {
+            "id": 75,
+            "name": " إذاعة محمود خليل الحصري",
+            "url": "https://backup.qurango.net/radio/mahmoud_khalil_alhussary_mojawwad",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمود خليل الحصري.jpg"
+        },
+        {
+            "id": 76,
+            "name": " إذاعة محمود خليل الحصري",
+            "url": "https://backup.qurango.net/radio/mahmoud_khalil_alhussary_warsh",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمود خليل الحصري.jpg"
+        },
+        {
+            "id": 77,
+            "name": " إذاعة محمود علي البنا",
+            "url": "https://backup.qurango.net/radio/mahmoud_ali__albanna",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمود علي البنا.jpg"
+        },
+        {
+            "id": 78,
+            "name": " إذاعة محمود علي البنا",
+            "url": "https://backup.qurango.net/radio/mahmoud_ali__albanna_mojawwad",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمود علي البنا.jpg"
+        },
+        {
+            "id": 79,
+            "name": " إذاعة مشاري العفاسي",
+            "url": "https://backup.qurango.net/radio/mishary_alafasi",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/مشاري العفاسي.jpg"
+        },
+        {
+            "id": 80,
+            "name": " إذاعة مصطفى إسماعيل",
+            "url": "https://backup.qurango.net/radio/mustafa_ismail",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/مصطفى إسماعيل.jpg"
+        },
+        {
+            "id": 81,
+            "name": " إذاعة مصطفى اللاهوني",
+            "url": "https://backup.qurango.net/radio/mustafa_allahoni",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/مصطفى اللاهوني.jpg"
+        },
+        {
+            "id": 82,
+            "name": " إذاعة مصطفى رعد العزاوي",
+            "url": "https://backup.qurango.net/radio/mustafa_raad_alazawy",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/مصطفى رعد العزاوي.jpg"
+        },
+        {
+            "id": 83,
+            "name": " إذاعة مفتاح السلطني",
+            "url": "https://backup.qurango.net/radio/muftah_alsaltany_aldori_an_abi_amr ",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/مفتاح السلطني.jpg"
+        },
+        {
+            "id": 84,
+            "name": " إذاعة ماهر شخاشيرو",
+            "url": "https://backup.qurango.net/radio/maher_shakhashero",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/ماهر شخاشيرو.jpg"
+        },
+        {
+            "id": 85,
+            "name": " إذاعة محمود الشيمي",
+            "url": "https://backup.qurango.net/radio/mahmood_alsheimy",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمود الشيمي.jpg"
+        },
+        {
+            "id": 86,
+            "name": " إذاعة خالد المهنا",
+            "url": "https://backup.qurango.net/radio/khalid_almohana",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/خالد المهنا.jpg"
+        },
+        {
+            "id": 87,
+            "name": " إذاعة عادل الكلباني",
+            "url": "https://backup.qurango.net/radio/adel_alkhalbany",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/عادل الكلباني.jpg"
+        },
+        {
+            "id": 88,
+            "name": " إذاعة موسى بلال",
+            "url": "https://backup.qurango.net/radio/mousa_bilal",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/موسى بلال.jpg"
+        },
+        {
+            "id": 89,
+            "name": "حاتم فريد الواعر",
+            "url": "https://backup.qurango.net/radio/hatem_fareed_alwaer",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/حاتم فريد الواعر.jpg"
+        },
+        {
+            "id": 90,
+            "name": " إذاعة محمود الرفاعي",
+            "url": "https://backup.qurango.net/radio/mahmood_al_rifai",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمود الرفاعي.jpg"
+        },
+        {
+            "id": 91,
+            "name": " إذاعة ابراهيم الدوسري",
+            "url": "https://backup.qurango.net/radio/ibrahim_aldosari",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/ابراهيم الدوسري.jpg"
+        },
+        {
+            "id": 92,
+            "name": " إذاعة مفتاح السلطني",
+            "url": "https://backup.qurango.net/radio/muftah_alsaltany_aldorai",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/مفتاح السلطني.jpg"
+        },
+        {
+            "id": 93,
+            "name": " إذاعة جمعان العصيمي",
+            "url": "https://backup.qurango.net/radio/jamaan_alosaimi",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/جمعان العصيمي.jpg"
+        },
+        {
+            "id": 94,
+            "name": " إذاعة مفتاح السلطني",
+            "url": "https://backup.qurango.net/radio/muftah_alsaltany",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/مفتاح السلطني.jpg"
+        },
+        {
+            "id": 95,
+            "name": " إذاعة يوسف بن نوح أحمد",
+            "url": "https://backup.qurango.net/radio/yousef_bin_noah_ahmad",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/يوسف بن نوح أحمد.jpg"
+        },
+        {
+            "id": 96,
+            "name": " إذاعة مفتاح السلطني",
+            "url": "https://backup.qurango.net/radio/muftah_alsaltany_ibn_thakwan_an_ibn_amr",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/مفتاح السلطني.jpg"
+        },
+        {
+            "id": 97,
+            "name": " إذاعة معيض الحارثي",
+            "url": "https://backup.qurango.net/radio/moeedh_alharthi",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/معيض الحارثي.jpg"
+        },
+        {
+            "id": 98,
+            "name": " إذاعة محمد رشاد الشريف",
+            "url": "https://backup.qurango.net/radio/mohammad_rashad_alshareef",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمد رشاد الشريف.jpg"
+        },
+        {
+            "id": 99,
+            "name": " إذاعة أحمد خضر الطرابلسي",
+            "url": "https://backup.qurango.net/radio/ahmad_khader_altarabulsi",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/أحمد خضر الطرابلسي.jpg"
+        },
+        {
+            "id": 100,
+            "name": " إذاعة أحمد الطرابلسي",
+            "url": "https://backup.qurango.net/radio/ahmed_altrabulsi",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/أحمد خضر الطرابلسي.jpg"
+        },
+        {
+            "id": 101,
+            "name": " إذاعة عبدالله الكندري",
+            "url": "https://backup.qurango.net/radio/abdullah_alkandari",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/عبدالله الكندري.jpg"
+        },
+        {
+            "id": 102,
+            "name": " إذاعة أحمد عامر",
+            "url": "https://backup.qurango.net/radio/ahmed_amer",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/"
+        },
+        {
+            "id": 103,
+            "name": "إذاعة محمد عثمان خان",
+            "url": "https://backup.qurango.net/radio/mohammed_osman_khan",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/إذاعة محمد عثمان خان.jpg"
+        },
+        {
+            "id": 104,
+            "name": " إذاعة الدوكالي محمد العالم",
+            "url": "https://backup.qurango.net/radio/addokali_mohammad_alalim",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/الدوكالي محمد العالم.jpg"
+        },
+        {
+            "id": 105,
+            "name": " إذاعة محمد عبدالكريم",
+            "url": "https://backup.qurango.net/radio/mohammad_abdullkarem_alasbahani",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/محمد عبدالكريم.jpg"
+        },
+        {
+            "id": 106,
+            "name": " إذاعة الفاتح محمد الزبير",
+            "url": "https://backup.qurango.net/radio/alfateh_alzubair",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/الفاتح محمد الزبير.jpg"
+        },
+        {
+            "id": 107,
+            "name": " إذاعة طارق عبدالغني دعوب",
+            "url": "https://backup.qurango.net/radio/tareq_abdulgani_daawob",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/طارق عبدالغني دعوب.jpg"
+        },
+        {
+            "id": 108,
+            "name": "-الإذاعة العامة - اذاعة متنوعة لمختلف القراء",
+            "url": "https://backup.qurango.net/radio/mix",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/"
+        },
+        {
+            "id": 109,
+            "name": "إذاعة -تلاوات خاشعة-",
+            "url": "https://backup.qurango.net/radio/salma",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/"
+        },
+        {
+            "id": 110,
+            "name": "إذاعة تكبيرات العيد",
+            "url": "https://backup.qurango.net/radio/eid",
+            "recent_date": "2020-06-27 02:41:26",
+            "image":"/reciters_images/"
+        },
+        {
+            "id": 111,
+            "name": " إذاعة عبدالرحمن الماجد",
+            "url": "https://backup.qurango.net/radio/abdulrahman_almajed",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/عبدالرحمن الماجد.jpg"
+        },
+        {
+            "id": 113,
+            "name": "إذاعة الفتاوى العامة",
+            "url": "https://backup.qurango.net/radio/fatwa",
+            "recent_date": "2020-06-27 02:39:55",
+            "image":"/reciters_images/"
+        },
+        {
+            "id": 114,
+            "name": "إذاعة الرقية الشرعية",
+            "url": "https://backup.qurango.net/radio/roqiah",
+            "recent_date": "2020-06-27 02:38:21",
+            "image":"/reciters_images/"
+        },
+        {
+            "id": 115,
+            "name": "إذاعة ---سورة البقرة - لعدد من القراء---",
+            "url": "https://backup.qurango.net/radio/albaqarah",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/"
+        },
+        {
+            "id": 116,
+            "name": "إذاعة --تفسير القران الكريم--",
+            "url": "https://backup.qurango.net/radio/tafseer",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/"
+        },
+        {
+            "id": 117,
+            "name": "إذاعة خالد الجليل",
+            "url": "https://backup.qurango.net/radio/khalid_aljileel",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/خالد الجليل.jpg"
+        },
+        {
+            "id": 118,
+            "name": "إذاعة ناصر الماجد",
+            "url": "https://backup.qurango.net/radio/nasser_almajed",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/ناصر الماجد.jpg"
+        },
+        {
+            "id": 119,
+            "name": "إذاعة هيثم الجدعاني",
+            "url": "https://backup.qurango.net/radio/hitham_aljadani",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/هيثم الجدعاني.jpg"
+        },
+        {
+            "id": 120,
+            "name": "إذاعة أحمد خليل شاهين",
+            "url": "https://backup.qurango.net/radio/ahmad_shaheen",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/أحمد خليل شاهين.jpg"
+        },
+        {
+            "id": 121,
+            "name": "إذاعة عبدالله الموسى",
+            "url": "https://backup.qurango.net/radio/abdullah_almousa",
+            "recent_date": "2020-06-27 02:46:31",
+            "image":"/reciters_images/عبدالله الموسى.jpg"
+        },
+        {
+            "id": 122,
+            "name": "إذاعة عبدالله الخلف",
+            "url": "https://backup.qurango.net/radio/abdullah_alkhalaf",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/عبدالله الخلف.jpg"
+        },
+        {
+            "id": 123,
+            "name": "-تراتيل قصيرة متميزة-",
+            "url": "https://backup.qurango.net/radio/tarateel",
+            "recent_date": "2020-04-25 22:04:05",
+            "image":"/reciters_images/"
+        },
+        {
+            "id": 139,
+            "name": "إذاعة ماجد الزامل",
+            "url": "https://backup.qurango.net/radio/majed_alzamel",
+            "recent_date": "2020-06-27 01:43:46",
+            "image":"/reciters_images/ماجد الزامل.jpg"
+        },
+        {
+            "id": 217,
+            "name": "إذاعة بندر بليلة",
+            "url": "https://backup.qurango.net/radio/bandar_balilah",
+            "recent_date": "2021-09-06 22:14:27",
+            "image":"/reciters_images/بندر بليلة.jpg"
+        },
+        {
+            "id": 248,
+            "name": "إذاعة ناصر العصفور",
+            "url": "https://backup.qurango.net/radio/nasser_alosfor",
+            "recent_date": "2020-05-05 02:27:02",
+            "image":"/reciters_images/ناصر العصفور.jpg"
+        },
+        {
+            "id": 261,
+            "name": "إذاعة محمد أيوب - قراءة مميزة-",
+            "url": "https://backup.qurango.net/radio/ayyoub2",
+            "recent_date": "2020-06-27 02:35:33",
+            "image":"/reciters_images/محمد أيوب.jpg"
+        },
+        {
+            "id": 265,
+            "name": "إذاعة أحمد ديبان",
+            "url": "https://backup.qurango.net/radio/ahmad_deban",
+            "recent_date": "2020-06-27 01:46:13",
+            "image":"/reciters_images/أحمد ديبان.jpg"
+        },
+        {
+            "id": 274,
+            "name": "أذاعة محمد أبوسنينة",
+            "url": "https://backup.qurango.net/radio/sneineh",
+            "recent_date": "2022-08-17 16:40:49",
+            "image":"/reciters_images/محمد أبوسنينة.jpg"
+        },
+        {
+            "id": 275,
+            "name": "إذاعة محمد الأمين قنيوة",
+            "url": "https://backup.qurango.net/radio/qeniwa",
+            "recent_date": "2022-08-17 16:44:08",
+            "image":"/reciters_images/محمد الأمين قنيوة.jpg"
+        },
+        {
+            "id": 287,
+            "name": "إذاعة عبدالرحمن الشحات",
+            "url": "https://backup.qurango.net/radio/a_alshahhat",
+            "recent_date": "2022-09-20 17:28:01",
+            "image":"/reciters_images/عبدالرحمن الشحات.jpg"
+        },
+        {
+            "id": 307,
+            "name": "عبدالعزيز سحيم",
+            "url": "https://backup.qurango.net/radio/a_sheim",
+            "image":"/reciters_images/عبدالعزيز سحيم.jpg",
+            "recent_date": "2023-10-11 04:18:00"
+        }
+    ]
+}
