@@ -1,0 +1,424 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+
+// ── Variables ──────────────────────────────────────────────
+$bg-primary:        #0d1b3e;
+$green-primary:     #1a6e44;
+$green-dark:        #0f5233;
+$green-darker:      #0a3d26;
+$green-accent:      #2ecc71;
+$green-light:       #7ecda8;
+$text-primary:      #e8f0ff;
+$text-muted:        #a0b4d6;
+$gold:              #e8be70;
+$font:              'Cairo', sans-serif;
+
+// ── Root ───────────────────────────────────────────────────
+.prayer-app {
+  font-family: $font;
+  direction: rtl;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+
+  // Full-screen background image
+  &__bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: $bg-primary;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+
+    // Dark gradient overlay for readability
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 15, 35, 0.45) 0%,
+        rgba(5, 15, 35, 0.55) 40%,
+        rgba(5, 15, 35, 0.72) 100%
+      );
+    }
+  }
+}
+
+// ── Scroll Container ───────────────────────────────────────
+.page-scroll {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: 0 0 40px;
+}
+
+// ── Page Container (centered with side margins) ────────────
+.page-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+// ── Hero Header (title area at top) ───────────────────────
+.hero-header {
+  text-align: center;
+  padding: 48px 16px 24px;
+
+  &__title {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 900;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+    margin-bottom: 4px;
+  }
+
+  &__subtitle {
+    color: $green-light;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+}
+
+// ── Next Prayer Card ───────────────────────────────────────
+.next-prayer-card {
+  width: 100%;
+  margin: 0 auto 28px;
+  background: rgba(10, 30, 50, 0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 22px;
+  padding: 20px 22px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(46, 204, 113, 0.22);
+
+  &__label {
+    color: $green-light;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    opacity: 0.85;
+  }
+
+  &__name {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+  }
+
+  &__time {
+    color: $green-light;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  &__countdown-label {
+    color: $green-light;
+    font-size: 10px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    text-align: center;
+    opacity: 0.85;
+  }
+
+  &__ring-wrapper {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    text-align: center;
+  }
+
+  &__ring-svg {
+    transform: rotate(-90deg);
+  }
+
+  &__ring-track {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 5;
+  }
+
+  &__ring-progress {
+    fill: none;
+    stroke: $green-accent;
+    stroke-width: 5;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 4px rgba(46, 204, 113, 0.7));
+  }
+
+  &__countdown-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &__bell-btn {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+    flex-shrink: 0;
+    transition: background 0.2s;
+
+    &:hover {
+      background: rgba(46, 204, 113, 0.22);
+    }
+  }
+}
+
+// ── Content ────────────────────────────────────────────────
+.content {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+// ── Location ───────────────────────────────────────────────
+.location-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: $green-light;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  justify-content: center;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+// ── Date Bar ───────────────────────────────────────────────
+.date-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10, 25, 50, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  color: $text-muted;
+  font-size: 13px;
+
+  &__hijri {
+    color: $green-light;
+    font-weight: 600;
+  }
+}
+
+// ── Prayers Grid ───────────────────────────────────────────
+.prayers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.prayer-card {
+  background: rgba(10, 25, 50, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 10px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s, border-color 0.2s;
+  text-align: center;
+
+  &--active {
+    background: rgba(26, 110, 68, 0.38);
+    border-color: rgba(46, 204, 113, 0.4);
+    box-shadow: 0 0 16px rgba(46, 204, 113, 0.15);
+  }
+
+  &__icon {
+    font-size: 26px;
+    line-height: 1;
+  }
+
+  &__name {
+    color: $text-primary;
+    font-size: 15px;
+    font-weight: 700;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+
+  &__time {
+    color: $text-muted;
+    font-size: 13px;
+    font-weight: 600;
+    direction: ltr;
+  }
+
+  &__badge {
+    font-size: 10px;
+    color: $green-light;
+    background: rgba(26, 110, 68, 0.45);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  &__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $green-accent;
+    display: inline-block;
+    margin-right: 4px;
+    vertical-align: middle;
+    box-shadow: 0 0 6px rgba(46, 204, 113, 0.8);
+  }
+}
+
+// ── Status messages ────────────────────────────────────────
+.status-error {
+  color: #e07070;
+  text-align: center;
+  font-size: 13px;
+  padding: 20px 0;
+}
+
+.status-loading {
+  color: $green-light;
+  text-align: center;
+  font-size: 14px;
+  padding: 40px 0;
+}
+
+// ── Quran Card ─────────────────────────────────────────────
+.quran-card {
+  background: rgba(10, 25, 50, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(232, 190, 112, 0.2);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-top: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  direction: rtl;
+
+  &__verse {
+    color: $text-primary;
+    font-size: 13px;
+    line-height: 1.8;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+
+  &__ref {
+    color: $green-light;
+    font-size: 11px;
+    margin-top: 4px;
+    display: block;
+  }
+
+  &__icon {
+    font-size: 26px;
+    color: $gold;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 6px rgba(232, 190, 112, 0.5));
+  }
+}
+
+// ── Location Selector (Country & City) ──────────────────────
+.location-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+  background: rgba(10, 25, 50, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 14px;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__label {
+    color: $green-light;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+
+  &__select {
+    background: rgba(10, 30, 50, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: $text-primary;
+    font-family: $font;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: right;
+    direction: rtl;
+
+    &:hover {
+      border-color: rgba(46, 204, 113, 0.6);
+      background: rgba(10, 30, 50, 0.75);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $green-accent;
+      box-shadow: 0 0 12px rgba(46, 204, 113, 0.3);
+      background: rgba(10, 30, 50, 0.85);
+    }
+
+    option {
+      background: $bg-primary;
+      color: $text-primary;
+      padding: 8px;
+    }
+  }
+
+  // Responsive: stack on smaller screens
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}

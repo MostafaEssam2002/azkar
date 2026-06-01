@@ -71,10 +71,12 @@ const QuranView = ({
             {tooltip.visible && (() => {
                 const wrapperEl      = document.querySelector("[data-quran-container]");
                 const containerWidth = wrapperEl ? wrapperEl.offsetWidth : 900;
-                const tooltipLeft    = getLeft(tooltip.x, containerWidth, TOOLTIP_WIDTH);
-                const arrowOffset    = Math.max(16, Math.min(tooltip.arrowX - tooltipLeft, TOOLTIP_WIDTH - 16));
+                // make tooltip responsive: width should not exceed container minus padding
+                const tooltipWidth = Math.max(220, Math.min(TOOLTIP_WIDTH, containerWidth - 16));
+                const tooltipLeft    = getLeft(tooltip.x, containerWidth, tooltipWidth);
+                const arrowOffset    = Math.max(12, Math.min(tooltip.arrowX - tooltipLeft, tooltipWidth - 16));
                 return (
-                    <div className="tooltip" style={{ left: tooltipLeft, top: tooltip.y }}>
+                    <div className="tooltip" style={{ left: tooltipLeft, top: tooltip.y, width: tooltipWidth }}>
                         <div className="tooltip__arrow" style={{ left: arrowOffset }} />
                         {tooltip.text}
                     </div>

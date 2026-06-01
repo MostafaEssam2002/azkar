@@ -330,7 +330,8 @@ $font-sans:       sans-serif;
   line-height:   1.9;
   padding:       12px 18px;
   border-radius: 10px;
-  width:         520px;
+  max-width:     520px;
+  width:         auto;
   text-align:    right;
   z-index:       100;
   border:        1px solid $gold;
@@ -338,6 +339,8 @@ $font-sans:       sans-serif;
   pointer-events: none;
   direction:     rtl;
   transform:     translateY(calc(-100% - 12px));
+  word-wrap:     break-word;
+  white-space:   normal;
 }
 
 .tooltip__arrow {
