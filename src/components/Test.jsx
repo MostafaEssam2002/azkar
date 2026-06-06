@@ -1,20 +1,18 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import usePin from "../hooks/usePin";
-import useWird from "./test/useWird";
 import QuranView from './quran/QuranView';
 import PinBanner from './quran/PinBanner';
 import QuranHeader from './quran/QuranHeader';
 import PinToast from './quran/PinToast';
 import MiniPlayer from './quran/MiniPlayer';
 import FloatingPin from './quran/FloatingPin';
-import WirdSettingsPopup from './test/WirdSettingsPopup';
-import WirdScoreBar from './test/WirdScoreBar';
-import CompletionPopup from './test/CompletionPopup';
-import Fireworks from './test/Fireworks';
-import SurahSeparator from './test/SurahSeparator';
+import WirdSettingsPopup from './wird/WirdSettingsPopup';
+import WirdScoreBar from './wird/WirdScoreBar';
+import CompletionPopup from './wird/CompletionPopup';
+import Fireworks from './wird/Fireworks';
+import SurahSeparator from './wird/SurahSeparator';
 import chaptersData from '../data/chapters.json';
-// import "./test/wird-system.scss";
-// import "./test/surah-separator.scss";
+import useWird from './../hooks/useWird';
 
 const TOTAL_PAGES = 604;
 
