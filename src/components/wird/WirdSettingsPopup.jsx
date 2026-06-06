@@ -12,6 +12,7 @@ export default function WirdSettingsPopup({ settings, onSave }) {
     const [pagesPerDay, setPagesPerDay] = useState(settings?.pagesPerDay ?? 20);
     const [startPage, setStartPage] = useState(settings?.startPage ?? 1);
     const [updateInterval, setUpdateInterval] = useState(settings?.updateInterval ?? 3); // بالدقائق
+    const [intervalUnit, setIntervalUnit] = useState(settings?.intervalUnit ?? "minutes"); // minutes, hours, days
     const popupRef = useRef(null);
 
     // اغلق لو ضغط بره
@@ -28,8 +29,22 @@ export default function WirdSettingsPopup({ settings, onSave }) {
     const handleSave = () => {
         const pages = Math.min(TOTAL_PAGES, Math.max(1, Number(pagesPerDay) || 20));
         const start = Math.min(TOTAL_PAGES, Math.max(1, Number(startPage) || 1));
-        const interval = Math.min(60, Math.max(1, Number(updateInterval) || 3)); // من 1 إلى 60 دقيقة
-        onSave({ pagesPerDay: pages, startPage: start, updateInterval: interval });
+        
+        // تحويل الفترة إلى دقائق حسب الوحدة المختارة
+        let intervalInMinutes = Number(updateInterval) || 3;
+        if (intervalUnit === "hours") {
+            intervalInMinutes = intervalInMinutes * 60;
+        } else if (intervalUnit === "days") {
+            intervalInMinutes = intervalInMinutes * 24 * 60;
+        }
+        intervalInMinutes = Math.min(10080, Math.max(1, intervalInMinutes)); // من 1 دقيقة إلى 7 أيام
+        
+        onSave({ 
+            pagesPerDay: pages, 
+            startPage: start, 
+            updateInterval: intervalInMinutes,
+            intervalUnit: intervalUnit // احفظ الوحدة الأصلية للعرض
+        });
         setOpen(false);
     };
 
@@ -87,13 +102,28 @@ export default function WirdSettingsPopup({ settings, onSave }) {
 
                         {/* فترة التحديث */}
                         <div className="wird-field">
-                            <label>فترة التحديث (بالدقائق)</label>
-                            <div className="wird-stepper">
-                                <button onClick={() => setUpdateInterval(v => Math.max(1, v - 1))}>−</button>
-                                <span>{updateInterval}</span>
-                                <button onClick={() => setUpdateInterval(v => Math.min(60, v + 1))}>+</button>
+                            <label>فترة التحديث</label>
+                            <div className="wird-interval-group">
+                                <div className="wird-stepper">
+                                    <button onClick={() => setUpdateInterval(v => Math.max(1, v - 1))}>−</button>
+                                    <span>{updateInterval}</span>
+                                    <button onClick={() => setUpdateInterval(v => Math.max(1, v + 1))}>+</button>
+                                </div>
+                                <select 
+                                    value={intervalUnit} 
+                                    onChange={e => setIntervalUnit(e.target.value)}
+                                    className="wird-unit-select"
+                                >
+                                    <option value="minutes">دقائق</option>
+                                    <option value="hours">ساعات</option>
+                                    <option value="days">أيام</option>
+                                </select>
                             </div>
-                            <small>الورد يتحدث كل {updateInterval} دقيقة</small>
+                            <small>
+                                {intervalUnit === "minutes" && `الورد يتحدث كل ${updateInterval} دقيقة`}
+                                {intervalUnit === "hours" && `الورد يتحدث كل ${updateInterval} ${updateInterval === 1 ? "ساعة" : "ساعات"}`}
+                                {intervalUnit === "days" && `الورد يتحدث كل ${updateInterval} ${updateInterval === 1 ? "يوم" : "أيام"}`}
+                            </small>
                         </div>
                     </div>
 

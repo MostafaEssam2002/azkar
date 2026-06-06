@@ -71,6 +71,7 @@ const WirdPage = () => {
         setEndPageInput(String(activeRange.end));
         setCurrentPage(activeRange.start);
 
+        // احذف الـ pin عند تغيير الورد (سواء تلقائي أو يدوي)
         localStorage.removeItem("quran_wird_pin");
         clearPin();
 

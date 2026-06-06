@@ -290,6 +290,41 @@ $danger:       #dc2626;
     }
 }
 
+.wird-interval-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.wird-unit-select {
+    padding: 8px 10px;
+    border: 1.5px solid $cream-border;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: 'Noto Naskh Arabic', serif;
+    color: $text-dark;
+    background: $cream;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    cursor: pointer;
+    min-width: 100px;
+    direction: rtl;
+
+    &:hover {
+        border-color: $green-light;
+    }
+
+    &:focus {
+        border-color: $green-mid;
+        box-shadow: 0 0 0 3px rgba(45,106,79,.12);
+    }
+
+    option {
+        direction: rtl;
+        padding: 8px;
+    }
+}
+
 .wird-time {
     direction: ltr;
     font-size: 16px;

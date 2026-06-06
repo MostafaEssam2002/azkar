@@ -7,6 +7,59 @@ import { useEffect, useRef, useState } from "react";
 import WirdSettingsPopup from "./WirdSettingsPopup";
 import Confetti from "./Confetti";
 
+/* ── Format time display ────────────────────────────────────── */
+const formatTimeRemaining = (totalSeconds) => {
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    
+    if (totalMinutes < 60) {
+        // أقل من ساعة: عرض بالدقائق فقط
+        return `${totalMinutes} دقيقة و${seconds} ثانية`;
+    }
+    
+    if (totalMinutes < 1440) {
+        // أقل من 24 ساعة: عرض بالساعات والدقائق
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        const hourText = hours === 1 ? "ساعة" : `${hours} ساعات`;
+        return `${hourText}${minutes > 0 ? ` و${minutes} دقيقة` : ""}`;
+    }
+    
+    // أكثر من 24 ساعة: عرض باليوم والساعات والدقائق
+    const days = Math.floor(totalMinutes / 1440);
+    const remainingMinutes = totalMinutes % 1440;
+    const hours = Math.floor(remainingMinutes / 60);
+    const minutes = remainingMinutes % 60;
+    
+    let result = `${days === 1 ? "يوم" : `${days} أيام`}`;
+    if (hours > 0) {
+        const hourText = hours === 1 ? "ساعة" : `${hours} ساعات`;
+        result += ` و${hourText}`;
+    }
+    if (minutes > 0) {
+        result += ` و${minutes} دقيقة`;
+    }
+    
+    return result;
+};
+
+/* ── Format interval display ────────────────────────────────── */
+const formatIntervalDisplay = (intervalMinutes) => {
+    if (intervalMinutes < 60) {
+        return `${intervalMinutes} دقيقة`;
+    }
+    
+    if (intervalMinutes < 1440) {
+        const hours = intervalMinutes / 60;
+        const isWhole = hours === Math.floor(hours);
+        return isWhole ? `${Math.floor(hours)} ساعات` : `${hours.toFixed(1)} ساعة`;
+    }
+    
+    const days = intervalMinutes / 1440;
+    const isWhole = days === Math.floor(days);
+    return isWhole ? `${Math.floor(days)} أيام` : `${days.toFixed(1)} يوم`;
+};
+
 /* ── WirdScoreBar ────────────────────────────────────────────── */
 export default function WirdScoreBar({
     score,
@@ -137,9 +190,9 @@ export default function WirdScoreBar({
                             <div className="wird-next-update-timer">
                                 <span className="wird-timer-label">⏱️ الورد القادم خلال:</span>
                                 <span className="wird-timer-display">
-                                    {Math.floor(timeRemaining / 60)}:{String(timeRemaining % 60).padStart(2, '0')}
+                                    {formatTimeRemaining(timeRemaining)}
                                 </span>
-                                <span className="wird-timer-info">(كل {Math.max(0.5, effectiveUpdateInterval.toFixed(1))} دقائق)</span>
+                                {/* <span className="wird-timer-info">(كل {formatIntervalDisplay(Math.ceil(effectiveUpdateInterval))})</span> */}
                             </div>
 
                             {/* شريط التقدم */}
