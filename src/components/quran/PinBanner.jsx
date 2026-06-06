@@ -9,7 +9,7 @@ const PinBanner = ({ pin, onJump, onClear, onDismiss }) => {
                 <span className="pin-banner__icon">📌</span>
                 <div>
                     <div className="pin-banner__title">
-                        آخر موقف · سورة {pin.suraName} · الآية {pin.ayaNumber}
+                        آخر موقف · سورة {pin.suraName} · الآية {pin.ayaNumber} · الصفحة {pin.pageNumber || "—"}
                     </div>
                     <div className="pin-banner__sub">حُفظ: {formattedDate}</div>
                 </div>

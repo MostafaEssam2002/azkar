@@ -7,6 +7,7 @@ const useAudioPlayer = (src, onClose) => {
     const [currentTime, setCurrent]  = useState("0:00");
     const [duration,    setDuration] = useState("—");
     const [volume,      setVolume]   = useState(0.85);
+    const [error,       setError]    = useState(null);
 
     const fmt = (s) => {
         if (!s || isNaN(s)) return "—";
@@ -28,16 +29,22 @@ const useAudioPlayer = (src, onClose) => {
             setPlaying(false);
             setTimeout(() => onClose(), 1000);
         };
+        const onError = () => {
+            setError("فشل تحميل الصوت. يرجى التحقق من الاتصال أو المحاولة لاحقاً.");
+            setPlaying(false);
+        };
 
         audio.addEventListener("loadedmetadata", onMeta);
         audio.addEventListener("timeupdate",     onTime);
         audio.addEventListener("ended",          onEnd);
+        audio.addEventListener("error",          onError);
         audio.play().then(() => setPlaying(true)).catch(() => {});
 
         return () => {
             audio.removeEventListener("loadedmetadata", onMeta);
             audio.removeEventListener("timeupdate",     onTime);
             audio.removeEventListener("ended",          onEnd);
+            audio.removeEventListener("error",          onError);
             audio.pause();
         };
     }, [src, onClose]);
@@ -66,7 +73,7 @@ const useAudioPlayer = (src, onClose) => {
         if (audioRef.current) audioRef.current.volume = v;
     }, []);
 
-    return { audioRef, playing, progress, currentTime, duration, volume, toggle, skip, seek, changeVolume };
+    return { audioRef, playing, progress, currentTime, duration, volume, error, toggle, skip, seek, changeVolume };
 };
 
 export default useAudioPlayer;

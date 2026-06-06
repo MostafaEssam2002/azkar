@@ -24,6 +24,7 @@ const AudioPlayer = ({ src, arabicTitle, surahNumber, surahName, reader }) => {
     const [currentTime, setCurrentTime] = useState("0:00");
     const [duration, setDuration]     = useState("—");
     const [volume, setVolume]         = useState(0.75);
+    const [loadError, setLoadError]   = useState(null);
 
 const fmt = (s) => {
     if (isNaN(s)) return "—";
@@ -53,7 +54,13 @@ useEffect(() => {
     };
 }, []);
 
+    const handleAudioError = () => {
+        setLoadError("فشل تحميل الصوت. يرجى التحقق من الاتصال أو المحاولة لاحقاً.");
+        setPlaying(false);
+    };
+
     const togglePlay = () => {
+    if (loadError) return;
     const audio = audioRef.current;
     if (audio.paused) { audio.play(); setPlaying(true); }
     else              { audio.pause(); setPlaying(false); }
@@ -82,7 +89,13 @@ const changeVolume = useCallback((e) => {
 return (
     <div className="player-wrapper">
         <div className="player-card">
-        <audio ref={audioRef} src={src} preload="metadata" />
+        <audio ref={audioRef} src={src} preload="metadata" onError={handleAudioError} />
+
+        {loadError && (
+            <div className="player-error">
+                ⚠️ {loadError}
+            </div>
+        )}
 
         {/* Ornamental corners */}
         <div className="corner tl"><OrnamentalCorner /></div>

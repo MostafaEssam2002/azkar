@@ -32,6 +32,7 @@ function App() {
                 { index: true, element: <QuranPage /> },
                 { path: "read", element: <SurahForReading /> },
                 { path: "radio", element: <RadioApp /> },
+                { path: "test", element: <Test /> },
                 
                 { path: "surahsList", element: <SurahsList /> },
                 { path: "surahsList/play", element: <PlayAudio  /> },

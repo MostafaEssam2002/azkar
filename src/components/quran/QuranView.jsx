@@ -29,8 +29,8 @@ const QuranView = ({
 
     const handleNumberClick = (e, aya) => {
         e.stopPropagation();
-        if (!chapter) return;
-        const globalNumber = chapter.verses_global_range[0] + Number(aya.aya) - 1;
+        const globalNumber = Number(aya.globalNumber || aya.number || (chapter?.verses_global_range ? chapter.verses_global_range[0] + Number(aya.aya || aya.numberInSurah) - 1 : 0));
+        if (!globalNumber) return;
         const ayaEl = e.currentTarget.closest("[data-aya]");
         const rect  = ayaEl ? ayaEl.getBoundingClientRect() : e.currentTarget.getBoundingClientRect();
         const PW    = Math.min(320, window.innerWidth - 16);
@@ -45,8 +45,8 @@ const QuranView = ({
         setPlayer({
             globalNumber,
             src: `https://cdn.islamic.network/quran/audio/128/ar.husary/${globalNumber}.mp3`,
-            ayaText:   aya.arabic_text,
-            ayaNumber: aya.aya,
+            ayaText:   aya.arabic_text || aya.text,
+            ayaNumber: aya.aya || aya.numberInSurah,
             x,
             y,
         });
@@ -86,16 +86,16 @@ const QuranView = ({
             {/* Verses */}
             <div className="quran-text">
                 {verses.map((aya) => {
-                    if (!chapter) return null;
-                    const globalNumber = chapter.verses_global_range[0] + Number(aya.aya) - 1;
+                    const globalNumber = Number(aya.globalNumber || aya.number || (chapter?.verses_global_range ? chapter.verses_global_range[0] + Number(aya.aya || aya.numberInSurah) - 1 : 0));
+                    const ayaSuraId = Number(aya.sura || (aya.surah && (aya.surah.number || aya.surah.id)) || currentSura);
                     return (
                         <AyaItem
                             key={aya.id}
                             aya={aya}
-                            currentSura={currentSura}
+                            currentSura={ayaSuraId}
                             chapter={chapter}
                             isPlaying={player?.globalNumber === globalNumber}
-                            isPinned={pin?.suraId === currentSura && pin?.ayaNumber === Number(aya.aya)}
+                            isPinned={pin?.suraId === ayaSuraId && pin?.ayaNumber === Number(aya.aya || aya.numberInSurah)}
                             onClick={(e) => handleClick(e, aya)}
                             onNumberClick={(e) => handleNumberClick(e, aya)}
                         />

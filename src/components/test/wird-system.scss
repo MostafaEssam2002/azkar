@@ -1,0 +1,611 @@
+/* ═══════════════════════════════════════════════════════════
+   Wird Daily System — SCSS
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Variables ─────────────────────────────────────────────── */
+$green-dark:   #1b4332;
+$green-mid:    #2d6a4f;
+$green-light:  #52b788;
+$gold:         #c8b97a;
+$gold-light:   #e9c46a;
+$cream:        #faf8f3;
+$cream-border: #e8dfc8;
+$text-dark:    #1a1a1a;
+$text-muted:   #6b7280;
+$warning-bg:   #fff8e1;
+$warning-border: #f59e0b;
+$danger:       #dc2626;
+
+/* ═══════════════════════════════════════════════════════════
+   Top Bar (Settings + Page Selector)
+   ═══════════════════════════════════════════════════════════ */
+.quran-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 12px 24px;
+    background: #fff;
+    border-bottom: 1px solid $cream-border;
+    direction: rtl;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+}
+
+/* Page Range (inside top bar) */
+.page-range-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.page-range-field {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    label {
+        font-size: 13px;
+        color: $text-muted;
+        white-space: nowrap;
+        font-family: 'Noto Naskh Arabic', serif;
+    }
+
+    input[type="number"] {
+        width: 64px;
+        padding: 6px 8px;
+        border: 1.5px solid $cream-border;
+        border-radius: 8px;
+        font-size: 14px;
+        text-align: center;
+        background: $cream;
+        color: $text-dark;
+        outline: none;
+        transition: border-color .2s, box-shadow .2s;
+        direction: ltr;
+
+        &:focus {
+            border-color: $green-mid;
+            box-shadow: 0 0 0 3px rgba(45,106,79,.12);
+        }
+
+        /* hide spin arrows */
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button { -webkit-appearance: none; }
+    }
+}
+
+.page-range-btn {
+    padding: 7px 16px;
+    background: linear-gradient(135deg, $green-mid, $green-dark);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .15s, box-shadow .2s;
+    box-shadow: 0 2px 6px rgba(27,67,50,.3);
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(27,67,50,.35);
+    }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   Wird Settings — Gear Button
+   ═══════════════════════════════════════════════════════════ */
+.wird-settings-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.wird-gear-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: $cream;
+    border: 1.5px solid $cream-border;
+    border-radius: 10px;
+    color: $green-mid;
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+
+    svg {
+        width: 18px;
+        height: 18px;
+        transition: transform .4s ease;
+        flex-shrink: 0;
+    }
+
+    &:hover {
+        background: #eef6f1;
+        border-color: $green-mid;
+        box-shadow: 0 2px 8px rgba(45,106,79,.15);
+
+        svg { transform: rotate(60deg); }
+    }
+
+    &.active {
+        background: $green-mid;
+        color: #fff;
+        border-color: $green-mid;
+
+        svg { transform: rotate(90deg); stroke: #fff; }
+    }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   Wird Popup
+   ═══════════════════════════════════════════════════════════ */
+.wird-popup {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 300px;
+    background: #fff;
+    border: 1.5px solid $cream-border;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.14);
+    z-index: 500;
+    overflow: hidden;
+    animation: popupIn .22s cubic-bezier(.34,1.56,.64,1);
+
+    @keyframes popupIn {
+        from { opacity: 0; transform: translateY(-10px) scale(.96); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+}
+
+.wird-popup-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px 10px;
+    background: linear-gradient(135deg, $green-dark, $green-mid);
+    color: #fff;
+
+    .wird-popup-icon { font-size: 22px; }
+
+    h3 {
+        flex: 1;
+        margin: 0;
+        font-family: 'Noto Naskh Arabic', serif;
+        font-size: 15px;
+        font-weight: 700;
+    }
+
+    .wird-popup-close {
+        background: rgba(255,255,255,.15);
+        border: none;
+        color: #fff;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background .15s;
+
+        &:hover { background: rgba(255,255,255,.3); }
+    }
+}
+
+.wird-popup-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.wird-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+        font-family: 'Noto Naskh Arabic', serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: $text-dark;
+    }
+
+    small {
+        font-size: 11px;
+        color: $text-muted;
+        font-family: 'Noto Naskh Arabic', serif;
+    }
+}
+
+.wird-stepper {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1.5px solid $cream-border;
+    border-radius: 10px;
+    overflow: hidden;
+    width: fit-content;
+
+    button {
+        width: 36px;
+        height: 36px;
+        border: none;
+        background: $cream;
+        color: $green-mid;
+        font-size: 20px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background .15s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover { background: #e0f0e8; }
+    }
+
+    span {
+        min-width: 48px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 700;
+        color: $green-dark;
+        font-family: 'Noto Naskh Arabic', serif;
+        border-left: 1.5px solid $cream-border;
+        border-right: 1.5px solid $cream-border;
+        padding: 0 8px;
+        line-height: 36px;
+    }
+}
+
+.wird-input {
+    padding: 8px 12px;
+    border: 1.5px solid $cream-border;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Noto Naskh Arabic', serif;
+    color: $text-dark;
+    background: $cream;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:focus {
+        border-color: $green-mid;
+        box-shadow: 0 0 0 3px rgba(45,106,79,.12);
+    }
+}
+
+.wird-time {
+    direction: ltr;
+    font-size: 16px;
+    font-weight: 600;
+    color: $green-dark;
+}
+
+.wird-save-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, $green-mid, $green-dark);
+    color: #fff;
+    border: none;
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity .2s, transform .15s;
+    letter-spacing: 0.5px;
+
+    &:hover {
+        opacity: .92;
+        transform: translateY(-1px);
+    }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   Wird Score Bar
+   ═══════════════════════════════════════════════════════════ */
+.wird-score-bar-wrapper {
+    max-width: 860px;
+    margin: 12px auto;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    direction: rtl;
+}
+
+/* Catch-up Banner */
+.wird-catchup-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: $warning-bg;
+    border: 1.5px solid $warning-border;
+    border-radius: 12px;
+    animation: shake .4s ease;
+
+    @keyframes shake {
+        0%,100% { transform: translateX(0); }
+        25%      { transform: translateX(-4px); }
+        75%      { transform: translateX(4px); }
+    }
+
+    .wird-catchup-icon { font-size: 22px; }
+
+    .wird-catchup-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        strong {
+            font-family: 'Noto Naskh Arabic', serif;
+            font-size: 14px;
+            color: #92400e;
+        }
+
+        span {
+            font-size: 12px;
+            color: #b45309;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+    }
+
+    .wird-catchup-badge {
+        padding: 4px 10px;
+        background: $warning-border;
+        color: #fff;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        font-family: 'Noto Naskh Arabic', serif;
+        white-space: nowrap;
+    }
+}
+
+/* Score Info */
+.wird-score-info {
+    background: #fff;
+    border: 1.5px solid $cream-border;
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+
+.wird-day-label {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 13px;
+    color: $text-muted;
+    direction: rtl;
+
+    .wird-settings-wrapper {
+        /* أقصى اليمين */
+        grid-column: 1;
+        flex-shrink: 0;
+    }
+
+    > span {
+        /* المنتصف */
+        grid-column: 2;
+        text-align: center;
+        justify-self: center;
+    }
+
+    .wird-range-label {
+        /* أقصى اليسار */
+        grid-column: 3;
+        color: $green-mid;
+        font-weight: 600;
+        font-size: 13px;
+        justify-self: start;
+    }
+
+    .wird-catchup-tag {
+        /* أيضاً في المنتصف */
+        grid-column: 2;
+        text-align: center;
+        justify-self: center;
+        color: $warning-border;
+        font-weight: 700;
+    }
+}
+
+/* Timer للورد القادم */
+.wird-next-update-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(45, 106, 79, .08), rgba(82, 183, 136, .08));
+    border: 1px solid rgba(45, 106, 79, .15);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-family: 'Noto Naskh Arabic', serif;
+
+    .wird-timer-label {
+        font-size: 12px;
+        color: $green-mid;
+        font-weight: 600;
+    }
+
+    .wird-timer-display {
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        color: $green-dark;
+        background: rgba(255, 255, 255, .6);
+        padding: 4px 10px;
+        border-radius: 6px;
+        min-width: 45px;
+        text-align: center;
+        animation: pulse-timer 1s ease-in-out infinite;
+    }
+
+    .wird-timer-info {
+        font-size: 11px;
+        color: $text-muted;
+        font-weight: 500;
+    }
+
+    @keyframes pulse-timer {
+        0%, 100% { opacity: 1; }
+        50% { opacity: .7; }
+    }
+}
+
+/* Progress Track */
+.wird-progress-track {
+    position: relative;
+    height: 20px;
+    background: $cream;
+    border-radius: 100px;
+    overflow: hidden;
+    border: 1px solid $cream-border;
+}
+
+.wird-progress-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, $green-mid, $green-light);
+    transition: width .6s cubic-bezier(.34,1.2,.64,1);
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(180deg, rgba(255,255,255,.25) 0%, transparent 100%);
+        border-radius: inherit;
+    }
+
+    &.complete {
+        background: linear-gradient(90deg, $gold, $gold-light);
+    }
+}
+
+.wird-score-pct {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    font-weight: 700;
+    color: $green-dark;
+    z-index: 1;
+    font-family: 'Noto Naskh Arabic', serif;
+}
+
+/* Completion Message */
+.wird-complete-msg {
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: $green-dark;
+    animation: fadeInUp .4s ease;
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+}
+
+.wird-next-catchup-btn {
+    margin-right: 12px;
+    padding: 4px 14px;
+    background: $green-mid;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .2s;
+
+    &:hover { background: $green-dark; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   Pin Banner + Pagination (keep consistent)
+   ═══════════════════════════════════════════════════════════ */
+.pin-banner-wrapper {
+    max-width: 860px;
+    margin: 0 auto 12px;
+    padding: 0 16px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 16px 40px;
+    direction: rtl;
+
+    .pagination-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 22px;
+        border-radius: 10px;
+        border: 1.5px solid $green-mid;
+        background: #fff;
+        color: $green-mid;
+        font-family: 'Noto Naskh Arabic', serif;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all .2s;
+
+        &:hover:not(:disabled) {
+            background: $green-mid;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(45,106,79,.3);
+            transform: translateY(-1px);
+        }
+
+        &:disabled {
+            opacity: .35;
+            cursor: not-allowed;
+            border-color: #cbd5e0;
+            color: #a0aec0;
+        }
+    }
+
+    .page-number.active {
+        padding: 10px 20px;
+        background: $cream;
+        border-radius: 10px;
+        border: 1.5px solid $cream-border;
+        font-family: 'Noto Naskh Arabic', serif;
+        font-size: 14px;
+        color: $text-muted;
+        text-align: center;
+        min-width: 160px;
+    }
+}

@@ -1,23 +1,21 @@
 import { useState, useCallback } from "react";
 
-const PIN_KEY = "quran_pin";
-
-const usePin = () => {
+const usePin = (key = "quran_pin") => {
     const [pin, setPin] = useState(() => {
-        try { return JSON.parse(localStorage.getItem(PIN_KEY)) || null; }
+        try { return JSON.parse(localStorage.getItem(key)) || null; }
         catch { return null; }
     });
 
     const savePin = useCallback((data) => {
         const entry = { ...data, savedAt: new Date().toISOString() };
-        localStorage.setItem(PIN_KEY, JSON.stringify(entry));
+        localStorage.setItem(key, JSON.stringify(entry));
         setPin(entry);
-    }, []);
+    }, [key]);
 
     const clearPin = useCallback(() => {
-        localStorage.removeItem(PIN_KEY);
+        localStorage.removeItem(key);
         setPin(null);
-    }, []);
+    }, [key]);
 
     return { pin, savePin, clearPin };
 };

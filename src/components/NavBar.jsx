@@ -1,27 +1,33 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { PrayerContext } from "./PrayerContext";
 import { PRAYERS_AR, PRAYER_ICONS } from "../utils/constants";
 
 const NavBar = () => {
   const prayerData = useContext(PrayerContext);
+
+  const renderLink = (to, label, end = true) => (
+    <li className="navbar__item">
+      <NavLink
+        to={to}
+        end={end}
+        className={({ isActive }) =>
+          isActive ? "navbar__link navbar__link--active" : "navbar__link"
+        }
+      >
+        {label}
+      </NavLink>
+    </li>
+  );
   
   if (!prayerData) {
     return (
       <nav className="navbar">
         <ul className="navbar__list">
-          <li className="navbar__item">
-            <Link to="/quran/read">القرآن</Link>
-          </li>
-          <li className="navbar__item">
-            <Link to="/azkar">الأذكار</Link>
-          </li>
-          <li className="navbar__item">
-            <Link to="/quran">تلاوة</Link>
-          </li>
-          <li className="navbar__item">
-            <Link to="/quran/radio">الاذاعه</Link>
-          </li>
+          {renderLink("/quran/read", "القرآن", true)}
+          {renderLink("/azkar", "الأذكار", false)}
+          {renderLink("/quran", "تلاوة", true)}
+          {renderLink("/quran/radio", "الاذاعه", true)}
           <li className="navbar__item">مواقيت الصلاة</li>
         </ul>
       </nav>
@@ -33,21 +39,11 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <ul className="navbar__list">
-        <li className="navbar__item">
-          <Link to="/quran/read">القرآن</Link>
-        </li>
-        <li className="navbar__item">
-          <Link to="/azkar">الأذكار</Link>
-        </li>
-        <li className="navbar__item">
-          <Link to="/quran">تلاوة</Link>
-        </li>
-        <li className="navbar__item">
-          <Link to="/quran/radio">الاذاعه</Link>
-        </li>
-        <li className="navbar__item">
-          <Link to="/prayer_times">مواقيت الصلاة</Link>
-        </li>
+        {renderLink("/quran/read", "القرآن", true)}
+        {renderLink("/azkar", "الأذكار", false)}
+        {renderLink("/quran", "تلاوة", true)}
+        {renderLink("/quran/radio", "الاذاعه", true)}
+        {renderLink("/prayer_times", "مواقيت الصلاة", true)}
 
         {/* Countdown Display */}
         {nextPrayer && (

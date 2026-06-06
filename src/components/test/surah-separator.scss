@@ -1,0 +1,89 @@
+/* ══════════════════════════════════════════════════════════════
+   surah-separator.scss
+   فاصل السور داخل الصفحة الواحدة
+   ══════════════════════════════════════════════════════════════ */
+
+/* الـ wrapper لكل سورة في الصفحة */
+.surah-group {
+    margin-bottom: 2rem;
+}
+
+/* ── الفاصل نفسه ── */
+.surah-separator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0 1rem;
+    padding: 0 1rem;
+    direction: rtl;
+
+    /* صف اسم السورة */
+    &__name-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%);
+        color: #fff8e1;
+        padding: 0.45rem 1.5rem;
+        border-radius: 999px;
+        box-shadow: 0 2px 8px rgba(45, 106, 79, 0.35);
+    }
+
+    &__name-ar {
+        font-family: "Scheherazade New", "Amiri", serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+    }
+
+    &__name-en {
+        font-size: 0.78rem;
+        opacity: 0.75;
+        font-style: italic;
+        color: #c8e6c9;
+    }
+
+    /* البسملة */
+    &__basmala {
+        font-family: "Scheherazade New", "Amiri", "Traditional Arabic", serif;
+        font-size: 1.4rem;
+        color: #2d6a4f;
+        text-align: center;
+        line-height: 2;
+        letter-spacing: 0.05em;
+        padding: 0.25rem 0.5rem;
+        background: linear-gradient(90deg, transparent, #f0faf4, transparent);
+        border-radius: 8px;
+        width: 100%;
+        max-width: 480px;
+    }
+
+    /* الخط الفاصل */
+    &__divider {
+        width: 80%;
+        max-width: 400px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #52b788, transparent);
+        opacity: 0.5;
+    }
+}
+
+/* ── Dark mode support ── */
+@media (prefers-color-scheme: dark) {
+    .surah-separator {
+        &__name-row {
+            background: linear-gradient(135deg, #1b4332 0%, #0d2b1f 100%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        &__basmala {
+            color: #52b788;
+            background: linear-gradient(90deg, transparent, rgba(82, 183, 136, 0.08), transparent);
+        }
+
+        &__divider {
+            background: linear-gradient(90deg, transparent, #2d6a4f, transparent);
+        }
+    }
+}

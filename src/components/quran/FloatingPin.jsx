@@ -51,10 +51,11 @@ const FloatingPin = ({ onDropped, pinning, setPinning }) => {
             const ayaEl = findAya(cx, cy);
             if (ayaEl) {
                 onDropped({
-                    ayaNumber: Number(ayaEl.dataset.ayaNum),
-                    suraId:    Number(ayaEl.dataset.suraId),
-                    suraName:  ayaEl.dataset.suraName,
-                    ayaText:   ayaEl.dataset.ayaText,
+                    ayaNumber:  Number(ayaEl.dataset.ayaNum),
+                    pageNumber: Number(ayaEl.dataset.pageNum || 1),
+                    suraId:     Number(ayaEl.dataset.suraId),
+                    suraName:   ayaEl.dataset.suraName,
+                    ayaText:    ayaEl.dataset.ayaText,
                 });
             }
             // Keep the pin where the user dropped it instead of resetting it.

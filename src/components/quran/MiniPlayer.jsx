@@ -3,7 +3,7 @@ import useDraggable    from "../../hooks/useDraggable";
 import { BAR_HEIGHTS } from "../../utils/quranHelpers";
 
 const MiniPlayer = ({ src, ayaText, ayaNumber, onClose, initialX, initialY }) => {
-    const { audioRef, playing, progress, currentTime, duration, volume, toggle, skip, seek, changeVolume } =
+    const { audioRef, playing, progress, currentTime, duration, volume, toggle, skip, seek, changeVolume, error } =
         useAudioPlayer(src, onClose);
 
     const { pos, setPos, isDragging, startDrag } = useDraggable({ x: initialX, y: initialY });
@@ -33,6 +33,12 @@ const MiniPlayer = ({ src, ayaText, ayaNumber, onClose, initialX, initialY }) =>
                     onClick={onClose}
                 >✕</button>
             </div>
+
+            {error && (
+                <div className="mini-player__error">
+                    ⚠️ {error}
+                </div>
+            )}
 
             {/* Waveform */}
             <div className="mini-player__wave-row" onMouseDown={(e) => e.stopPropagation()}>

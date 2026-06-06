@@ -42,20 +42,31 @@ nav li, .navbar__item {
     white-space: nowrap;
 }
 
-nav a, .navbar__item a {
+nav a, .navbar__item a, .navbar__link {
     text-decoration: none;
     color: $navbar-text;
-    transition: all 0.3s ease;
+    transition: color 0.2s ease, border-bottom-color 0.2s ease;
     padding: 4px 8px;
-    border-radius: 6px;
+    border-radius: 0;
     display: inline-block;
+    border-bottom: 2px solid transparent;
 
     &:hover {
         color: $navbar-accent;
-        background: rgba($navbar-accent, 0.1);
-        text-shadow: 0 0 8px rgba($navbar-accent, 0.5);
-        transform: translateY(-2px);
+        background: transparent;
+        text-shadow: none;
+        border-bottom-color: rgba($navbar-accent, 0.35);
     }
+}
+
+.navbar__link--active {
+    color: $navbar-accent;
+    border-bottom-color: $navbar-accent;
+    border-bottom-width: 3px;
+}
+
+.navbar__link--active:hover {
+    border-bottom-color: $navbar-accent;
 }
 
 // ──────────────────────────────────────────────

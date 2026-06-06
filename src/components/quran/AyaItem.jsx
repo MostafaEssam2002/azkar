@@ -1,33 +1,40 @@
 // import { highlightWaqf } from "../utils/quranHelpers";
 import { highlightWaqf } from "../../utils/quranHelpers";
 
-const AyaItem = ({ aya, currentSura, chapter, isPlaying, isPinned, onClick, onNumberClick }) => (
-    <span
-        data-aya=""
-        data-aya-num={aya.aya}
-        data-sura-id={currentSura}
-        data-sura-name={chapter?.name_arabic}
-        data-aya-text={aya.arabic_text}
-        className={`aya${isPinned ? " aya--pinned" : ""}`}
-        onClick={onClick}
-    >
-        {isPinned && (
-            <span className="pin-marker">
-                <span className="pin-marker__icon">📌</span>
-                <span className="pin-marker__line" />
-            </span>
-        )}
+const AyaItem = ({ aya, currentSura, chapter, isPlaying, isPinned, onClick, onNumberClick }) => {
+    const ayaNum = aya.aya || aya.numberInSurah;
+    const arabicText = aya.arabic_text || aya.text || "";
+    const suraName = aya.surah?.name || chapter?.name_arabic || "القرآن الكريم";
 
-        <span className="aya__text">{highlightWaqf(aya.arabic_text)}</span>
-
+    return (
         <span
-            className={`aya__number${isPlaying ? " aya__number--active" : ""}`}
-            onClick={onNumberClick}
-            title="اضغط لتشغيل الصوت"
+            data-aya=""
+            data-aya-num={ayaNum}
+            data-page-num={aya.page || ""}
+            data-sura-id={currentSura}
+            data-sura-name={suraName}
+            data-aya-text={arabicText}
+            className={`aya${isPinned ? " aya--pinned" : ""}`}
+            onClick={onClick}
         >
-            ﴿{aya.aya}﴾
+            {isPinned && (
+                <span className="pin-marker">
+                    <span className="pin-marker__icon">📌</span>
+                    <span className="pin-marker__line" />
+                </span>
+            )}
+
+            <span className="aya__text">{highlightWaqf(arabicText)}</span>
+
+            <span
+                className={`aya__number${isPlaying ? " aya__number--active" : ""}`}
+                onClick={onNumberClick}
+                title="اضغط لتشغيل الصوت"
+            >
+                ﴿{ayaNum}﴾
+            </span>
         </span>
-    </span>
-);
+    );
+};
 
 export default AyaItem;
