@@ -13,11 +13,10 @@
 @use "./components/_surahtext";
 @use "./components/_radioapp";
 @use "./components/_prayertimes";
-
-// @use "./components/_surahcard";
-// @use "./components/_floatingpin";
-// @use "./components/_miniplayer";
-
+@use "./components/_fireworks";
+@use "./components/_surah-separator";
+@use "./components/_wird-system";
+@use "./components/_completion-popup";
 @import url("https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap");
 
 // =============================================

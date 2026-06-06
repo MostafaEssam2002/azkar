@@ -11,30 +11,13 @@ import WirdSettingsPopup from './test/WirdSettingsPopup';
 import WirdScoreBar from './test/WirdScoreBar';
 import CompletionPopup from './test/CompletionPopup';
 import Fireworks from './test/Fireworks';
+import SurahSeparator from './test/SurahSeparator';
 import chaptersData from '../data/chapters.json';
-import "./test/wird-system.scss";
-import "./test/surah-separator.scss"; // فاصل السور
+// import "./test/wird-system.scss";
+// import "./test/surah-separator.scss";
 
 const TOTAL_PAGES = 604;
-const TIME_SCALE = 1 / 1440; // 1 يوم = 1 دقيقة (1440 دقيقة في اليوم)
 
-/* ── SurahSeparator ──────────────────────────────────────────────────────────
- * يُعرض بين السور داخل نفس الصفحة.
- * إذا كانت QuranView تعرض الـ verses بنفسها، يجب تعديلها لتتعرف على
- * items بـ type === "surah-header" وتعرض هذا المكوّن بدلاً من آية عادية.
- * ─────────────────────────────────────────────────────────────────────────── */
-function SurahSeparator({ surahName, surahEnglishName, showBasmala }) {
-    return (
-        <div className="surah-separator" dir="rtl">
-            <div className="surah-separator__name-row">
-                <span className="surah-separator__name-ar">{surahName}</span>
-                <span className="surah-separator__name-en">{surahEnglishName}</span>
-            </div>
-            
-            <div className="surah-separator__divider" />
-        </div>
-    );
-}
 const QuranPageReader = () => {
     const [verses,         setVerses]       = useState([]);
     const [loading,        setLoading]      = useState(true);
@@ -89,11 +72,10 @@ const QuranPageReader = () => {
         setStartPageInput(String(activeRange.start));
         setEndPageInput(String(activeRange.end));
         setCurrentPage(activeRange.start);
-        
-        // حذف الـ pin عند تغيير الورد (سواء تلقائياً أو يدويّاً)
+
         localStorage.removeItem("quran_wird_pin");
         clearPin();
-        
+
         fetchPages(activeRange.start);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeRange?.start, activeRange?.end, clearPin]);
@@ -160,10 +142,8 @@ const QuranPageReader = () => {
             const tafsirText = (tafsirCache.current[suraId]?.[ayaNum])
                 || `سورة ${aya.surah?.name || ""} - آية ${aya.numberInSurah} - صفحة ${aya.page}`;
 
-            // أضف header السورة عند أول آية من كل سورة جديدة
             if (suraId !== lastSurahNumber) {
                 lastSurahNumber = suraId;
-                // البسملة تظهر مع كل سورة ما عدا سورة التوبة (9) والفاتحة (1) لأن بسملتها جزء من آياتها
                 const showBasmala = suraId !== 9 && ayaNum === 1;
                 result.push({
                     type: "surah-header",
@@ -202,7 +182,7 @@ const QuranPageReader = () => {
         }
     }, [currentPage, loading, activeRange, markPageRead]);
 
-    // ── Handle completion when user clicks "إنهاء الورد" button ─────────────
+    // ── Handlers ─────────────────────────────────────────────────────────────
     const handleMoveToNext = useCallback(() => {
         localStorage.removeItem("quran_wird_pin");
         clearPin();
@@ -215,7 +195,6 @@ const QuranPageReader = () => {
         finishCatchUp();
     }, [clearPin, finishCatchUp]);
 
-    // ── Handle automatic wird update when time expires ───────────────────────
     const handleTimeExpired = useCallback(() => {
         localStorage.removeItem("quran_wird_pin");
         clearPin();
@@ -223,39 +202,32 @@ const QuranPageReader = () => {
     }, [clearPin, forceCheckUpdate]);
 
     const handleCompletionClick = useCallback(() => {
-        // Show celebration ONLY at page 604 (end of Quran)
         if (currentPage === TOTAL_PAGES && !completionShownRef.current) {
             completionShownRef.current = true;
-            
-            // Show celebration
+
             setShowFireworks(true);
             setShowCompletionPopup(true);
-            
-            // Clear all wird data and saved pin from localStorage for fresh start
+
             localStorage.removeItem("wird_settings");
             localStorage.removeItem("wird_progress");
             localStorage.removeItem("quran_wird_pin");
             clearPin();
-            
-            // Also clear any interval that might be running
+
             if (window.wirdUpdateInterval) {
                 clearInterval(window.wirdUpdateInterval);
                 window.wirdUpdateInterval = null;
             }
         }
-        
-        // Mark the wird as complete (this happens regardless of page)
-        markComplete();
-    }, [currentPage, markComplete]);
 
-    // ── Toast ─────────────────────────────────────────────────────────────────
+        markComplete();
+    }, [currentPage, markComplete, clearPin]);
+
     const showToast = useCallback(() => {
         setToastVisible(true);
         clearTimeout(toastTimer.current);
         toastTimer.current = setTimeout(() => setToastVisible(false), 2200);
     }, []);
 
-    // ── Pin ───────────────────────────────────────────────────────────────────
     const handlePinDrop = useCallback(({ ayaNumber, pageNumber, suraId, suraName, ayaText }) => {
         savePin({ ayaNumber, pageNumber, suraId, suraName, ayaText });
         setShowBanner(true);
@@ -282,7 +254,6 @@ const QuranPageReader = () => {
         setTimeout(doScroll, 1500);
     }, [pin, currentPage, rangeStart, fetchPages]);
 
-    // ── Manual range submit ───────────────────────────────────────────────────
     const handleSubmit = useCallback(() => {
         const rawStart = Number(startPageInput) || 1;
         const rawEnd   = Number(endPageInput)   || rawStart;
@@ -303,29 +274,16 @@ const QuranPageReader = () => {
 
     const handleNextRange = useCallback(() => {
         if (currentPage >= rangeEnd) return;
-        const nextPage = currentPage + 1;
-        fetchPages(nextPage);
+        fetchPages(currentPage + 1);
     }, [currentPage, fetchPages, rangeEnd]);
 
     // ── Chapter ───────────────────────────────────────────────────────────────
     const chapter = useMemo(() => {
         if (!pageInfo?.topPageSurah?.number) return null;
-        const found = chaptersData.chapters.find(c => c.id === pageInfo.topPageSurah.number);
-        return found || null;
+        return chaptersData.chapters.find(c => c.id === pageInfo.topPageSurah.number) || null;
     }, [pageInfo]);
 
-    /**
-     * groupedVerses: Array من السور، كل سورة عبارة عن:
-     * {
-     *   surahNumber, surahName, surahEnglishName, showBasmala,
-     *   ayahs: [...] ← الآيات الخاصة بها في هذه الصفحة
-     * }
-     *
-     * ملاحظة: QuranView يستقبل verses كـ flat array تحتوي على items من نوعين:
-     *   • { type: "surah-header", surahNumber, surahName, showBasmala, ... }
-     *   • { type: "ayah", ...بيانات الآية }
-     * يجب تعديل QuranView ليتعامل مع النوعين (راجع التعليق أدناه).
-     */
+    // ── Group verses by surah ─────────────────────────────────────────────────
     const groupedVerses = useMemo(() => {
         const groups = [];
         let current = null;
@@ -358,11 +316,11 @@ const QuranPageReader = () => {
 
             <PinToast visible={toastVisible} />
             <QuranHeader chapter={chapter} />
-            
-            {/* ── Celebration Components ────────────────────────────────── */}
+
+            {/* ── Celebration ───────────────────────────────────────────── */}
             <Fireworks active={showFireworks} />
-            <CompletionPopup 
-                visible={showCompletionPopup} 
+            <CompletionPopup
+                visible={showCompletionPopup}
                 onClose={() => {
                     resetWird();
                     setShowCompletionPopup(false);
@@ -371,7 +329,7 @@ const QuranPageReader = () => {
                 }}
             />
 
-            {/* ── Wird Score Bar ─────────────────────────────────────────── */}
+            {/* ── Wird Score Bar ────────────────────────────────────────── */}
             <WirdScoreBar
                 score={score}
                 isComplete={isComplete}
@@ -402,11 +360,7 @@ const QuranPageReader = () => {
                 </div>
             )}
 
-            {/*
-             * ── Quran Content ──────────────────────────────────────────────
-             * نعرض كل سورة منفصلة مع BismAllah بينها.
-             * QuranView تستقبل verses (فقط آيات السورة الواحدة) ونمررها لكل group.
-             */}
+            {/* ── Quran Content ─────────────────────────────────────────── */}
             {groupedVerses.map(group => (
                 <div key={group.id} className="surah-group">
                     <SurahSeparator
@@ -428,7 +382,7 @@ const QuranPageReader = () => {
                 </div>
             ))}
 
-            {/* ── Pagination ─────────────────────────────────────────────── */}
+            {/* ── Pagination ────────────────────────────────────────────── */}
             {!loading && (
                 <div className="pagination" dir="rtl">
                     <button className="pagination-btn prev-btn" onClick={handlePrevRange} disabled={currentPage <= rangeStart}>

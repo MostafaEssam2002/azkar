@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import "./fireworks.scss";
+// import "./fireworks.scss";
 
 const Fireworks = ({ active }) => {
     const containerRef = useRef(null);

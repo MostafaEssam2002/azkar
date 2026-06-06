@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./completion-popup.scss";
+// import "./completion-popup.scss";
 
 const CompletionPopup = ({ visible, onClose }) => {
     const [isShowing, setIsShowing] = useState(false);

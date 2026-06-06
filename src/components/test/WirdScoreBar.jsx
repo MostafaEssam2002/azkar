@@ -5,67 +5,7 @@
  */
 import { useEffect, useRef, useState } from "react";
 import WirdSettingsPopup from "./WirdSettingsPopup";
-
-/* ── بسيط Confetti بدون library ──────────────────────────────── */
-function Confetti({ active }) {
-    const canvasRef = useRef(null);
-    const animRef = useRef(null);
-    const particles = useRef([]);
-
-    useEffect(() => {
-        if (!active) return;
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const ctx = canvas.getContext("2d");
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const colors = ["#c8b97a", "#2d6a4f", "#e9c46a", "#52b788", "#fff8e1", "#f4a261"];
-        particles.current = Array.from({ length: 120 }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * -canvas.height,
-            w: Math.random() * 12 + 6,
-            h: Math.random() * 6 + 4,
-            color: colors[Math.floor(Math.random() * colors.length)],
-            speed: Math.random() * 4 + 2,
-            angle: Math.random() * 360,
-            spin: (Math.random() - 0.5) * 6,
-            drift: (Math.random() - 0.5) * 1.5,
-        }));
-
-        const draw = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            let alive = false;
-            particles.current.forEach(p => {
-                p.y += p.speed;
-                p.x += p.drift;
-                p.angle += p.spin;
-                if (p.y < canvas.height + 20) alive = true;
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                ctx.rotate((p.angle * Math.PI) / 180);
-                ctx.fillStyle = p.color;
-                ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-                ctx.restore();
-            });
-            if (alive) animRef.current = requestAnimationFrame(draw);
-        };
-        animRef.current = requestAnimationFrame(draw);
-        return () => cancelAnimationFrame(animRef.current);
-    }, [active]);
-
-    if (!active) return null;
-    return (
-        <canvas
-            ref={canvasRef}
-            style={{
-                position: "fixed", top: 0, left: 0,
-                width: "100vw", height: "100vh",
-                pointerEvents: "none", zIndex: 9999,
-            }}
-        />
-    );
-}
+import Confetti from "./Confetti";
 
 /* ── WirdScoreBar ────────────────────────────────────────────── */
 export default function WirdScoreBar({
@@ -99,26 +39,19 @@ export default function WirdScoreBar({
     // حساب الدقائق المتبقية والثواني
     useEffect(() => {
         const updateTimer = () => {
-            // الفترة الفعلية بالدقائق (بدون تقريب)
             const updateIntervalMinutes = effectiveUpdateInterval;
             const updateIntervalMs = updateIntervalMinutes * 60 * 1000;
-            
+
             const now = Date.now();
-            
-            // احسب الوقت المنقضي منذ آخر حفظ إعدادات بالملي ثانية
             const timeElapsedSinceUpdate = now - (lastSettingsUpdateTime || now);
-            
-            // احسب الوقت المتبقي بناءً على الفترة الكاملة
-            // إذا انقضت الفترة كاملة، يعود الوقت لـ 0
             const remainingMs = Math.max(0, updateIntervalMs - (timeElapsedSinceUpdate % updateIntervalMs));
-            const remaining = Math.ceil(remainingMs / 1000); // تحويل إلى ثواني
-            
+            const remaining = Math.ceil(remainingMs / 1000);
+
             setTimeRemaining(remaining);
         };
 
-        updateTimer(); // تحديث فوري
-        const interval = setInterval(updateTimer, 1000); // تحديث كل ثانية
-
+        updateTimer();
+        const interval = setInterval(updateTimer, 1000);
         return () => clearInterval(interval);
     }, [effectiveUpdateInterval, lastSettingsUpdateTime]);
 
@@ -131,7 +64,7 @@ export default function WirdScoreBar({
         prevComplete.current = isComplete;
     }, [isComplete]);
 
-    // إعادة تعيين flag عندما يتغير currentDayIndex (الانتقال للورد الجديد)
+    // إعادة تعيين flag عندما يتغير currentDayIndex
     useEffect(() => {
         timeExpiredRef.current = false;
     }, [currentDayIndex]);
@@ -140,9 +73,7 @@ export default function WirdScoreBar({
     useEffect(() => {
         if (timeRemaining === 0 && !timeExpiredRef.current && onTimeExpired) {
             timeExpiredRef.current = true;
-            onTimeExpired(); // استدعي الـ callback لتحديث الورد
-            
-            // أعد تعيين الـ flag بعد دقيقة واحدة لتجنب استدعاء متكرر
+            onTimeExpired();
             setTimeout(() => {
                 timeExpiredRef.current = false;
             }, 1000);
@@ -171,28 +102,22 @@ export default function WirdScoreBar({
                 {/* ── معلومات اليوم ── */}
                 <div className="wird-score-info">
                     {!activeRange ? (
-                        /* لا توجد إعدادات محفوظة — اعرض رسالة وزر الإعدادات */
-                        <div style={{
-                            textAlign: 'center',
-                            padding: '20px 10px',
-                            color: '#6b7280',
-                            fontFamily: "'Noto Naskh Arabic', serif",
-                        }}>
-                            <div style={{ fontSize: '18px', marginBottom: '12px' }}>📖</div>
-                            <p style={{ margin: '0 0 12px 0', fontSize: '14px' }}>
+                        /* لا توجد إعدادات محفوظة */
+                        <div className="wird-empty-state">
+                            <div className="wird-empty-state__icon">📖</div>
+                            <p className="wird-empty-state__title">
                                 لم تقم بإعداد الورد اليومي بعد
                             </p>
-                            <p style={{ margin: '0 0 16px 0', fontSize: '12px', color: '#9ca3af' }}>
+                            <p className="wird-empty-state__hint">
                                 اضغط على الترس أدناه لبدء إعدادك الورد
                             </p>
                             <WirdSettingsPopup settings={settings} onSave={onSaveSettings} />
                         </div>
                     ) : (
-                        /* إعدادات موجودة — اعرض معلومات الورد */
                         <>
                             <div className="wird-day-label">
                                 <WirdSettingsPopup settings={settings} onSave={onSaveSettings} />
-                                
+
                                 {isCatchingUp ? (
                                     <span className="wird-catchup-tag">📚 قضاء يوم فائت</span>
                                 ) : (
@@ -201,7 +126,7 @@ export default function WirdScoreBar({
                                 <span className="wird-range-label">
                                     الصفحات {activeRange.start} – {activeRange.end}
                                     {accumulatedMissedPages > 0 && !isCatchingUp && (
-                                        <span style={{ color: "#e9c46a", marginLeft: "0.5rem" }}>
+                                        <span className="wird-missed-pages-badge">
                                             (+{accumulatedMissedPages} محفوظة)
                                         </span>
                                     )}
@@ -229,14 +154,11 @@ export default function WirdScoreBar({
                             {/* زرار الإجراء */}
                             <div className="wird-action-area">
                                 {isComplete ? (
-                                    /* الورد اكتمل (score=100) */
                                     isLastWird ? (
-                                        /* آخر ورد في القرآن - رسالة تهنئة فقط */
                                         <div className="wird-complete-msg">
                                             🎉 ما شاء الله! أتممتَ القرآن الكريم!
                                         </div>
                                     ) : (
-                                        /* ورد عادي - زرار الانتقال للتالي */
                                         <div className="wird-complete-msg">
                                             🎉 ما شاء الله! أتممتَ وردك اليوم
                                             <button
@@ -248,7 +170,6 @@ export default function WirdScoreBar({
                                         </div>
                                     )
                                 ) : (
-                                    /* لا يزال يقرأ — لا يوجد زرار */
                                     <span className="wird-reading-hint">📖 واصل القراءة حتى آخر صفحة</span>
                                 )}
                             </div>

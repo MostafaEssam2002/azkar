@@ -551,8 +551,52 @@ $danger:       #dc2626;
 
 
 /* ═══════════════════════════════════════════════════════════
-   Pin Banner + Pagination (keep consistent)
+   Wird Empty State (no settings configured yet)
    ═══════════════════════════════════════════════════════════ */
+.wird-empty-state {
+    text-align: center;
+    padding: 20px 10px;
+    color: $text-muted;
+    font-family: 'Noto Naskh Arabic', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+
+    &__icon {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    &__title {
+        margin: 0 0 12px 0;
+        font-size: 14px;
+        color: $text-muted;
+    }
+
+    &__hint {
+        margin: 0 0 16px 0;
+        font-size: 12px;
+        color: #9ca3af;
+    }
+}
+
+/* Missed pages badge inside range label */
+.wird-missed-pages-badge {
+    color: $gold-light;
+    margin-left: 0.5rem;
+}
+
+/* Reading hint */
+.wird-reading-hint {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 13px;
+    color: $text-muted;
+}
+
 .pin-banner-wrapper {
     max-width: 860px;
     margin: 0 auto 12px;
