@@ -24,10 +24,11 @@ const NavBar = () => {
     return (
       <nav className="navbar">
         <ul className="navbar__list">
-          {renderLink("/quran/read", "القرآن", true)}
+          {renderLink("/quran", "القرآن", true)}
           {renderLink("/azkar", "الأذكار", false)}
-          {renderLink("/quran", "تلاوة", true)}
-          {renderLink("/quran/radio", "الاذاعه", true)}
+          {renderLink("/tilawa", "تلاوة", true)}
+          {renderLink("/radio", "الاذاعه", true)}
+          {renderLink("/wird", "الورد اليومي", true)}
           <li className="navbar__item">مواقيت الصلاة</li>
         </ul>
       </nav>
@@ -39,10 +40,12 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <ul className="navbar__list">
-        {renderLink("/quran/read", "القرآن", true)}
+        {renderLink("/quran", "القرآن", true)}
         {renderLink("/azkar", "الأذكار", false)}
-        {renderLink("/quran", "تلاوة", true)}
-        {renderLink("/quran/radio", "الاذاعه", true)}
+        {renderLink("/tilawa", "تلاوة", true)}
+        {renderLink("/radio", "الاذاعه", true)}
+        {renderLink("/wird", "الورد اليومي", true)}
+
         {renderLink("/prayer_times", "مواقيت الصلاة", true)}
 
         {/* Countdown Display */}

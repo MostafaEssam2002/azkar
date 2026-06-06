@@ -1,22 +1,22 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
-import usePin from "../hooks/usePin";
-import QuranView from './quran/QuranView';
-import PinBanner from './quran/PinBanner';
-import QuranHeader from './quran/QuranHeader';
-import PinToast from './quran/PinToast';
-import MiniPlayer from './quran/MiniPlayer';
-import FloatingPin from './quran/FloatingPin';
-import WirdSettingsPopup from './wird/WirdSettingsPopup';
-import WirdScoreBar from './wird/WirdScoreBar';
-import CompletionPopup from './wird/CompletionPopup';
-import Fireworks from './wird/Fireworks';
-import SurahSeparator from './wird/SurahSeparator';
 import chaptersData from '../data/chapters.json';
 import useWird from './../hooks/useWird';
+import usePin from './../hooks/usePin';
+import QuranView from './../components/quran/QuranView';
+import PinBanner from './../components/quran/PinBanner';
+import QuranHeader from './../components/quran/QuranHeader';
+import PinToast from './../components/quran/PinToast';
+import MiniPlayer from './../components/quran/MiniPlayer';
+import FloatingPin from './../components/quran/FloatingPin';
+import WirdSettingsPopup from './../components/wird/WirdSettingsPopup';
+import WirdScoreBar from './../components/wird/WirdScoreBar';
+import CompletionPopup from './../components/wird/CompletionPopup';
+import Fireworks from './../components/wird/Fireworks';
+import SurahSeparator from './../components/wird/SurahSeparator';
 
 const TOTAL_PAGES = 604;
 
-const QuranPageReader = () => {
+const WirdPage = () => {
     const [verses,         setVerses]       = useState([]);
     const [loading,        setLoading]      = useState(true);
     const [tooltip,        setTooltip]      = useState({ visible: false, text: "", x: 0, y: 0, arrowX: 0 });
@@ -404,4 +404,4 @@ const QuranPageReader = () => {
     );
 };
 
-export default QuranPageReader;
+export default WirdPage;
