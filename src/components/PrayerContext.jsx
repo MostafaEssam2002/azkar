@@ -1,9 +1,19 @@
 import { createContext, useState, useEffect, useRef } from 'react';
 import { KEYS } from '../utils/constants';
 import { parseTime, formatCountdown, getNowMinutes, findNextPrayer } from '../utils/utils';
-
+import { getCachedPrayerTimes, savePrayerTimesToCache } from '../utils/prayerCache';
 export const PrayerContext = createContext();
-
+// Map each prayer to its specific adhan audio file
+const PRAYER_AUDIO_MAP = {
+  Fajr: '1.mp3',
+  Dhuhr: '2.mp3',
+  Asr: '3.mp3',
+  Maghrib: '4.mp3',
+  Isha: '5.mp3',
+};
+const getPrayerAudioFile = (prayerKey) => {
+  return `/audio/${PRAYER_AUDIO_MAP[prayerKey] || '3.mp3'}`;
+};
 export const PrayerProvider = ({ children }) => {
   const [prayerTimes, setPrayerTimes] = useState({});
   const [gregDate, setGregDate] = useState('');
@@ -15,6 +25,54 @@ export const PrayerProvider = ({ children }) => {
   const [selectedCountry, setSelectedCountryState] = useState('EG');
   const [selectedCity, setSelectedCityState] = useState('Cairo');
   const intervalRef = useRef(null);
+  const lastPlayedRef = useRef({ playId: '' });
+
+  const [isAudioMuted, setIsAudioMuted] = useState(() => {
+    return localStorage.getItem('prayerAudioMuted') === 'true';
+  });
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [audioPlayFailed, setAudioPlayFailed] = useState(false);
+
+  useEffect(() => {
+    const handleInteraction = () => {
+      setHasInteracted(true);
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('keydown', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+    };
+
+    window.addEventListener('click', handleInteraction);
+    window.addEventListener('keydown', handleInteraction);
+    window.addEventListener('touchstart', handleInteraction);
+
+    return () => {
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('keydown', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+    };
+  }, []);
+
+  const unlockAudio = () => {
+    const audio = new Audio('/audio/3.mp3');
+    audio.volume = 0;
+    audio.play().then(() => {
+      audio.pause();
+      setIsAudioMuted(false);
+      localStorage.setItem('prayerAudioMuted', 'false');
+      setAudioPlayFailed(false);
+    }).catch(err => {
+      console.warn("Could not unlock audio:", err);
+    });
+  };
+
+  const toggleMute = () => {
+    if (isAudioMuted) {
+      unlockAudio();
+    } else {
+      setIsAudioMuted(true);
+      localStorage.setItem('prayerAudioMuted', 'true');
+    }
+  };
 
   // Load saved location from localStorage on mount
   useEffect(() => {
@@ -40,9 +98,22 @@ export const PrayerProvider = ({ children }) => {
     localStorage.setItem('prayerCity', city);
   };
 
-  // Fetch prayer times
+  // Fetch prayer times (with caching to update only once per day)
   useEffect(() => {
     async function fetchTimes() {
+      // التحقق من وجود بيانات محفوظة ليوم اليوم
+      const cachedData = getCachedPrayerTimes(selectedCountry, selectedCity);
+      
+      if (cachedData) {
+        // استخدام البيانات المحفوظة
+        setPrayerTimes(cachedData.times);
+        setGregDate(cachedData.gregDate);
+        setHijriDate(cachedData.hijriDate);
+        setError(false);
+        return; // الخروج بدون استدعاء API
+      }
+
+      // إذا لم توجد بيانات محفوظة، استدعاء API
       const today = new Date();
       const dd = String(today.getDate()).padStart(2, '0');
       const mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -61,13 +132,24 @@ export const PrayerProvider = ({ children }) => {
             Maghrib: t.Maghrib,
             Isha: t.Isha
           };
-          setPrayerTimes(times);
           const d = json.data.date;
-          setGregDate(d.gregorian.weekday.en + '، ' + d.gregorian.date);
-          const hijri = d.hijri;
-          setHijriDate(`${hijri.day} ${hijri.month.ar} ${hijri.year} هـ`);
+          const gregDateStr = d.gregorian.weekday.en + '، ' + d.gregorian.date;
+          const hijriDateStr = `${d.hijri.day} ${d.hijri.month.ar} ${d.hijri.year} هـ`;
+          
+          // حفظ البيانات في cache
+          savePrayerTimesToCache(selectedCountry, selectedCity, {
+            times,
+            gregDate: gregDateStr,
+            hijriDate: hijriDateStr,
+          });
+          
+          setPrayerTimes(times);
+          setGregDate(gregDateStr);
+          setHijriDate(hijriDateStr);
+          setError(false);
         }
       } catch (e) {
+        console.error('خطأ في جلب أوقات الصلاة:', e);
         setError(true);
       }
     }
@@ -83,6 +165,44 @@ export const PrayerProvider = ({ children }) => {
         setNextPrayer(next);
         const secs = Math.round(next.minutes * 60);
         setCountdown(formatCountdown(secs));
+
+        // Check if current time matches any prayer time (within 60 seconds)
+        const nowMin = getNowMinutes();
+        const ADHAN_KEYS = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+        for (const pKey of ADHAN_KEYS) {
+          if (!prayerTimes[pKey]) continue;
+          const prayerMin = parseTime(prayerTimes[pKey]);
+          const diff = nowMin - prayerMin;
+          // If within 0 to 1 minute after prayer time
+          if (diff >= 0 && diff < 1) {
+            const todayStr = new Date().toDateString();
+            const playId = `${pKey}-${todayStr}`;
+            if (lastPlayedRef.current.playId !== playId) {
+              lastPlayedRef.current.playId = playId;
+              if (!isAudioMuted) {
+                const audioFile = getPrayerAudioFile(pKey);
+                const audio = new Audio(audioFile);
+                // For Dhuhr, Asr, Maghrib, Isha: play azan.mp3 after the intro finishes
+                const needsAzan = ['Dhuhr', 'Asr', 'Maghrib', 'Isha'].includes(pKey);
+                if (needsAzan) {
+                  audio.addEventListener('ended', () => {
+                    const azanAudio = new Audio('/audio/azan.mp3');
+                    azanAudio.play().catch(err => {
+                      console.error('Error playing azan audio:', err);
+                    });
+                  });
+                }
+                audio.play().catch(err => {
+                  console.error('Error playing prayer audio:', err);
+                  setAudioPlayFailed(true);
+                });
+              }
+            }
+            break;
+          }
+        }
+
+
         const circumference = 2 * Math.PI * 30;
         const fraction = 1 - (next.minutes / (next.total || 1));
         setRingOffset(circumference * fraction);
@@ -91,7 +211,7 @@ export const PrayerProvider = ({ children }) => {
     tick();
     intervalRef.current = setInterval(tick, 1000);
     return () => clearInterval(intervalRef.current);
-  }, [prayerTimes]);
+  }, [prayerTimes, isAudioMuted]);
 
   const value = {
     prayerTimes,
@@ -104,7 +224,12 @@ export const PrayerProvider = ({ children }) => {
     selectedCountry,
     setSelectedCountry,
     selectedCity,
-    setSelectedCity
+    setSelectedCity,
+    isAudioMuted,
+    toggleMute,
+    hasInteracted,
+    unlockAudio,
+    audioPlayFailed
   };
 
   return (

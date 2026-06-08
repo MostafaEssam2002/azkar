@@ -10,10 +10,12 @@
 
     padding: 1rem;
     position: relative;
+    z-index: 1;
     overflow: hidden;
 
     transition: 0.3s;
     user-select: none;
+    cursor: pointer;
     flex-shrink: 0;
 }
  
@@ -53,6 +55,7 @@
     align-items: center;
 
     margin-top: -0.9rem;
+    pointer-events: none;
 }
 
 /* الرقم الأساسي */
@@ -98,10 +101,12 @@
 
     // margin-top: 0;
     margin-bottom: -1.1rem;
+    pointer-events: none;
 }
 
 /* زر reset */
 .counterSectionReset {
+    pointer-events: auto;
     text-decoration: none  ;
     width: clamp(38px, 6vw, 52px);
     height: clamp(38px, 6vw, 52px);

@@ -32,7 +32,7 @@ const PlayAudio = () => {
         const baseUrl = src.split('/').slice(0, -1).join('/');
         const queryParams = `url=${encodeURIComponent(baseUrl)}&name=${encodeURIComponent(reader)}`;
         const finalUrl = surahsList ? `${queryParams}&surahs_list=${encodeURIComponent(JSON.stringify(surahsList))}` : queryParams;
-        navigate(`/quran/surahsList?${finalUrl}`);
+        navigate(`/tilawa/surahsList?${finalUrl}`);
     };
     return (
         <div className="player-wrapper">

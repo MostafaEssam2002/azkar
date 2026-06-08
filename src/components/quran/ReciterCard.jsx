@@ -54,7 +54,7 @@ const ReciterCard = ({id, name, ar_name, rawi, timing_url, server, surahs_count,
             </div>
         </div>
         <div className="bottom-row">
-            <button className="listen-btn" onClick={() =>navigate(`/quran/surahsList?url=${encodeURIComponent(server)}&name=${name}&surahs_list=${encodeURIComponent(JSON.stringify(surahs_list))}`)}>
+            <button className="listen-btn" onClick={() =>navigate(`/tilawa/surahsList?url=${encodeURIComponent(server)}&name=${name}&surahs_list=${encodeURIComponent(JSON.stringify(surahs_list))}`)}>
                 <i className="fa-solid fa-headphones"></i>
                 استماع
             </button>
