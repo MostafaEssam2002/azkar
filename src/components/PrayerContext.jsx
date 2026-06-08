@@ -30,12 +30,37 @@ export const PrayerProvider = ({ children }) => {
   const [isAudioMuted, setIsAudioMuted] = useState(() => {
     return localStorage.getItem('prayerAudioMuted') === 'true';
   });
+  const pendingAudioRef = useRef(null);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [audioPlayFailed, setAudioPlayFailed] = useState(false);
 
   useEffect(() => {
     const handleInteraction = () => {
       setHasInteracted(true);
+
+      // Play any pending adhan that was blocked due to autoplay policy (within the last 5 minutes)
+      if (pendingAudioRef.current) {
+        const { pKey, timestamp } = pendingAudioRef.current;
+        const fiveMinutes = 5 * 60 * 1000;
+        if (Date.now() - timestamp < fiveMinutes) {
+          const audioFile = getPrayerAudioFile(pKey);
+          const audio = new Audio(audioFile);
+          const needsAzan = ['Dhuhr', 'Asr', 'Maghrib', 'Isha'].includes(pKey);
+          if (needsAzan) {
+            audio.addEventListener('ended', () => {
+              const azanAudio = new Audio('/audio/azan.mp3');
+              azanAudio.play().catch(err => {
+                console.warn('Error playing azan audio after interaction:', err);
+              });
+            });
+          }
+          audio.play().catch(err => {
+            console.warn('Error playing prayer audio after interaction:', err);
+          });
+        }
+        pendingAudioRef.current = null;
+      }
+
       window.removeEventListener('click', handleInteraction);
       window.removeEventListener('keydown', handleInteraction);
       window.removeEventListener('touchstart', handleInteraction);
@@ -78,7 +103,7 @@ export const PrayerProvider = ({ children }) => {
   useEffect(() => {
     const savedCountry = localStorage.getItem('prayerCountry');
     const savedCity = localStorage.getItem('prayerCity');
-    
+
     if (savedCountry) {
       setSelectedCountryState(savedCountry);
     }
@@ -103,7 +128,7 @@ export const PrayerProvider = ({ children }) => {
     async function fetchTimes() {
       // التحقق من وجود بيانات محفوظة ليوم اليوم
       const cachedData = getCachedPrayerTimes(selectedCountry, selectedCity);
-      
+
       if (cachedData) {
         // استخدام البيانات المحفوظة
         setPrayerTimes(cachedData.times);
@@ -135,14 +160,14 @@ export const PrayerProvider = ({ children }) => {
           const d = json.data.date;
           const gregDateStr = d.gregorian.weekday.en + '، ' + d.gregorian.date;
           const hijriDateStr = `${d.hijri.day} ${d.hijri.month.ar} ${d.hijri.year} هـ`;
-          
+
           // حفظ البيانات في cache
           savePrayerTimesToCache(selectedCountry, selectedCity, {
             times,
             gregDate: gregDateStr,
             hijriDate: hijriDateStr,
           });
-          
+
           setPrayerTimes(times);
           setGregDate(gregDateStr);
           setHijriDate(hijriDateStr);
@@ -192,10 +217,19 @@ export const PrayerProvider = ({ children }) => {
                     });
                   });
                 }
-                audio.play().catch(err => {
-                  console.error('Error playing prayer audio:', err);
-                  setAudioPlayFailed(true);
-                });
+                audio.play()
+                  .then(() => {
+                    setAudioPlayFailed(false);
+                  })
+                  .catch(err => {
+                    if (err.name === 'NotAllowedError') {
+                      console.log('Autoplay blocked. Adhan will play on first user interaction.');
+                      pendingAudioRef.current = { pKey, timestamp: Date.now() };
+                    } else {
+                      console.error('Error playing prayer audio:', err);
+                      setAudioPlayFailed(true);
+                    }
+                  });
               }
             }
             break;

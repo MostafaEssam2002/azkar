@@ -4,7 +4,7 @@ import useWird from './../hooks/useWird';
 import usePin from './../hooks/usePin';
 import QuranView from './../components/quran/QuranView';
 import PinBanner from './../components/quran/PinBanner';
-import QuranHeader from './../components/quran/QuranHeader';
+import SurahHero from './../components/quran/SurahHero';
 import PinToast from './../components/quran/PinToast';
 import MiniPlayer from './../components/quran/MiniPlayer';
 import FloatingPin from './../components/quran/FloatingPin';
@@ -314,7 +314,7 @@ const WirdPage = () => {
             )}
 
             <PinToast visible={toastVisible} />
-            <QuranHeader chapter={chapter} />
+            <SurahHero chapter={chapter} />
 
             {/* ── Celebration ───────────────────────────────────────────── */}
             <Fireworks active={showFireworks} />

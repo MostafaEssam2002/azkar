@@ -5,7 +5,7 @@ import FloatingPin from './../components/quran/FloatingPin';
 import PinBanner from './../components/quran/PinBanner';
 import MiniPlayer from './../components/quran/MiniPlayer';
 import PinToast from './../components/quran/PinToast';
-import QuranHeader from './../components/quran/QuranHeader';
+import SurahHero from './../components/quran/SurahHero';
 import SuraSelector from './../components/quran/SuraSelector';
 import QuranView from './../components/quran/QuranView';
 
@@ -80,7 +80,7 @@ const SurahForReading = () => {
                 />
             )}
             <PinToast visible={toastVisible} />
-            <QuranHeader chapter={chapter} />
+            <SurahHero chapter={chapter} />
             <SuraSelector currentSura={currentSura} onChange={setCurrentSura} />
             {pin && showBanner && (
                 <div className="pin-banner-wrapper">

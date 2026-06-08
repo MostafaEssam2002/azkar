@@ -6,7 +6,17 @@ import { PRAYERS_AR, PRAYER_ICONS } from "../utils/constants";
 const NavBar = () => {
   const prayerData = useContext(PrayerContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const navRef = useRef(null);
+
+  // Detect scroll for navbar effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Close menu on outside click / touch
   useEffect(() => {
@@ -51,9 +61,8 @@ const NavBar = () => {
         </span>
         <span className="navbar__countdown-timer">{prayerData.countdown}</span>
         <button
-          className={`navbar__sound-btn ${
-            prayerData.isAudioMuted ? "muted" : "active"
-          }`}
+          className={`navbar__sound-btn ${prayerData.isAudioMuted ? "muted" : "active"
+            }`}
           onClick={prayerData.toggleMute}
           title={
             prayerData.isAudioMuted
@@ -70,7 +79,13 @@ const NavBar = () => {
   );
 
   return (
-    <nav className="navbar" ref={navRef}>
+    <nav className={`navbar ${isScrolled ? "navbar--scrolled" : ""}`} ref={navRef}>
+      {/* ── Logo/Branding (Premium Islamic Icon) ──── */}
+      <div className="navbar__logo">
+        <span className="navbar__logo-icon">✨</span>
+        <span className="navbar__logo-text">أذكار</span>
+      </div>
+
       {/* ── Hamburger button (mobile only) ─────────── */}
       <button
         className={`navbar__hamburger${menuOpen ? " navbar__hamburger--open" : ""}`}
