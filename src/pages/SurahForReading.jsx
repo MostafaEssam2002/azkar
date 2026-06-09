@@ -15,7 +15,7 @@ const SurahForReading = () => {
     const [loading, setLoading] = useState(true);
     const [tooltip, setTooltip] = useState({ visible: false, text: "", x: 0, y: 0, arrowX: 0 });
     const [player, setPlayer] = useState(null);
-    const [currentSura, setCurrentSura] = useState(22);
+    const [currentSura, setCurrentSura] = useState(1);
     const [showBanner, setShowBanner] = useState(true);
     const [toastVisible, setToastVisible] = useState(false);
     const [pinning, setPinning] = useState(false);
