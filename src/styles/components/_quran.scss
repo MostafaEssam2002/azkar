@@ -367,3 +367,161 @@
         margin: 1rem 0 0 0;
     }
 }
+
+/* ===== SURAH NAVIGATION STYLES ===== */
+.surah-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(29, 94, 79, 0.08) 0%, rgba(29, 94, 79, 0.03) 100%);
+    border-radius: 1.2rem;
+    border: 1px solid rgba(29, 94, 79, 0.12);
+    width: fit-content;
+    max-width: 90%;
+    flex-wrap: wrap;
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.8rem;
+    background: linear-gradient(135deg, #1d5e4f 0%, #0f3a33 100%);
+    color: white;
+    border: none;
+    border-radius: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: "Cairo", sans-serif;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(29, 94, 79, 0.2);
+    white-space: nowrap;
+}
+
+.nav-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #0f3a33 0%, #072820 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(29, 94, 79, 0.3);
+}
+
+.nav-button:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.nav-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%);
+}
+
+.nav-button .arrow {
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-button:hover:not(:disabled) .arrow {
+    transform: scale(1.2);
+}
+
+.nav-button .text {
+    display: inline-block;
+}
+
+.surah-counter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.6rem;
+    background: white;
+    border: 2px solid #1d5e4f;
+    border-radius: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1d5e4f;
+    font-family: "Cairo", sans-serif;
+    box-shadow: 0 4px 15px rgba(29, 94, 79, 0.1);
+}
+
+.surah-counter .current {
+    font-size: 1.4rem;
+    color: #1d5e4f;
+}
+
+.surah-counter .separator {
+    color: #999;
+    margin: 0 0.3rem;
+}
+
+.surah-counter .total {
+    font-size: 1.1rem;
+    color: #999;
+}
+
+/* Responsive Design for Navigation */
+@media (max-width: 768px) {
+    .surah-navigation {
+        gap: 1.5rem;
+        margin: 2.5rem auto;
+        padding: 1.5rem;
+        flex-direction: row;
+    }
+    
+    .nav-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .nav-button .arrow {
+        font-size: 1.1rem;
+    }
+    
+    .surah-counter {
+        padding: 0.75rem 1.4rem;
+        font-size: 1rem;
+    }
+    
+    .surah-counter .current {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .surah-navigation {
+        gap: 1rem;
+        margin: 2rem auto;
+        padding: 1rem;
+        width: calc(100% - 2rem);
+    }
+    
+    .nav-button {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.95rem;
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .nav-button .arrow {
+        font-size: 1rem;
+    }
+    
+    .nav-button .text {
+        display: none;
+    }
+    
+    .surah-counter {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .surah-counter .current {
+        font-size: 1.1rem;
+    }
+    
+    .surah-counter .separator {
+        margin: 0 0.2rem;
+    }
+}

@@ -8,6 +8,7 @@ import PinToast from './../components/quran/PinToast';
 import SurahHero from './../components/quran/SurahHero';
 import SuraSelector from './../components/quran/SuraSelector';
 import QuranView from './../components/quran/QuranView';
+import SurahNavigation from './../components/quran/SurahNavigation';
 
 const SurahForReading = () => {
     const [verses,  setVerses]  = useState([]);
@@ -102,6 +103,22 @@ const SurahForReading = () => {
                 player={player}
                 setPlayer={setPlayer}
                 pin={pin}
+            />
+            
+            <SurahNavigation
+                currentSura={currentSura}
+                onPrevious={() => {
+                    if (currentSura > 1) {
+                        setCurrentSura(currentSura - 1);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }}
+                onNext={() => {
+                    if (currentSura < 114) {
+                        setCurrentSura(currentSura + 1);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }}
             />
         </div>
     );

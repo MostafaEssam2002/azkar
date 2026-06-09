@@ -1,225 +1,253 @@
 // ──────────────────────────────────────────────────────────────
-// PREMIUM GLASSMORPHISM NAVBAR
-// Islamic Luxury Theme - Emerald Green + Gold
+// GLASSMORPHISM NAVBAR — 2026 Edition
+// Islamic Theme · Emerald + Gold · RTL
 // ──────────────────────────────────────────────────────────────
 
-// ── Color Palette ──────────────────────────────────────────────
-$emerald-primary:    #0f5132; // Deep emerald green
-$emerald-light:      #1a6e44;
-$emerald-dark:       #0a3a20;
-$gold-primary:       #d4a574; // Warm gold
-$gold-accent:        #e8c547; // Bright gold
-$gold-light:         #f5e6d3;
-$text-primary:       #f5f5f5; // Off-white
-$text-secondary:     #e0e0e0; // Light gray
-$text-muted:         #a8a8a8;  // Muted gray
-$dark-bg:            #0a0e27; // Very dark blue-black
-$glass-light:        rgba(255, 255, 255, 0.06);
-$glass-lighter:      rgba(255, 255, 255, 0.08);
+// ── Design Tokens ──────────────────────────────────────────────
+$emerald-900:   #061c10;
+$emerald-800:   #0a3a20;
+$emerald-700:   #0f5132;
+$emerald-600:   #1a6e44;
+$gold-bright:   #e8c547;
+$gold-warm:     #d4a574;
+$gold-soft:     #f5e6d3;
+$white:         #ffffff;
+$text-primary:  #f5f5f5;
+$text-soft:     #dde8e2;   // was #c8c8c8 — brighter on dark bg
+$text-muted:    #9eb8a8;
 
-// ── Shared navbar height token ─────────────────────────────────
+// Glass layers — strong enough to read on ANY background (light or dark)
+$glass-base:    rgba(8, 40, 22, 0.78);   // was 0.45 — now opaque enough on green bg
+$glass-deep:    rgba(6, 28, 16, 0.92);   // scrolled: near-solid
+$glass-card:    rgba(20, 80, 48, 0.55);
+$glass-card-h:  rgba(20, 80, 48, 0.70);
+
+// Borders — more visible
+$border-gold:   rgba($gold-warm, 0.45);  // was 0.22
+$border-gold-h: rgba($gold-warm, 0.70);
+$border-bright: rgba($gold-bright, 0.6);
+
+// ── Root Tokens ────────────────────────────────────────────────
 :root {
-  --navbar-height: 78px; // Premium height
-  --navbar-blur: 20px;
+  --navbar-height: 72px;
+  --navbar-blur:   22px;
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 // ──────────────────────────────────────────────────────────────
-// Base Navbar Styles - Glassmorphism
+// Base Navbar
 // ──────────────────────────────────────────────────────────────
 
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto 0;
   z-index: 999;
-  
-  // ── Glassmorphism Background ───────────────────────────────
-  background: rgba(15, 81, 50, 0.55);
-  backdrop-filter: blur(var(--navbar-blur));
-  -webkit-backdrop-filter: blur(var(--navbar-blur));
-  
-  // ── Elegant Border ─────────────────────────────────────────
-  border-bottom: 1px solid rgba($gold-primary, 0.25);
-  
-  // ── Spacing & Layout ───────────────────────────────────────
-  padding: 0.85rem 2rem;
-  margin: 0;
-  
-  // ── Text & Font ───────────────────────────────────────────
-  color: $text-primary;
-  font-family: 'Cairo', sans-serif;
   direction: rtl;
-  
-  // ── RTL Layout ────────────────────────────────────────────
+  font-family: 'Cairo', sans-serif;
+  color: $text-primary;
+  isolation: isolate; // contain stacking context
+
+  // Glass core
+  background: $glass-base;
+  backdrop-filter: blur(var(--navbar-blur)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--navbar-blur)) saturate(160%);
+
+  // Gold rule — visible on ANY background
+  border-bottom: 1.5px solid $border-gold;
+  box-shadow:
+    0 1px 0 0 rgba($white, 0.10) inset,
+    0 4px 0 0 rgba($gold-warm, 0.12),
+    0 8px 40px rgba($emerald-900, 0.55),
+    0 2px 12px rgba($emerald-900, 0.35);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  
-  // ── Premium Shadow Effects ─────────────────────────────────
-  box-shadow: 
-    0 8px 32px rgba(15, 81, 50, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  
-  // ── Smooth Transitions ────────────────────────────────────
-  transition: 
-    background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    backdrop-filter 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  // ── Scroll Effect - Darker Glass ───────────────────────────
+  gap: 1.5rem;
+  padding: 0 2rem;
+  height: var(--navbar-height);
+
+  transition:
+    background var(--transition-smooth),
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    backdrop-filter var(--transition-smooth);
+
+  // Top shimmer line (gold micro-highlight)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba($gold-bright, 0.5) 30%,
+      rgba($gold-bright, 0.7) 50%,
+      rgba($gold-bright, 0.5) 70%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  // Scrolled: near-solid, deeply anchored
   &.navbar--scrolled {
-    background: rgba(15, 81, 50, 0.75);
-    border-color: rgba($gold-primary, 0.35);
-    box-shadow: 
-      0 12px 48px rgba(15, 81, 50, 0.35),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    background: $glass-deep;
+    border-bottom-color: $border-gold-h;
+    box-shadow:
+      0 1px 0 0 rgba($white, 0.12) inset,
+      0 4px 0 0 rgba($gold-warm, 0.18),
+      0 16px 56px rgba($emerald-900, 0.70),
+      0 4px 16px rgba($emerald-900, 0.45);
+    --navbar-blur: 30px;
   }
 }
 
 // ──────────────────────────────────────────────────────────────
-// Logo / Branding Section
+// Logo
 // ──────────────────────────────────────────────────────────────
 
 .navbar__logo {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-right: auto; // RTL: push to right
+  gap: 0.6rem;
+  margin-right: auto;
   cursor: pointer;
-  
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
+  text-decoration: none;
+  flex-shrink: 0;
+
+  transition: transform var(--transition-spring), filter var(--transition-smooth);
+
   &:hover {
     transform: translateY(-1px);
-    filter: drop-shadow(0 4px 12px rgba($gold-accent, 0.3));
+    filter: drop-shadow(0 0 14px rgba($gold-bright, 0.35));
   }
 }
 
 .navbar__logo-icon {
-  font-size: 1.75rem;
-  animation: logo-float 3s ease-in-out infinite;
+  font-size: 1.6rem;
+  animation: logo-float 4s ease-in-out infinite;
+  line-height: 1;
 }
 
 .navbar__logo-text {
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  background: linear-gradient(135deg, $gold-accent, $gold-primary);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, $gold-bright 0%, $gold-warm 60%, $gold-soft 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  
-  transition: all 0.3s ease;
-  
+
   @supports not (-webkit-text-fill-color: transparent) {
-    color: $gold-primary;
+    color: $gold-warm;
   }
 }
 
 @keyframes logo-float {
-  0%, 100% {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(-3px);
-    opacity: 0.95;
-  }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-3px); }
 }
 
 // ──────────────────────────────────────────────────────────────
-// Navigation List
+// Nav List
 // ──────────────────────────────────────────────────────────────
 
 .navbar__list {
-  list-style-type: none;
+  list-style: none;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 2.5rem;
+  justify-content: center;
+  gap: 0.25rem;
   flex: 1;
-  max-width: 100%;
   margin: 0;
   padding: 0;
   flex-wrap: nowrap;
 }
 
 .navbar__item {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-weight: 600;
-  font-size: 0.95rem;
-  white-space: nowrap;
   position: relative;
+  font-weight: 600;
+  font-size: 0.93rem;
+  white-space: nowrap;
 }
 
 // ──────────────────────────────────────────────────────────────
-// Navigation Links - Premium Style
+// Nav Links
 // ──────────────────────────────────────────────────────────────
 
 .navbar__link {
   text-decoration: none;
-  color: $text-secondary;
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 6px;
+  color: $text-soft;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 8px;
   position: relative;
-  
-  // ── Smooth Transitions ────────────────────────────────────
-  transition: 
-    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    text-shadow 0.3s ease;
-  
-  // ── Elegant Underline Effect ──────────────────────────────
+  outline: none;
+  border: 1px solid transparent;
+
+  transition:
+    color var(--transition-smooth),
+    background var(--transition-smooth),
+    border-color var(--transition-smooth),
+    transform var(--transition-spring);
+
+  // Shimmer underline
   &::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: 3px;
     left: 50%;
     width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, $gold-accent, transparent);
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, $gold-bright, transparent);
     transform: translateX(-50%);
-    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1px;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   &:hover {
-    color: $gold-accent;
-    background: rgba($gold-primary, 0.08);
-    text-shadow: 0 0 12px rgba($gold-accent, 0.3);
-    
-    &::after {
-      width: 85%;
-    }
+    color: $gold-bright;
+    background: rgba($gold-warm, 0.09);
+    border-color: rgba($gold-warm, 0.18);
+    transform: translateY(-1px);
+
+    &::after { width: 80%; }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $gold-bright;
+    outline-offset: 2px;
+    background: rgba($gold-warm, 0.1);
   }
 }
 
 .navbar__link--active {
-  color: $gold-accent;
-  background: rgba($gold-primary, 0.12);
-  box-shadow: 
-    0 0 16px rgba($gold-accent, 0.25),
-    inset 0 0 8px rgba($gold-accent, 0.1);
-  text-shadow: 0 0 16px rgba($gold-accent, 0.4);
-  
+  color: $gold-bright;
+  background: rgba($gold-warm, 0.1);
+  border-color: rgba($gold-warm, 0.25);
+  box-shadow: 0 0 18px rgba($gold-bright, 0.18);
+  text-shadow: 0 0 14px rgba($gold-bright, 0.35);
+
   &::after {
-    width: 85%;
-    background: linear-gradient(90deg, transparent, $gold-accent, transparent);
+    width: 80%;
   }
-  
+
   &:hover {
-    background: rgba($gold-primary, 0.16);
-    box-shadow: 
-      0 0 20px rgba($gold-accent, 0.35),
-      inset 0 0 12px rgba($gold-accent, 0.15);
+    background: rgba($gold-warm, 0.16);
+    border-color: rgba($gold-bright, 0.35);
+    box-shadow: 0 0 24px rgba($gold-bright, 0.28);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $gold-bright;
+    outline-offset: 2px;
   }
 }
 
 // ──────────────────────────────────────────────────────────────
-// Hamburger Button - Mobile
+// Hamburger — Mobile Only
 // ──────────────────────────────────────────────────────────────
 
 .navbar__hamburger {
@@ -227,96 +255,95 @@ $glass-lighter:      rgba(255, 255, 255, 0.08);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  background: rgba($gold-primary, 0.08);
-  border: 1px solid rgba($gold-primary, 0.25);
+  gap: 5px;
+  background: rgba($gold-warm, 0.07);
+  border: 1px solid $border-gold;
+  border-radius: 10px;
   cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
+  padding: 9px 10px;
   margin-right: auto;
-  
-  transition: 
-    background-color 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-  
+  outline: none;
+  flex-shrink: 0;
+
+  transition:
+    background var(--transition-smooth),
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth);
+
   &:hover {
-    background: rgba($gold-primary, 0.12);
-    border-color: rgba($gold-primary, 0.4);
-    box-shadow: 0 4px 16px rgba($gold-primary, 0.2);
+    background: rgba($gold-warm, 0.14);
+    border-color: $border-gold-h;
+    box-shadow: 0 4px 16px rgba($gold-warm, 0.15);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $gold-bright;
+    outline-offset: 2px;
   }
 }
 
 .navbar__hamburger-bar {
   display: block;
-  width: 22px;
-  height: 2px;
-  background: $gold-primary;
+  width: 20px;
+  height: 1.5px;
+  background: $gold-warm;
   border-radius: 2px;
-  
-  transition: 
+  transform-origin: center;
+  transition:
     transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity 0.25s ease,
+    background-color 0.25s ease;
 }
 
 .navbar__hamburger--open {
-  background: rgba($gold-accent, 0.12);
-  border-color: rgba($gold-accent, 0.4);
-  
+  background: rgba($gold-bright, 0.1);
+  border-color: $border-bright;
+
+  .navbar__hamburger-bar { background: $gold-bright; }
+
   .navbar__hamburger-bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(6.5px) rotate(45deg);
   }
-  
   .navbar__hamburger-bar:nth-child(2) {
     opacity: 0;
     transform: scaleX(0);
   }
-  
   .navbar__hamburger-bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-6.5px) rotate(-45deg);
   }
 }
 
 // ──────────────────────────────────────────────────────────────
-// Countdown Widget - Premium Glassmorphism
+// Countdown Widget
 // ──────────────────────────────────────────────────────────────
 
 .navbar__countdown {
   list-style: none;
-  
-  // ── Premium Glass Background ──────────────────────────────
-  background: rgba(26, 110, 68, 0.35);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  
-  // ── Gold Border with Low Opacity ──────────────────────────
-  border: 1px solid rgba($gold-primary, 0.3);
+  background: $glass-card;
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid $border-gold;
   border-radius: 12px;
-  
-  // ── Spacing ────────────────────────────────────────────────
-  padding: 10px 16px;
+  padding: 8px 14px;
   display: flex;
   align-items: center;
-  gap: 12px;
   white-space: nowrap;
-  
-  // ── Premium Shadow & Glow ─────────────────────────────────
-  box-shadow: 
-    0 8px 24px rgba(26, 110, 68, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  
-  // ── Smooth Transitions ────────────────────────────────────
-  transition: 
-    all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  
+  flex-shrink: 0;
+
+  box-shadow:
+    0 4px 20px rgba($emerald-800, 0.2),
+    0 1px 0 rgba($white, 0.06) inset;
+
+  transition: all var(--transition-smooth);
+
   &:hover {
-    background: rgba(26, 110, 68, 0.45);
-    border-color: rgba($gold-primary, 0.5);
-    box-shadow: 
-      0 12px 32px rgba(26, 110, 68, 0.3),
-      0 0 20px rgba($gold-accent, 0.25),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
+    background: $glass-card-h;
+    border-color: $border-gold-h;
+    box-shadow:
+      0 8px 28px rgba($emerald-800, 0.3),
+      0 0 18px rgba($gold-bright, 0.12),
+      0 1px 0 rgba($white, 0.08) inset;
+    transform: translateY(-1px);
   }
 }
 
@@ -324,362 +351,348 @@ $glass-lighter:      rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 .navbar__countdown-icon {
-  font-size: 1.4rem;
-  animation: pulse-icon 2.5s ease-in-out infinite;
-  filter: drop-shadow(0 0 8px rgba($gold-accent, 0.5));
-  
-  transition: all 0.3s ease;
-}
+  font-size: 1.25rem;
+  line-height: 1;
+  animation: pulse-icon 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba($gold-bright, 0.45));
+  transition: transform 0.3s ease;
 
-.navbar__countdown:hover .navbar__countdown-icon {
-  transform: scale(1.1) rotate(5deg);
+  .navbar__countdown:hover & {
+    transform: scale(1.12) rotate(6deg);
+  }
 }
 
 .navbar__countdown-label {
-  color: $text-secondary;
+  color: $text-soft;
   font-weight: 700;
-  white-space: nowrap;
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-  
-  transition: color 0.3s ease;
-}
+  font-size: 0.83rem;
+  letter-spacing: 0.3px;
+  transition: color var(--transition-smooth);
 
-.navbar__countdown:hover .navbar__countdown-label {
-  color: $gold-accent;
-  text-shadow: 0 0 12px rgba($gold-accent, 0.3);
+  .navbar__countdown:hover & {
+    color: $gold-bright;
+    text-shadow: 0 0 10px rgba($gold-bright, 0.3);
+  }
 }
 
 .navbar__countdown-timer {
-  color: $gold-accent;
+  color: $gold-bright;
   font-weight: 800;
   font-family: 'Monaco', 'Courier New', monospace;
-  min-width: 80px;
+  font-size: 0.88rem;
+  letter-spacing: 1.5px;
+  min-width: 76px;
   text-align: center;
-  
-  // ── Glass Background ──────────────────────────────────────
-  background: rgba(0, 0, 0, 0.25);
-  padding: 6px 12px;
-  border-radius: 8px;
-  border: 1px solid rgba($gold-primary, 0.2);
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
-  
-  letter-spacing: 1px;
-  font-size: 0.9rem;
-  
-  transition: 
-    all 0.3s ease;
+
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba($gold-warm, 0.18);
+  border-radius: 7px;
+  padding: 5px 11px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
+
+  transition: all var(--transition-smooth);
+
+  .navbar__countdown:hover & {
+    background: rgba(0, 0, 0, 0.32);
+    border-color: rgba($gold-bright, 0.28);
+    box-shadow:
+      inset 0 2px 8px rgba(0, 0, 0, 0.35),
+      0 0 10px rgba($gold-bright, 0.18);
+  }
 }
 
-.navbar__countdown:hover .navbar__countdown-timer {
-  background: rgba(0, 0, 0, 0.35);
-  border-color: rgba($gold-accent, 0.3);
-  box-shadow: 
-    inset 0 2px 8px rgba(0, 0, 0, 0.4),
-    0 0 12px rgba($gold-accent, 0.25);
-}
+// ──────────────────────────────────────────────────────────────
+// Sound Button
+// ──────────────────────────────────────────────────────────────
 
 .navbar__sound-btn {
-  background: rgba($gold-primary, 0.08);
-  border: 1px solid rgba($gold-primary, 0.25);
+  background: rgba($gold-warm, 0.07);
+  border: 1px solid rgba($gold-warm, 0.2);
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1.1rem;
-  padding: 6px;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  outline: none;
-  border-radius: 8px;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
   margin-right: 4px;
-  
-  transition: 
-    all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
+  outline: none;
+  flex-shrink: 0;
+  line-height: 1;
+
+  transition: all var(--transition-smooth);
+
   &:hover {
-    background: rgba($gold-primary, 0.15);
-    border-color: rgba($gold-primary, 0.4);
-    transform: scale(1.12);
-    box-shadow: 0 4px 16px rgba($gold-primary, 0.2);
+    background: rgba($gold-warm, 0.15);
+    border-color: $border-gold-h;
+    transform: scale(1.1);
+    box-shadow: 0 4px 14px rgba($gold-warm, 0.2);
   }
-  
+
+  &:focus-visible {
+    outline: 2px solid $gold-bright;
+    outline-offset: 2px;
+  }
+
   &.muted {
-    opacity: 0.6;
-    
-    &:hover {
-      opacity: 0.85;
-    }
+    opacity: 0.55;
+    &:hover { opacity: 0.85; }
   }
-  
+
   &.active {
-    color: $gold-accent;
-    background: rgba($gold-accent, 0.1);
-    border-color: rgba($gold-accent, 0.3);
-    
+    color: $gold-bright;
+    background: rgba($gold-bright, 0.08);
+    border-color: rgba($gold-bright, 0.25);
+
     &:hover {
-      background: rgba($gold-accent, 0.15);
-      border-color: rgba($gold-accent, 0.5);
-      box-shadow: 0 4px 16px rgba($gold-accent, 0.25);
+      background: rgba($gold-bright, 0.15);
+      border-color: rgba($gold-bright, 0.45);
+      box-shadow: 0 0 14px rgba($gold-bright, 0.25);
     }
   }
-  
+
   &.blocked {
-    animation: blink-sound 1.5s infinite alternate;
-    background: rgba($gold-accent, 0.1);
-    border: 1px dashed rgba($gold-accent, 0.4);
+    animation: blink-sound 1.5s ease-in-out infinite alternate;
+    background: rgba($gold-bright, 0.08);
+    border: 1px dashed rgba($gold-bright, 0.35);
   }
 }
 
 // ──────────────────────────────────────────────────────────────
-// Animations
+// Keyframes
 // ──────────────────────────────────────────────────────────────
 
 @keyframes pulse-icon {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.85;
-    transform: scale(1.15);
-  }
+  0%, 100% { transform: scale(1);    opacity: 1;    }
+  50%       { transform: scale(1.12); opacity: 0.88; }
 }
 
 @keyframes blink-sound {
-  0% {
-    opacity: 0.6;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
+  from { opacity: 0.55; transform: scale(0.95); }
+  to   { opacity: 1;    transform: scale(1.08); }
 }
 
 // ──────────────────────────────────────────────────────────────
-// Responsive - Tablet (≤992px)
+// Tablet (≤ 992px)
 // ──────────────────────────────────────────────────────────────
 
 @media (max-width: 992px) {
   .navbar {
-    padding: 0.75rem 1.5rem;
-    gap: 1.5rem;
+    padding: 0 1.5rem;
+    gap: 1rem;
   }
-  
+
   .navbar__list {
-    gap: 1.8rem;
+    gap: 0.1rem;
   }
-  
+
   .navbar__item {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
-  
+
   .navbar__link {
     padding: 5px 10px;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
-  
+
   .navbar__logo-text {
     font-size: 1rem;
   }
-  
+
   .navbar__countdown {
-    padding: 8px 12px;
-    gap: 8px;
+    padding: 7px 10px;
   }
-  
+
   .navbar__countdown-content {
-    gap: 8px;
+    gap: 7px;
   }
-  
-  .navbar__countdown-icon {
-    font-size: 1.2rem;
-  }
-  
+
   .navbar__countdown-timer {
-    min-width: 70px;
-    font-size: 0.8rem;
-    padding: 5px 10px;
+    min-width: 68px;
+    font-size: 0.82rem;
+    padding: 4px 9px;
   }
 }
 
 // ──────────────────────────────────────────────────────────────
-// Responsive - Mobile (≤768px) - Hamburger Mode
+// Mobile (≤ 768px) — Hamburger Mode
 // ──────────────────────────────────────────────────────────────
 
 @media (max-width: 768px) {
   :root {
-    --navbar-height: 64px;
+    --navbar-height: 62px;
   }
-  
+
   .navbar {
-    padding: 0.65rem 1rem;
-    gap: 1rem;
+    padding: 0 1rem;
+    gap: 0.75rem;
   }
-  
+
   .navbar__logo {
     gap: 0.5rem;
   }
-  
+
   .navbar__logo-icon {
     font-size: 1.4rem;
   }
-  
+
   .navbar__logo-text {
-    font-size: 0.95rem;
     display: none;
   }
-  
-  // Show hamburger
+
   .navbar__hamburger {
     display: flex;
   }
-  
-  // Mobile dropdown list
+
+  // Mobile dropdown
   .navbar__list {
     position: absolute;
-    top: calc(100% + 0px);
+    top: calc(var(--navbar-height) - 1px);
     left: 0;
     right: 0;
-    
-    // Glass background for dropdown
-    background: rgba(15, 81, 50, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    
+    z-index: 998;
+
+    background: rgba($emerald-800, 0.96);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     max-height: 0;
     overflow: hidden;
-    
-    border-top: 1px solid rgba($gold-primary, 0.25);
-    box-shadow: 
-      0 12px 48px rgba(15, 81, 50, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    
-    transition: 
-      max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    
     padding: 0;
     margin: 0;
-    
-    // When open
+
+    border-top: 1px solid $border-gold;
+    box-shadow:
+      0 16px 48px rgba($emerald-900, 0.55),
+      0 1px 0 rgba($white, 0.06) inset;
+
+    transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+
     &.navbar__list--open {
-      max-height: 600px;
-      padding: 0.75rem 0;
+      max-height: 620px;
+      padding: 0.5rem 0;
     }
   }
-  
+
   .navbar__item {
     font-size: 0.95rem;
-    border-bottom: 1px solid rgba($gold-primary, 0.1);
+    border-bottom: 1px solid rgba($gold-warm, 0.08);
     text-align: right;
-    
+
     &:last-child {
       border-bottom: none;
     }
   }
-  
+
   .navbar__link {
     display: block;
-    padding: 1rem 1.25rem;
+    padding: 0.9rem 1.25rem;
     border-radius: 0;
+    border: none;
     font-size: 0.95rem;
-    
-    &::after {
-      display: none;
-    }
-    
+
+    &::after { display: none; }
+
     &:hover {
-      background: rgba($gold-primary, 0.1);
-      color: $gold-accent;
+      transform: none;
+      background: rgba($gold-warm, 0.09);
+      color: $gold-bright;
+    }
+
+    &:focus-visible {
+      outline: none;
+      background: rgba($gold-warm, 0.1);
+      box-shadow: inset 3px 0 0 rgba($gold-bright, 0.55);
     }
   }
-  
+
   .navbar__link--active {
-    background: rgba($gold-primary, 0.15);
-    color: $gold-accent;
-    box-shadow: none;
-    text-shadow: 0 0 12px rgba($gold-accent, 0.3);
+    background: rgba($gold-warm, 0.12);
+    color: $gold-bright;
+    box-shadow: inset 3px 0 0 rgba($gold-bright, 0.6);
+    text-shadow: 0 0 10px rgba($gold-bright, 0.25);
   }
-  
+
   .navbar__countdown {
-    margin: 0.75rem 1rem;
-    padding: 10px 12px;
-    gap: 8px;
+    margin: 0.6rem 1rem;
+    padding: 9px 12px;
   }
-  
+
   .navbar__countdown-label {
     font-size: 0.8rem;
   }
-  
+
   .navbar__countdown-timer {
-    min-width: 65px;
+    min-width: 64px;
     font-size: 0.8rem;
-    padding: 5px 10px;
+    padding: 4px 9px;
   }
-  
+
   .navbar__sound-btn {
     width: 32px;
     height: 32px;
-    padding: 4px;
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 }
 
 // ──────────────────────────────────────────────────────────────
-// Responsive - Small Mobile (≤480px)
+// Small Mobile (≤ 480px)
 // ──────────────────────────────────────────────────────────────
 
 @media (max-width: 480px) {
   :root {
     --navbar-height: 56px;
   }
-  
+
   .navbar {
-    padding: 0.55rem 0.75rem;
+    padding: 0 0.75rem;
   }
-  
+
   .navbar__logo-icon {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
-  
+
   .navbar__hamburger {
-    padding: 6px;
+    padding: 7px 8px;
   }
-  
+
   .navbar__hamburger-bar {
-    width: 20px;
-    height: 1.5px;
+    width: 18px;
   }
-  
+
+  .navbar__countdown {
+    margin: 0.5rem 0.75rem;
+    padding: 7px 10px;
+  }
+
   .navbar__countdown-label {
     display: none;
   }
-  
+
   .navbar__countdown-icon {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
-  
+
   .navbar__countdown-timer {
-    min-width: 55px;
-    font-size: 0.7rem;
+    min-width: 54px;
+    font-size: 0.75rem;
     padding: 4px 8px;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
   }
-  
+
   .navbar__sound-btn {
     width: 28px;
     height: 28px;
-    padding: 3px;
     font-size: 0.9rem;
     margin-right: 2px;
   }
-  
 }

@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 // ─── Colors & Variables ────────────────────────────────────────────────────────
 
 $emerald-dark: #0b3d2e;
@@ -532,9 +534,9 @@ $glass-border: rgba(212, 175, 55, 0.3);
   .surah-hero {
     background: linear-gradient(
       135deg,
-      #{darken($emerald-dark, 5%)} 0%,
-      #{darken($emerald-mid, 5%)} 50%,
-      #{darken($emerald-light, 5%)} 100%
+      #{color.adjust($emerald-dark, $lightness: -5%)} 0%,
+      #{color.adjust($emerald-mid, $lightness: -5%)} 50%,
+      #{color.adjust($emerald-light, $lightness: -5%)} 100%
     );
   }
 }
