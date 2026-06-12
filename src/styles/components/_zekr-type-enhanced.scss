@@ -1,0 +1,141 @@
+// نمط صفحة الأذكار المحسّنة
+.zekrType {
+  padding: 16px;
+
+  .pageTitle {
+    margin: 24px 0 16px;
+    text-align: right;
+
+    h6 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .tracking-info {
+      margin: 8px 0 0;
+      font-size: 14px;
+      color: #666;
+      font-weight: 500;
+    }
+  }
+
+  .azkar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 16px 0;
+
+    .zekr-item-wrapper {
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+      overflow: hidden;
+
+      &:hover {
+        transform: translateX(-4px);
+      }
+
+      &.read {
+        opacity: 0.6;
+
+        .read-indicator {
+          background: #10b981;
+        }
+      }
+
+      .read-indicator {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        background: #e5e7eb;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 10;
+
+        .checkmark {
+          color: white;
+          font-weight: bold;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .completion-message {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 32px 0;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+
+    h3 {
+      margin: 0 0 12px;
+      font-size: 28px;
+    }
+
+    p {
+      margin: 0 0 20px;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    .reset-button {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid white;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}
+
+// استجابة للشاشات الصغيرة
+@media (max-width: 600px) {
+  .zekrType {
+    padding: 12px;
+
+    .pageTitle {
+      margin: 16px 0 12px;
+
+      h6 {
+        font-size: 20px;
+      }
+    }
+
+    .azkar-list {
+      gap: 8px;
+    }
+
+    .completion-message {
+      padding: 20px;
+      margin: 24px 0;
+
+      h3 {
+        font-size: 24px;
+      }
+    }
+  }
+}

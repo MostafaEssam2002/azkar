@@ -45,9 +45,9 @@ function App() {
             {
               path: "azkar",
               children: [
-                { index: true, element: <ZekrType type="أذكار الصباح" /> },
-                { path: "أذكار-الصباح", element: <ZekrType type="أذكار الصباح" /> },
-                { path: "أذكار-المساء", element: <ZekrType type="أذكار المساء" /> },
+                { index: true, element: <ZekrType key="morning" type="أذكار الصباح" /> },
+                { path: "أذكار-الصباح", element: <ZekrType key="morning" type="أذكار الصباح" /> },
+                { path: "أذكار-المساء", element: <ZekrType key="evening" type="أذكار المساء" /> },
                 { path: "أذكار-بعد-السلام-من-الصلاة-المفروضة", element: <ZekrType type="أذكار بعد السلام من الصلاة المفروضة" /> },
                 { path: "تسابيح", element: <ZekrType type="تسابيح" /> },
                 { path: "أذكار-النوم", element: <ZekrType type="أذكار النوم" /> },

@@ -1,9 +1,10 @@
 /**
  * نظام تخزين مؤقت ذكي لأوقات الصلاة
- * يحفظ البيانات في local storage ويحدثها مرة واحدة يوميا فقط
+ * يحفظ البيانات في local storage ويحدّثها كل 24 ساعة
  */
 
 const PRAYER_CACHE_KEY = 'prayerTimesCache';
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 ساعة
 
 /**
  * الحصول على تاريخ اليوم بصيغة YYYY-MM-DD
@@ -35,7 +36,21 @@ export const savePrayerTimesToCache = (country, city, prayerData) => {
 };
 
 /**
- * الحصول على أوقات الصلاة من cache إذا كانت لليوم الحالي
+ * التحقق من صلاحية الـ cache (الموقع، التاريخ، ومرور أقل من 24 ساعة)
+ */
+const isCacheEntryValid = (cache, country, city) => {
+  if (!cache?.timestamp) return false;
+
+  const today = getTodayDate();
+  const isExpired = Date.now() - cache.timestamp > CACHE_TTL_MS;
+  const isWrongLocation = cache.country !== country || cache.city !== city;
+  const isWrongDate = cache.date !== today;
+
+  return !isExpired && !isWrongLocation && !isWrongDate;
+};
+
+/**
+ * الحصول على أوقات الصلاة من cache إذا كانت صالحة (أقل من 24 ساعة)
  */
 export const getCachedPrayerTimes = (country, city) => {
   try {
@@ -43,20 +58,16 @@ export const getCachedPrayerTimes = (country, city) => {
     if (!cached) return null;
 
     const cache = JSON.parse(cached);
-    const today = getTodayDate();
 
-    // التحقق من أن البيانات للدولة والمدينة الحالية واليوم الحالي
-    if (
-      cache.country === country &&
-      cache.city === city &&
-      cache.date === today
-    ) {
-      return cache.data;
+    if (!isCacheEntryValid(cache, country, city)) {
+      clearPrayerCache();
+      return null;
     }
 
-    return null;
+    return cache.data;
   } catch (error) {
     console.error('خطأ في قراءة البيانات من cache:', error);
+    clearPrayerCache();
     return null;
   }
 };
@@ -73,7 +84,7 @@ export const clearPrayerCache = () => {
 };
 
 /**
- * التحقق من وجود بيانات محفوظة ولليوم الحالي
+ * التحقق من وجود بيانات محفوظة صالحة (أقل من 24 ساعة)
  */
 export const isCacheValid = (country, city) => {
   return getCachedPrayerTimes(country, city) !== null;
