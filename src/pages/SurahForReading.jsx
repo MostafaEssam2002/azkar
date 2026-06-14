@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import chaptersData from "../data/chapters.json";
 import usePin        from "../hooks/usePin";
+import useReadingProgress from "../hooks/useReadingProgress";
 import FloatingPin from './../components/quran/FloatingPin';
 import PinBanner from './../components/quran/PinBanner';
 import MiniPlayer from './../components/quran/MiniPlayer';
@@ -11,17 +12,35 @@ import QuranView from './../components/quran/QuranView';
 import SurahNavigation from './../components/quran/SurahNavigation';
 
 const SurahForReading = () => {
+    const { pin, savePin, clearPin } = usePin();
+    const { currentSura: savedSura, updateReadingProgress } = useReadingProgress();
+    
     const [verses,  setVerses]  = useState([]);
     const [loading, setLoading] = useState(true);
     const [tooltip, setTooltip] = useState({ visible: false, text: "", x: 0, y: 0, arrowX: 0 });
     const [player, setPlayer] = useState(null);
-    const [currentSura, setCurrentSura] = useState(1);
+    const [currentSura, setCurrentSura] = useState(pin?.suraId || savedSura || 1);
     const [showBanner, setShowBanner] = useState(true);
     const [toastVisible, setToastVisible] = useState(false);
     const [pinning, setPinning] = useState(false);
+    const [shouldScrollToPin, setShouldScrollToPin] = useState(false);
     const toastTimer = useRef(null);
-    const { pin, savePin, clearPin } = usePin();
     const chapter = chaptersData.chapters.find((c) => c.id === currentSura);
+    
+    // ── Save reading progress on sura change ─────────────────────────────────
+    useEffect(() => {
+        updateReadingProgress(currentSura);
+    }, [currentSura, updateReadingProgress]);
+    
+    // ── Check for jump flag from Home page ───────────────────────────────────
+    useEffect(() => {
+        const shouldJump = localStorage.getItem("shouldJumpToPin");
+        if (shouldJump === "true" && pin) {
+            setShouldScrollToPin(true);
+            localStorage.removeItem("shouldJumpToPin");
+        }
+    }, [pin]);
+    
     // ── Fetch verses on sura change ──────────────────────────────────────────
     useEffect(() => {
         setLoading(true);
@@ -35,6 +54,42 @@ const SurahForReading = () => {
     useEffect(() => {
         if (pin) setShowBanner(true);
     }, [pin]);
+
+    // ── Auto navigate to pin sura when pin changes ──────────────────────────
+    useEffect(() => {
+        if (pin && currentSura !== pin.suraId) {
+            setCurrentSura(pin.suraId);
+        }
+    }, [pin?.suraId]);
+
+    // ── Scroll to pin when data is loaded ────────────────────────────────────
+    useEffect(() => {
+        if (shouldScrollToPin && !loading && pin && currentSura === pin.suraId) {
+            // انتظر قليلاً لضمان عرض الآيات في الـ DOM
+            const timer = setTimeout(() => {
+                const el = document.querySelector(
+                    `[data-aya-num="${pin.ayaNumber}"][data-sura-id="${pin.suraId}"]`
+                );
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "center" });
+                    setShouldScrollToPin(false);
+                } else {
+                    // في حالة عدم العثور على الآية، حاول مرة أخرى بعد قليل
+                    const retryTimer = setTimeout(() => {
+                        const retryEl = document.querySelector(
+                            `[data-aya-num="${pin.ayaNumber}"][data-sura-id="${pin.suraId}"]`
+                        );
+                        if (retryEl) {
+                            retryEl.scrollIntoView({ behavior: "smooth", block: "center" });
+                        }
+                        setShouldScrollToPin(false);
+                    }, 500);
+                    return () => clearTimeout(retryTimer);
+                }
+            }, 500);
+            return () => clearTimeout(timer);
+        }
+    }, [shouldScrollToPin, loading, pin, currentSura]);
 
     // ── Toast helper ─────────────────────────────────────────────────────────
     const showToast = useCallback(() => {
@@ -52,19 +107,27 @@ const SurahForReading = () => {
 
     const jumpToPin = useCallback(() => {
         if (!pin) return;
-        const doScroll = () => {
-            const el = document.querySelector(
-                `[data-aya-num="${pin.ayaNumber}"][data-sura-id="${pin.suraId}"]`
-            );
-            if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
-        };
-        if (pin.suraId !== currentSura) {
-            setCurrentSura(pin.suraId);
-            setTimeout(doScroll, 900);
+        
+        // إذا كانت السورة الحالية هي نفس السورة المحفوظة
+        if (pin.suraId === currentSura) {
+            // الآيات محملة بالفعل، عمل scroll فوراً
+            if (!loading) {
+                const el = document.querySelector(
+                    `[data-aya-num="${pin.ayaNumber}"][data-sura-id="${pin.suraId}"]`
+                );
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "center" });
+                }
+            } else {
+                // إذا كانت تحميل، حدد flag للقيام بـ scroll عند اكتمال التحميل
+                setShouldScrollToPin(true);
+            }
         } else {
-            doScroll();
+            // السورة مختلفة، غير السورة وضع flag للقيام بـ scroll بعد التحميل
+            setShouldScrollToPin(true);
+            setCurrentSura(pin.suraId);
         }
-    }, [pin, currentSura]);
+    }, [pin, currentSura, loading]);
 
     return (
         <div className="page">

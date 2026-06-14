@@ -4,6 +4,7 @@
  * يخزن في localStorage:
  *   wird_settings  → { pagesPerDay, reminderTime, startPage, startDate }
  *   wird_progress  → { lastVisitDate, currentDayIndex, completedPages: [], nextPageStart, ... }
+ *   wird_current_page → رقم الصفحة الحالية المعروضة (منفصل)
  *
  * الإصلاح: بدل الحساب الرياضي بـ dayIndex، بنخزن nextPageStart
  * عشان كل ورد يبدأ من حيث الأخير وقف بالظبط.
@@ -13,6 +14,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 const TOTAL_PAGES = 604;
 const STORAGE_SETTINGS = "wird_settings";
 const STORAGE_PROGRESS = "wird_progress";
+const STORAGE_CURRENT_PAGE = "wird_current_page";
 
 /* ── helpers ──────────────────────────────────────────────────── */
 const todayStr = () => new Date().toISOString().slice(0, 10);
@@ -349,6 +351,30 @@ export default function useWird(currentPage = null) {
         setProgress(defaultProgress(1));
         localStorage.removeItem(STORAGE_SETTINGS);
         localStorage.removeItem(STORAGE_PROGRESS);
+        localStorage.removeItem(STORAGE_CURRENT_PAGE);
+    }, []);
+
+    /* ── saveCurrentPage و getCurrentPage ────────────────────────── */
+    const saveCurrentPage = useCallback((page) => {
+        if (page >= 1 && page <= TOTAL_PAGES) {
+            localStorage.setItem(STORAGE_CURRENT_PAGE, JSON.stringify({ page, timestamp: Date.now() }));
+        }
+    }, []);
+
+    const getCurrentPage = useCallback(() => {
+        try {
+            const stored = JSON.parse(localStorage.getItem(STORAGE_CURRENT_PAGE));
+            if (stored && stored.page >= 1 && stored.page <= TOTAL_PAGES) {
+                return stored.page;
+            }
+        } catch {
+            // تجاهل الأخطاء
+        }
+        return null;
+    }, []);
+
+    const clearCurrentPage = useCallback(() => {
+        localStorage.removeItem(STORAGE_CURRENT_PAGE);
     }, []);
 
     return {
@@ -370,5 +396,8 @@ export default function useWird(currentPage = null) {
         markLastPageComplete,
         resetWird,
         lastSettingsUpdateTime: progress.lastSettingsUpdateTime,
+        saveCurrentPage,
+        getCurrentPage,
+        clearCurrentPage,
     };
 }

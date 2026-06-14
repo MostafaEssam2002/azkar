@@ -1,0 +1,414 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+
+// ─── Tokens ───────────────────────────────────────────────
+$green-dark:    #0a2a18;
+$green-mid:     #0f3d24;
+$green-base:    #1a5c36;
+$green-light:   #2a8a50;
+$green-pale:    #e6f4ec;
+$green-paler:   #f0faf4;
+$green-border:  #c8e6d4;
+$green-muted:   #c8e6d4;
+
+$gold-dark:     #8B6914;
+$gold-base:     #c8960c;
+$gold-light:    #e8b820;
+
+$text-primary:  #1a1a1a;
+$text-muted:    #666;
+$text-faint:    #888;
+$text-light:    #333;
+
+$bg-page:       #efefef;
+$bg-card:       #fff;
+$bg-item:       #f7f7f7;
+$bg-item-hover: #eef5f1;
+
+$radius-card:   18px;
+$radius-btn:    12px;
+$radius-item:   14px;
+$radius-pill:   20px;
+$radius-icon:   50%;
+
+$font:          'Cairo', sans-serif;
+
+// ─── Root ─────────────────────────────────────────────────
+.home {
+  font-family: $font;
+  background: $bg-page;
+  color: $text-primary;
+  min-height: 100vh;
+  width: 100%;
+  direction: rtl;
+
+  // ─── Hero ───────────────────────────────────────────────
+  &__hero {
+    background: linear-gradient(135deg, $green-base 0%, $green-mid 60%, $green-dark 100%);
+    padding: 36px 24px 40px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Cellipse cx='650' cy='150' rx='200' ry='200' fill='%23ffffff06'/%3E%3Crect x='520' y='60' width='28' height='160' rx='14' fill='%23ffffff0d'/%3E%3Crect x='556' y='85' width='20' height='135' rx='10' fill='%23ffffff0a'/%3E%3Cellipse cx='534' cy='62' rx='26' ry='16' fill='%23ffffff0c'/%3E%3Cellipse cx='566' cy='86' rx='18' ry='11' fill='%23ffffff0a'/%3E%3C/svg%3E") right bottom / 400px no-repeat;
+      pointer-events: none;
+    }
+  }
+
+  &__greeting {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  &__sub {
+    font-size: 17px;
+    color: #c8e6d4;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  &__date {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: $radius-pill;
+    padding: 5px 20px;
+    font-size: 13px;
+    color: #d4edda;
+    margin-bottom: 24px;
+  }
+
+  &__hero-btns {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  // ─── Hero Buttons ──────────────────────────────────────
+  &__btn {
+    font-family: $font;
+    border-radius: $radius-btn;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s, opacity 0.2s;
+
+    &--quran {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      color: #fff;
+
+      &:hover { background: rgba(255, 255, 255, 0.22); }
+    }
+
+    &--adhkar {
+      background: linear-gradient(135deg, $gold-base, $gold-light);
+      border: none;
+      color: $text-primary;
+      font-weight: 700;
+
+      &:hover { opacity: 0.9; }
+    }
+  }
+
+  // ─── Content Wrapper ───────────────────────────────────
+  &__content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px 24px;
+  }
+
+  // ─── Generic Section ───────────────────────────────────
+  &__section {
+    background: $bg-card;
+    margin-top: 14px;
+    border-radius: $radius-card;
+    padding: 18px 20px;
+  }
+
+  &__section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 16px;
+    text-align: right;
+  }
+
+  // ─── Quick Access Grid ─────────────────────────────────
+  &__quick-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+
+    @media (max-width: 700px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__quick-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: $bg-item;
+    border-radius: $radius-item;
+    padding: 16px 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    border: none;
+    width: 100%;
+
+    &:hover {
+      background: $bg-item-hover;
+      transform: translateY(-2px);
+    }
+  }
+
+  &__quick-icon {
+    color: $gold-base;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__quick-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: $text-light;
+    white-space: nowrap;
+  }
+
+  // ─── Prayer Card ───────────────────────────────────────
+  &__prayer-card {
+    background: linear-gradient(135deg, $green-paler, $green-pale);
+    border: 1.5px solid $green-border;
+    border-radius: $radius-item;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  &__prayer-icon-wrap {
+    width: 56px;
+    height: 56px;
+    background: $green-base;
+    border-radius: $radius-icon;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__prayer-info { flex: 1; }
+
+  &__prayer-next {
+    font-size: 12px;
+    color: $text-muted;
+    margin-bottom: 2px;
+  }
+
+  &__prayer-name {
+    font-size: 22px;
+    font-weight: 800;
+    color: $green-base;
+  }
+
+  &__prayer-time-label {
+    font-size: 12px;
+    color: $text-faint;
+  }
+
+  &__prayer-countdown {
+    font-size: 28px;
+    font-weight: 800;
+    color: $text-primary;
+    font-variant-numeric: tabular-nums;
+  }
+
+  // ─── Progress ──────────────────────────────────────────
+  &__progress-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  &__progress-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: all 0.2s ease;
+
+    &--clickable {
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.5);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:hover {
+        background: rgba(201, 168, 76, 0.08);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(201, 168, 76, 0.1);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &__progress-label {
+    font-size: 12px;
+    color: $text-faint;
+    font-weight: 500;
+  }
+
+  &__progress-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: $text-primary;
+    direction: ltr;
+    text-align: right;
+  }
+
+  &__progress-sub {
+    font-size: 12px;
+    color: $text-muted;
+  }
+
+  &__progress-bar {
+    height: 5px;
+    background: #e8e8e8;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, $green-base, $green-light);
+
+    &--gold {
+      background: linear-gradient(90deg, $gold-base, $gold-light);
+    }
+  }
+
+  // ─── Bottom Cards Grid ─────────────────────────────────
+  &__bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  &__card {
+    background: $bg-card;
+    border-radius: $radius-card;
+    padding: 18px 20px;
+  }
+
+  &__card-title {
+    font-size: 13px;
+    color: $text-faint;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__card-book-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, $gold-base, $gold-dark);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+
+  &__card-main {
+    font-size: 14px;
+    font-weight: 700;
+    color: $text-primary;
+    line-height: 1.5;
+  }
+
+  &__card-sub {
+    font-size: 12px;
+    color: $text-faint;
+    margin-top: 3px;
+  }
+
+  &__card-btn {
+    margin-top: 12px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: $font;
+    font-size: 13px;
+    font-weight: 600;
+    color: $green-base;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover { background: #e2ede7; }
+  }
+
+  &__ayah-text {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-primary;
+    line-height: 1.8;
+    text-align: right;
+  }
+
+  &__ayah-ref {
+    font-size: 12px;
+    color: $text-faint;
+    margin-top: 6px;
+  }
+
+  &__ayah-tafsir {
+    margin-top: 12px;
+    padding: 12px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+    max-height: 180px;
+    overflow-y: auto;
+    font-weight: 500;
+  }
+
+  &__tafsir-label {
+    color: $green-base;
+    font-weight: 700;
+  }
+
+  &__quote-icon {
+    color: $gold-base;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  &__ayah-loading {
+    color: #999;
+    font-size: 14px;
+  }
+}

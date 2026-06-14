@@ -60,6 +60,9 @@ const WirdPage = () => {
         markLastPageComplete,
         resetWird,
         lastSettingsUpdateTime,
+        saveCurrentPage,
+        getCurrentPage,
+        clearCurrentPage,
     } = useWird(currentPage);
 
     // ── When wird range changes, sync the page selector ──────────────────────
@@ -69,13 +72,21 @@ const WirdPage = () => {
         setRangeEnd(activeRange.end);
         setStartPageInput(String(activeRange.start));
         setEndPageInput(String(activeRange.end));
-        setCurrentPage(activeRange.start);
-
+        
         // احذف الـ pin عند تغيير الورد (سواء تلقائي أو يدوي)
         localStorage.removeItem("quran_wird_pin");
         clearPin();
 
-        fetchPages(activeRange.start);
+        // استرجع الصفحة المحفوظة من سابق
+        const savedPage = getCurrentPage();
+        let pageToLoad = activeRange.start;
+        
+        if (savedPage && savedPage >= activeRange.start && savedPage <= activeRange.end) {
+            pageToLoad = savedPage;
+        }
+
+        setCurrentPage(pageToLoad);
+        fetchPages(pageToLoad);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeRange?.start, activeRange?.end, clearPin]);
 
@@ -178,21 +189,27 @@ const WirdPage = () => {
     useEffect(() => {
         if (!loading && activeRange && currentPage >= activeRange.start && currentPage <= activeRange.end) {
             markPageRead(currentPage);
+            // احفظ الصفحة الحالية في localStorage
+            saveCurrentPage(currentPage);
+            // أرسل حدث مخصص لتنبيه Home page بالتحديث
+            window.dispatchEvent(new Event("wirdProgressUpdated"));
         }
-    }, [currentPage, loading, activeRange, markPageRead]);
+    }, [currentPage, loading, activeRange, markPageRead, saveCurrentPage]);
 
     // ── Handlers ─────────────────────────────────────────────────────────────
     const handleMoveToNext = useCallback(() => {
         localStorage.removeItem("quran_wird_pin");
         clearPin();
+        clearCurrentPage();
         moveToNextWird();
-    }, [clearPin, moveToNextWird]);
+    }, [clearPin, moveToNextWird, clearCurrentPage]);
 
     const handleFinishCatchUp = useCallback(() => {
         localStorage.removeItem("quran_wird_pin");
         clearPin();
+        clearCurrentPage();
         finishCatchUp();
-    }, [clearPin, finishCatchUp]);
+    }, [clearPin, finishCatchUp, clearCurrentPage]);
 
     const handleTimeExpired = useCallback(() => {
         localStorage.removeItem("quran_wird_pin");
@@ -210,6 +227,7 @@ const WirdPage = () => {
             localStorage.removeItem("wird_settings");
             localStorage.removeItem("wird_progress");
             localStorage.removeItem("quran_wird_pin");
+            localStorage.removeItem("wird_current_page");
             clearPin();
 
             if (window.wirdUpdateInterval) {

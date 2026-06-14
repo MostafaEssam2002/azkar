@@ -11,6 +11,7 @@ import RadioApp from "./pages/RadioApp";
 import PrayerTimes from './pages/PrayerTimes';
 import ErrorBoundary from "./components/ErrorBoundary";
 import WirdPage from './pages/WirdPage';
+import Home from "./pages/Home";
 
 function App() {
       const routing = createBrowserRouter([
@@ -26,7 +27,8 @@ function App() {
           ),
           errorElement: <ErrorBoundary />,
           children: [
-            { index: true, element: <Navigate to="/azkar" replace /> },
+            { index: true, element: <Home /> },
+            // { index: true, element: <Navigate to="/azkar" replace /> },
             { path: "prayer_times", element: <PrayerTimes /> },
             { path: "wird", element: <WirdPage /> },
             { path: "radio", element: <RadioApp /> },

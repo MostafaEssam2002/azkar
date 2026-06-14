@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 // ─── Variables ────────────────────────────────────────────────────────────────
 
 $gold: #c9a84c;
@@ -326,11 +328,13 @@ $font-sans: sans-serif;
   position: absolute;
   background: $dark-green;
   color: $text-light;
-  font-size: 20px;
-  line-height: 1.9;
-  padding: 12px 18px;
+  font-size: 17px;
+  line-height: 2;
+  padding: 16px 20px;
   border-radius: 10px;
   max-width: 520px;
+  max-height: 400px;
+  overflow-y: auto;
   width: auto;
   text-align: right;
   z-index: 100;
@@ -341,6 +345,29 @@ $font-sans: sans-serif;
   transform: translateY(calc(-100% - 12px));
   word-wrap: break-word;
   white-space: normal;
+  font-weight: 500;
+
+  /* تحسين scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: $gold rgba($gold, 0.1);
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba($gold, 0.1);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $gold;
+    border-radius: 10px;
+
+    &:hover {
+      background: color.adjust($gold, $lightness: 10%);
+    }
+  }
 }
 
 .tooltip__arrow {
@@ -656,5 +683,59 @@ $font-sans: sans-serif;
 
   to {
     transform: scaleY(1.1);
+  }
+}
+
+// ─── Responsive Design ────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .tooltip {
+    font-size: 15px;
+    max-width: 90vw;
+    max-height: 350px;
+    padding: 14px 16px;
+    line-height: 1.9;
+  }
+
+  .quran-text {
+    font-size: 24px;
+    line-height: 3.4;
+  }
+
+  .aya__text {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tooltip {
+    font-size: 14px;
+    max-width: 95vw;
+    max-height: 300px;
+    padding: 12px 14px;
+    line-height: 1.8;
+  }
+
+  .quran-text {
+    font-size: 20px;
+    line-height: 3.2;
+  }
+
+  .aya__text {
+    font-size: 22px;
+  }
+
+  .pin-banner {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pin-banner__left {
+    width: 100%;
+  }
+
+  .pin-banner__actions {
+    width: 100%;
+    justify-content: space-between;
   }
 }

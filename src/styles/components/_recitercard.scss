@@ -283,10 +283,35 @@
 /* Small Tablet / Large Phone: 480px - 768px */
 @media (max-width: 48rem) {
     .reciter-card {
+        flex-direction: column;
         border-radius: 1rem;
     }
+
     .card-image {
-        width: clamp(7rem, 20vw, 9rem);
+        width: 100%;
+        height: auto;
+        max-height: none;
+    }
+
+    .card-image img {
+        width: 100%;
+        height: auto;
+        max-height: 14rem;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .card-content {
+        padding: 1rem;
+        gap: 0.75rem;
+    }
+
+    .top-row {
+        margin-top: 0;
+    }
+
+    .title-box h2 {
+        font-size: 1rem;
     }
 
     .info-row,
@@ -300,6 +325,35 @@
     .link-item {
         width: 100%;
         min-width: 0;
+        align-items: flex-start;
+    }
+
+    .info-item > div,
+    .link-item div {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+    }
+
+    .info-item span,
+    .link-item span {
+        white-space: normal;
+        margin-right: 0;
+    }
+
+    .info-item p {
+        display: block;
+        width: 100%;
+    }
+
+    .link-item a {
+        display: block;
+        width: 100%;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+        word-break: break-all;
+        overflow-wrap: anywhere;
     }
 
     .divider {
@@ -310,18 +364,23 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        gap: 0.75rem;
     }
 }
 
 /* Mobile: 360px - 480px */
 @media (max-width: 30rem) {
-
     .reciter-card {
         border-radius: 0.875rem;
     }
 
-    .card-image {
-        width: clamp(5.5rem, 22vw, 7rem);
+    .card-image img {
+        max-height: 12rem;
+    }
+
+    .card-content {
+        padding: 0.875rem;
+        gap: 0.625rem;
     }
 
     .bottom-row {
@@ -342,13 +401,13 @@
 
 /* Extra Small: < 360px */
 @media (max-width: 22.5rem) {
-    .card-image {
-        width: clamp(4.5rem, 24vw, 5.5rem);
+    .card-image img {
+        max-height: 10.5rem;
     }
 
     .card-content {
-        padding: 0.6rem;
-        gap: 0.4rem;
+        padding: 0.75rem;
+        gap: 0.5rem;
     }
 }
 
