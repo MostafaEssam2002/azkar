@@ -2,8 +2,9 @@ import { NavLink } from "react-router-dom";
 import { useContext, useState, useEffect, useRef } from "react";
 import { PrayerContext } from "./PrayerContext";
 import { PRAYERS_AR, PRAYER_ICONS } from "../utils/constants";
-
+import { useNavigate } from 'react-router-dom';
 const NavBar = () => {
+  const navigate = useNavigate();
   const prayerData = useContext(PrayerContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -81,9 +82,9 @@ const NavBar = () => {
   return (
     <nav className={`navbar ${isScrolled ? "navbar--scrolled" : ""}`} ref={navRef}>
       {/* ── Logo/Branding (Premium Islamic Icon) ──── */}
-      <div className="navbar__logo">
+      <div className="navbar__logo" onClick={() => navigate('/')}>
         <span className="navbar__logo-icon">✨</span>
-        <span className="navbar__logo-text">أذكار</span>
+        <span className="navbar__logo-text">ذَكِّرْ</span>
       </div>
 
       {/* ── Hamburger button (mobile only) ─────────── */}
