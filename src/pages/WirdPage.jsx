@@ -8,15 +8,19 @@ import SurahHero from './../components/quran/SurahHero';
 import PinToast from './../components/quran/PinToast';
 import MiniPlayer from './../components/quran/MiniPlayer';
 import FloatingPin from './../components/quran/FloatingPin';
-import WirdSettingsPopup from './../components/wird/WirdSettingsPopup';
+// import WirdSettingsPopup from './../components/wird/WirdSettingsPopup';
 import WirdScoreBar from './../components/wird/WirdScoreBar';
 import CompletionPopup from './../components/wird/CompletionPopup';
 import Fireworks from './../components/wird/Fireworks';
 import SurahSeparator from './../components/wird/SurahSeparator';
+import useReciter from "../hooks/useReciter";
+import useReadingProgress from "../hooks/useReadingProgress";
 
 const TOTAL_PAGES = 604;
 
 const WirdPage = () => {
+    const { reciters, loading: recitersLoading, selectedReciter, changeReciter } = useReciter();
+    const { currentSura: savedSura, updateReadingProgress } = useReadingProgress();
     const [verses,         setVerses]       = useState([]);
     const [loading,        setLoading]      = useState(true);
     const [tooltip,        setTooltip]      = useState({ visible: false, text: "", x: 0, y: 0, arrowX: 0 });
@@ -332,8 +336,13 @@ const WirdPage = () => {
             )}
 
             <PinToast visible={toastVisible} />
-            <SurahHero chapter={chapter} />
-
+            <SurahHero
+                chapter={chapter}
+                reciters={reciters}
+                selectedReciter={selectedReciter}
+                onReciterChange={changeReciter}
+                recitersLoading={recitersLoading}
+            />
             {/* ── Celebration ───────────────────────────────────────────── */}
             <Fireworks active={showFireworks} />
             <CompletionPopup

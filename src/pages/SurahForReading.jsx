@@ -1,19 +1,22 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import chaptersData from "../data/chapters.json";
-import usePin        from "../hooks/usePin";
+import usePin from "../hooks/usePin";
 import useReadingProgress from "../hooks/useReadingProgress";
+import useReciter from "../hooks/useReciter";
 import FloatingPin from './../components/quran/FloatingPin';
 import PinBanner from './../components/quran/PinBanner';
 import MiniPlayer from './../components/quran/MiniPlayer';
 import PinToast from './../components/quran/PinToast';
 import SurahHero from './../components/quran/SurahHero';
 import SuraSelector from './../components/quran/SuraSelector';
+// import ReciterSelector from './../components/quran/ReciterSelector';
 import QuranView from './../components/quran/QuranView';
 import SurahNavigation from './../components/quran/SurahNavigation';
 
 const SurahForReading = () => {
     const { pin, savePin, clearPin } = usePin();
     const { currentSura: savedSura, updateReadingProgress } = useReadingProgress();
+    const { reciters, loading: recitersLoading, selectedReciter, changeReciter } = useReciter();
     
     const [verses,  setVerses]  = useState([]);
     const [loading, setLoading] = useState(true);
@@ -65,7 +68,6 @@ const SurahForReading = () => {
     // ── Scroll to pin when data is loaded ────────────────────────────────────
     useEffect(() => {
         if (shouldScrollToPin && !loading && pin && currentSura === pin.suraId) {
-            // انتظر قليلاً لضمان عرض الآيات في الـ DOM
             const timer = setTimeout(() => {
                 const el = document.querySelector(
                     `[data-aya-num="${pin.ayaNumber}"][data-sura-id="${pin.suraId}"]`
@@ -74,7 +76,6 @@ const SurahForReading = () => {
                     el.scrollIntoView({ behavior: "smooth", block: "center" });
                     setShouldScrollToPin(false);
                 } else {
-                    // في حالة عدم العثور على الآية، حاول مرة أخرى بعد قليل
                     const retryTimer = setTimeout(() => {
                         const retryEl = document.querySelector(
                             `[data-aya-num="${pin.ayaNumber}"][data-sura-id="${pin.suraId}"]`
@@ -107,10 +108,7 @@ const SurahForReading = () => {
 
     const jumpToPin = useCallback(() => {
         if (!pin) return;
-        
-        // إذا كانت السورة الحالية هي نفس السورة المحفوظة
         if (pin.suraId === currentSura) {
-            // الآيات محملة بالفعل، عمل scroll فوراً
             if (!loading) {
                 const el = document.querySelector(
                     `[data-aya-num="${pin.ayaNumber}"][data-sura-id="${pin.suraId}"]`
@@ -119,11 +117,9 @@ const SurahForReading = () => {
                     el.scrollIntoView({ behavior: "smooth", block: "center" });
                 }
             } else {
-                // إذا كانت تحميل، حدد flag للقيام بـ scroll عند اكتمال التحميل
                 setShouldScrollToPin(true);
             }
         } else {
-            // السورة مختلفة، غير السورة وضع flag للقيام بـ scroll بعد التحميل
             setShouldScrollToPin(true);
             setCurrentSura(pin.suraId);
         }
@@ -144,7 +140,13 @@ const SurahForReading = () => {
                 />
             )}
             <PinToast visible={toastVisible} />
-            <SurahHero chapter={chapter} />
+            <SurahHero
+                chapter={chapter}
+                reciters={reciters}
+                selectedReciter={selectedReciter}
+                onReciterChange={changeReciter}
+                recitersLoading={recitersLoading}
+            />
             <SuraSelector currentSura={currentSura} onChange={setCurrentSura} />
             {pin && showBanner && (
                 <div className="pin-banner-wrapper">
@@ -156,6 +158,7 @@ const SurahForReading = () => {
                     />
                 </div>
             )}
+
             <QuranView
                 verses={verses}
                 chapter={chapter}
@@ -166,6 +169,7 @@ const SurahForReading = () => {
                 player={player}
                 setPlayer={setPlayer}
                 pin={pin}
+                selectedReciter={selectedReciter}
             />
             
             <SurahNavigation

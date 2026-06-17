@@ -1,5 +1,3 @@
-import React from "react";
-
 // export const WAQF_MARKS = [
 //     "\u06D6","\u06D7","\u06D8","\u06D9","\u06DA",
 //     "\u06DB","\u06DC","\u06DD","\u06DE","\u06DF",

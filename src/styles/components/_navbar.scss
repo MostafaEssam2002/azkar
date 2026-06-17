@@ -68,7 +68,18 @@ $border-bright: rgba($gold-bright, 0.6);
   padding: 0 2rem;
   height: var(--navbar-height);
 
+  // ── Scroll-reveal transition ──────────────────────────────
+  // Combines opacity + translateY for a smooth fade-slide effect.
+  // will-change hints the browser to optimize compositing layers.
+  // pointer-events toggled to prevent clicking an invisible navbar.
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+  will-change: opacity, transform;
+
   transition:
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     background var(--transition-smooth),
     border-color var(--transition-smooth),
     box-shadow var(--transition-smooth),
@@ -88,6 +99,22 @@ $border-bright: rgba($gold-bright, 0.6);
       transparent 100%
     );
     pointer-events: none;
+  }
+
+  // ── Hidden state (scroll position = 0) ────────────────────
+  // Navbar is fully hidden above the viewport with zero opacity.
+  &.navbar--hidden {
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+  }
+
+  // ── Visible state (user has scrolled down) ────────────────
+  // Smoothly slides down and fades in.
+  &.navbar--visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 
   // Scrolled: near-solid, deeply anchored

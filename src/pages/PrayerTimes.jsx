@@ -1,9 +1,10 @@
 import { useContext } from "react";
 // Components
 import PrayerHeader from './../components/PrayerHeader';
-import LocationSelector from './../components/LocationSelector';
+import AthanSettings from './../components/AthanSettings';
+// import LocationSelector from './../components/LocationSelector';
 import NextPrayerCard from './../components/NextPrayerCard';
-import LocationBadge from './../components/LocationBadge';
+// import LocationBadge from './../components/LocationBadge';
 import DateBar from './../components/DateBar';
 import PrayersGrid from './../components/PrayersGrid';
 import QuranCard from './../components/QuranCard';
@@ -60,14 +61,16 @@ export default function PrayerTimes() {
             COUNTRIES_DATA={COUNTRIES_DATA}
           />
 
-          {/* Location Selector */}
-          <LocationSelector
-            selectedCountry={selectedCountry}
-            selectedCity={selectedCity}
-            COUNTRIES_DATA={COUNTRIES_DATA}
-            onCountryChange={setSelectedCountry}
-            onCityChange={setSelectedCity}
-          />
+          {/* Athan Settings (country / city / muezzin voice) */}
+          <div style={{ textAlign: 'center' }}>
+            <AthanSettings
+              selectedCountry={selectedCountry}
+              selectedCity={selectedCity}
+              COUNTRIES_DATA={COUNTRIES_DATA}
+              onCountryChange={setSelectedCountry}
+              onCityChange={setSelectedCity}
+            />
+          </div>
 
           {/* Next Prayer Card */}
           <NextPrayerCard
@@ -79,12 +82,6 @@ export default function PrayerTimes() {
 
           {/* ── CONTENT ── */}
           <div className="content">
-            {/* Location Badge */}
-            <LocationBadge
-              selectedCity={selectedCity}
-              selectedCountry={selectedCountry}
-              COUNTRIES_DATA={COUNTRIES_DATA}
-            />
 
             {/* Date Bar */}
             <DateBar

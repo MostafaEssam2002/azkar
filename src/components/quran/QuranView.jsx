@@ -1,6 +1,8 @@
 import AyaItem from "./AyaItem";
 
 const TOOLTIP_WIDTH = 520;
+const RECITER_STORAGE_KEY = "selectedReciterIdentifier";
+const DEFAULT_RECITER = "ar.husary";
 
 const getLeft = (x, cw, w) => {
     let l = x - w / 2;
@@ -14,7 +16,9 @@ const QuranView = ({
     tooltip, setTooltip,
     player, setPlayer,
     pin,
+    selectedReciter,
 }) => {
+    const reciter = selectedReciter || localStorage.getItem(RECITER_STORAGE_KEY) || DEFAULT_RECITER;
     const handleClick = (e, aya) => {
         if (tooltip.visible && tooltip.text === aya.translation) {
             setTooltip((prev) => ({ ...prev, visible: false }));
@@ -44,7 +48,7 @@ const QuranView = ({
         if (player?.globalNumber === globalNumber) { setPlayer(null); return; }
         setPlayer({
             globalNumber,
-            src: `https://cdn.islamic.network/quran/audio/128/ar.husary/${globalNumber}.mp3`,
+            src: `https://alfurqan.online/api/v1/audio/${reciter}/${globalNumber}`,
             ayaText:   aya.arabic_text || aya.text,
             ayaNumber: aya.aya || aya.numberInSurah,
             x,
@@ -71,7 +75,6 @@ const QuranView = ({
             {tooltip.visible && (() => {
                 const wrapperEl      = document.querySelector("[data-quran-container]");
                 const containerWidth = wrapperEl ? wrapperEl.offsetWidth : 900;
-                // make tooltip responsive: width should not exceed container minus padding
                 const tooltipWidth = Math.max(220, Math.min(TOOLTIP_WIDTH, containerWidth - 16));
                 const tooltipLeft    = getLeft(tooltip.x, containerWidth, tooltipWidth);
                 const arrowOffset    = Math.max(12, Math.min(tooltip.arrowX - tooltipLeft, tooltipWidth - 16));

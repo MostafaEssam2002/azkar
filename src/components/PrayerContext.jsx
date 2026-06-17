@@ -14,6 +14,20 @@ const PRAYER_AUDIO_MAP = {
 const getPrayerAudioFile = (prayerKey) => {
   return `/audio/${PRAYER_AUDIO_MAP[prayerKey] || '3.mp3'}`;
 };
+
+// Reads the muezzin chosen in Athan Settings (saved by AthanSettings.jsx).
+// Falls back to the default azan.mp3 if nothing was selected yet.
+const getSelectedAzanAudioFile = () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem('selectedMuezzin'));
+    if (saved?.file) {
+      return encodeURI(`/audio/${saved.file}`);
+    }
+  } catch {
+    // تجاهل أي بيانات تالفة في localStorage والرجوع للأذان الافتراضي
+  }
+  return '/audio/azan.mp3';
+};
 export const PrayerProvider = ({ children }) => {
   const [prayerTimes, setPrayerTimes] = useState({});
   const [gregDate, setGregDate] = useState('');
@@ -48,7 +62,7 @@ export const PrayerProvider = ({ children }) => {
           const needsAzan = ['Dhuhr', 'Asr', 'Maghrib', 'Isha'].includes(pKey);
           if (needsAzan) {
             audio.addEventListener('ended', () => {
-              const azanAudio = new Audio('/audio/azan.mp3');
+              const azanAudio = new Audio(getSelectedAzanAudioFile());
               azanAudio.play().catch(err => {
                 console.warn('Error playing azan audio after interaction:', err);
               });
@@ -211,7 +225,7 @@ export const PrayerProvider = ({ children }) => {
                 const needsAzan = ['Dhuhr', 'Asr', 'Maghrib', 'Isha'].includes(pKey);
                 if (needsAzan) {
                   audio.addEventListener('ended', () => {
-                    const azanAudio = new Audio('/audio/azan.mp3');
+                    const azanAudio = new Audio(getSelectedAzanAudioFile());
                     azanAudio.play().catch(err => {
                       console.error('Error playing azan audio:', err);
                     });

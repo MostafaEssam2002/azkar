@@ -1,0 +1,230 @@
+/* ── Trigger Button ── */
+.athan-settings__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto 18px;
+  padding: 10px 18px;
+  background: rgba(15, 35, 35, 0.65);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  border-radius: 999px;
+  color: #e7f8ee;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.athan-settings__trigger:hover {
+  border-color: rgba(74, 222, 128, 0.7);
+  background: rgba(20, 45, 45, 0.8);
+  transform: translateY(-1px);
+}
+
+.athan-settings__trigger-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* ── Overlay ── */
+.athan-settings__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 12, 14, 0.72);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+/* ── Modal ── */
+.athan-settings__modal {
+  width: 100%;
+  max-width: 460px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: linear-gradient(180deg, rgba(13, 28, 28, 0.97), rgba(8, 18, 20, 0.98));
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  direction: rtl;
+}
+
+.athan-settings__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.athan-settings__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #f3fbf6;
+}
+
+.athan-settings__close {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e7f8ee;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.athan-settings__close:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.athan-settings__body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.athan-settings__section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #6ee7a8;
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+
+.athan-settings__hint {
+  font-size: 12px;
+  color: rgba(231, 248, 238, 0.6);
+  margin: 0 0 10px;
+}
+
+/* ── Location row (inside popup) ── */
+.athan-settings__location-row {
+  display: flex;
+  gap: 10px;
+}
+
+.athan-settings__field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.athan-settings__field label {
+  font-size: 12px;
+  color: rgba(231, 248, 238, 0.7);
+}
+
+.athan-settings__field select {
+  width: 100%;
+  padding: 9px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  color: #f3fbf6;
+  font-size: 13px;
+}
+
+.athan-settings__field select:focus {
+  outline: none;
+  border-color: rgba(74, 222, 128, 0.6);
+}
+
+/* لازم تستايل الـ option لوحدها، لأن قايمة الاختيارات
+   بترث خلفية بيضاء من المتصفح وتسيب النص الفاتح مش باين */
+.athan-settings__field select option {
+  background: #0d1c1c;
+  color: #f3fbf6;
+}
+
+/* ── Muezzin list ── */
+.athan-settings__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.athan-settings__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.athan-settings__item--selected {
+  border-color: rgba(74, 222, 128, 0.55);
+  background: rgba(74, 222, 128, 0.1);
+}
+
+.athan-settings__name-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  color: #f3fbf6;
+  font-size: 14px;
+  text-align: right;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.athan-settings__play-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.18);
+  color: #6ee7a8;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.athan-settings__checkbox {
+  width: 19px;
+  height: 19px;
+  accent-color: #34d399;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ── Done button ── */
+.athan-settings__done-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 11px;
+  background: #22c55e;
+  border: none;
+  border-radius: 12px;
+  color: #06210f;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.athan-settings__done-btn:hover {
+  background: #2fdb73;
+}

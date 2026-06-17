@@ -1,36 +1,54 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import ReciterCard from '../components/quran/ReciterCard';
 import getData from './../api/getData';
+import localReciters from '../data/reciters.json';
+
 const QuranPage = () => {
     const ref = useRef(false);
     const [reciters, setReciters] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [usingFallback, setUsingFallback] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState('');
     const itemsPerPage = 6;
-    useEffect(() => {
-        async function fetchReciters() {
-            if (ref.current) return;
-            ref.current = true;
-            try {
-                setLoading(true);
-                const res = await getData("/api/reciters");
-                const flattenedData = res.flat();
-                const filteredData = flattenedData.filter(
-                    (reciter) =>
-                        reciter.classification.name === "حسب السور"
-                );
-                setReciters(filteredData);
-            } catch (error) {
-                `continue`;
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchReciters();
-    }, []);
-    // فلترة القراء بناءً على نص البحث
 
+    const filterBySurahClassification = (data) => {
+        const flattened = (Array.isArray(data) ? data : []).flat();
+        return flattened.filter(
+            (reciter) => reciter?.classification?.name === "حسب السور"
+        );
+    };
+
+    const loadReciters = async () => {
+        setLoading(true);
+        setError(false);
+        try {
+            const res = await getData("/api/reciters");
+            const filteredData = filterBySurahClassification(res);
+            setReciters(filteredData);
+            setUsingFallback(false);
+        } catch (err) {
+            // فشل الـ API: نستخدم البيانات المحلية كحل مؤقت
+            const fallbackData = filterBySurahClassification(localReciters);
+            if (fallbackData.length > 0) {
+                setReciters(fallbackData);
+                setUsingFallback(true);
+            } else {
+                setError(true);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        if (ref.current) return;
+        ref.current = true;
+        loadReciters();
+    }, []);
+
+    // فلترة القراء بناءً على نص البحث
     const filteredReciters = useMemo(() => {
         const query = searchQuery.trim();
         if (!query) return reciters;
@@ -38,6 +56,7 @@ const QuranPage = () => {
             reciter.name.toLowerCase().includes(query.toLowerCase())
         );
     }, [reciters, searchQuery]);
+
     // حساب البيانات المعروضة في الصفحة الحالية
     const totalPages = Math.ceil(filteredReciters.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -67,6 +86,12 @@ const QuranPage = () => {
     const handleClearSearch = () => {
         setSearchQuery('');
         setCurrentPage(1);
+    };
+
+    // إعادة المحاولة لتحميل القراء
+    const handleRetry = () => {
+        ref.current = false;
+        loadReciters();
     };
 
     // التعامل مع تغيير الصفحة
@@ -99,8 +124,18 @@ const QuranPage = () => {
                     <div className="spinner"></div>
                     <p>جارٍ التحميل...</p>
                 </div>
+            ) : error ? (
+                <div className="error-container">
+                    <i className="fa-solid fa-triangle-exclamation error-icon"></i>
+                    <p>فشل في تحميل القراء</p>
+                    <button className="error-retry-btn" onClick={handleRetry}>
+                        إعادة المحاولة
+                    </button>
+                </div>
             ) : (
                 <>
+                    
+
                     {/* Search Bar */}
                     <div className="search-wrapper">
                         <div className="search-box">

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { BookOpen, Clock, ListOrdered } from 'lucide-react';
 import '../../../src/styles/components/_surah-hero.scss';
+import ReciterSelector from './ReciterSelector';
 
-const SurahHero = ({ chapter }) => {
+const SurahHero = ({ chapter, reciters, selectedReciter, onReciterChange, recitersLoading }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Trigger fade-in animation
     setIsVisible(true);
   }, []);
 
@@ -19,32 +19,19 @@ const SurahHero = ({ chapter }) => {
 
   return (
     <section className={`surah-hero ${isVisible ? 'surah-hero--visible' : ''}`}>
-      {/* Decorative patterns background */}
       <div className="surah-hero__pattern surah-hero__pattern--left" />
       <div className="surah-hero__pattern surah-hero__pattern--right" />
-
-      {/* Top decorative border */}
       <div className="surah-hero__top-border" />
 
-      {/* Content wrapper */}
       <div className="surah-hero__content">
-        {/* Basmala */}
         <div className="surah-hero__basmala">
           بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
         </div>
-
-        {/* Decorative divider under Basmala */}
         <div className="surah-hero__divider" />
-
-        {/* Radial glow effect for title */}
         <div className="surah-hero__glow" />
-
-        {/* Surah name (main title) */}
         <h1 className="surah-hero__title">{surahName}</h1>
 
-        {/* Metadata cards */}
         <div className="surah-hero__metadata">
-          {/* Revelation type card */}
           <div className="surah-hero__card surah-hero__card--animate-delay-1">
             <div className="surah-hero__card-icon">
               <BookOpen size={20} />
@@ -52,7 +39,6 @@ const SurahHero = ({ chapter }) => {
             <span className="surah-hero__card-text">{revelationType}</span>
           </div>
 
-          {/* Verses count card */}
           <div className="surah-hero__card surah-hero__card--animate-delay-2">
             <div className="surah-hero__card-icon">
               <Clock size={20} />
@@ -60,7 +46,6 @@ const SurahHero = ({ chapter }) => {
             <span className="surah-hero__card-text">{versesCount} آية</span>
           </div>
 
-          {/* Revelation order card */}
           <div className="surah-hero__card surah-hero__card--animate-delay-3">
             <div className="surah-hero__card-icon">
               <ListOrdered size={20} />
@@ -69,13 +54,18 @@ const SurahHero = ({ chapter }) => {
               ترتيب النزول: {revelationOrder}
             </span>
           </div>
+
+          <ReciterSelector
+              reciters={reciters}
+              selectedReciter={selectedReciter}
+              onChange={onReciterChange}
+              loading={recitersLoading}
+          />
         </div>
       </div>
 
-      {/* Bottom decorative border */}
       <div className="surah-hero__bottom-border" />
 
-      {/* Floating particles background */}
       <div className="surah-hero__particles">
         {[...Array(6)].map((_, i) => (
           <div

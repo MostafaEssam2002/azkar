@@ -40,12 +40,12 @@ $font:          'Cairo', sans-serif;
   min-height: 70vh;
   width: 100%;
   direction: rtl;
-
+  margin-top:-40px;
   // ─── Hero Slider ─────────────────────────────────────────
   &__hero-wrapper {
     position: relative;
     width: 100%;
-    height: 95vh;
+    height: 100vh;
     overflow: hidden;
 
     @media (max-width: 768px) {
