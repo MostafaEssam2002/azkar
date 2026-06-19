@@ -19,15 +19,19 @@
 }
 html{
   // background-color: red;
-  
+    height: 100%;   // ← أضف ده
+
   font-size: 10px;
 }
 body {
     transition: .4s;
     white-space: pre-line;
     margin: 0;
-    padding-top: 10px;
+    padding-top: 0;
     overflow-x: hidden;
+    min-height: 100%;  // ← أضف ده
+    display: flex;     // ← أضف ده
+    flex-direction: column;  // ← أضف ده
 }
 
 .zekrType{

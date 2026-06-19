@@ -76,6 +76,9 @@ const HeroSection = ({ onQuranClick, onAdhkarClick }) => {
                 alt={`Hero slide ${slide.id}`}
                 className="home__hero-image"
                 draggable={false}
+                loading="eager"
+                decoding="async"
+                sizes="(max-width: 768px) 100vw, (max-width: 1366px) 100vw, 100vw"
               />
               <div className="home__hero-overlay" />
               {/* <div className="home__hero-content">

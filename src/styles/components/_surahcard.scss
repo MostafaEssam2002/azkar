@@ -63,6 +63,11 @@ $font-ui:       'Cairo', sans-serif;
   max-width: 960px;
   margin: 0 auto;
 
+  @media (max-width: 900px) and (min-width: 481px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
   @media (max-width: 480px) {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;

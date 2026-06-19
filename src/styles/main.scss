@@ -22,6 +22,7 @@
 @use "./components/_reciter-selector";
 @use "./components/_surah-hero";
 @use "./components/_athansettings";
+@use "./components/_footer";
 @import url("https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap");
 
 // =============================================
@@ -32,5 +33,28 @@
 
 
 // =============================================
-// Global Design Tokens & Variables
+// Global: Push body content below the fixed navbar
+// Uses the --navbar-height CSS variable so it adapts
+// automatically across all breakpoints (72 / 62 / 56px).
 // =============================================
+body {
+  padding-top: var(--height);
+}
+
+// .page {
+//   margin-top: -25px;
+// }
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-shell__content {
+  flex: 1;
+}
+
+#root {
+  width: 100%;
+}

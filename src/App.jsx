@@ -1,5 +1,5 @@
 import ZekrType from "./pages/ZekrType";
-import { createBrowserRouter, RouterProvider, Navigate, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet, useLocation } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import QuranPage from "./pages/QuranPage";
 import PlayAudio from "./pages/PlayAudio";
@@ -12,19 +12,30 @@ import PrayerTimes from './pages/PrayerTimes';
 import ErrorBoundary from "./components/ErrorBoundary";
 import WirdPage from './pages/WirdPage';
 import Home from "./pages/Home";
+import Footer from "./components/Footer";
+
+function RootLayout() {
+  const location = useLocation();
+  const shouldHideFooter = location.pathname === "/prayer_times";
+
+  return (
+    <PrayerProvider>
+      <div className="app-shell">
+        <NavBar />
+        <main className="app-shell__content">
+          <Outlet />
+        </main>
+        {!shouldHideFooter && <Footer />}
+      </div>
+    </PrayerProvider>
+  );
+}
 
 function App() {
       const routing = createBrowserRouter([
         {
           path: "/",
-          element: (
-            <PrayerProvider>
-              <>
-                <NavBar />
-                <Outlet />
-              </>
-            </PrayerProvider>
-          ),
+          element: <RootLayout />,
           errorElement: <ErrorBoundary />,
           children: [
             { index: true, element: <Home /> },
