@@ -1,5 +1,6 @@
 import azkarData from "../data/adkar.json";
 import { useEffect, useState, useCallback, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import AzkarBox from './../components/azkar/AzkarBox';
 import RowZekr from './../components/azkar/RowZekr';
 import AzkarTracker from '../components/AzkarTracker';
@@ -8,6 +9,7 @@ import useAzkarNotifications from '../hooks/useAzkarNotifications';
 
 const ZekrType = ({ type }) => {
     const [azkar, setAzkar] = useState([]);
+    const [searchParams] = useSearchParams();
 
     // تحديد نوع الأذكار مباشرة بدون useState لتجنب التأخير
     const azkarType = useMemo(() => {
@@ -28,6 +30,26 @@ const ZekrType = ({ type }) => {
     useEffect(() => {
         setAzkar(azkarData[type] || []);
     }, [type]);
+
+    useEffect(() => {
+        const scrollToValue = Number(searchParams.get("scrollTo"));
+        if (!Number.isFinite(scrollToValue) || scrollToValue < 1 || azkar.length === 0) {
+            return;
+        }
+
+        const itemIndex = Math.min(scrollToValue, azkar.length) - 1;
+        const target = document.querySelector(`[data-zekr-index="${itemIndex + 1}"]`);
+
+        if (!target) {
+            return;
+        }
+
+        const scrollToItem = () => {
+            target.scrollIntoView({ behavior: "smooth", block: "center" });
+        };
+
+        requestAnimationFrame(scrollToItem);
+    }, [searchParams, azkar.length, type]);
 
   // تحديث التقدم عند وصول العداد إلى صفر
     const handleCounterChange = useCallback((index, currentCount) => {
@@ -72,6 +94,7 @@ const ZekrType = ({ type }) => {
                     {azkar.map((zekr, index) => (
                         <div
                             key={`${type}-${index}`}
+                            data-zekr-index={index + 1}
                             className={`zekr-item-wrapper ${tracking.isItemRead(index) ? 'read' : ''}`}
                         >
                             <RowZekr 

@@ -220,6 +220,116 @@ $font-sans: sans-serif;
   }
 }
 
+.friday-kahf-toast-stack {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.friday-kahf-toast {
+  position: relative;
+  top: 0;
+  right: 0;
+  left: auto;
+  transform: none;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: min(520px, calc(100% - 40px));
+  padding: 16px 20px;
+  background: rgba(12, 75, 115, 0.18);
+  border: 1px solid rgba(125, 200, 255, 0.24);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 22px;
+  box-shadow: 0 20px 60px rgba(10, 65, 95, 0.22);
+  color: #f4fbff;
+  font-family: $font-sans;
+  font-size: 15px;
+  overflow: hidden;
+  animation: friday-kahf-enter 0.9s ease-out;
+}
+
+.friday-kahf-toast__close {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: red;//rgba(244, 251, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: bold;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.friday-kahf-toast__close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.friday-kahf-toast__text {
+  flex: 1;
+  min-width: 0;
+  color: #0f4f76;
+  font-weight: 700;
+  padding-left: 28px;
+}
+
+.friday-kahf-toast__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.friday-kahf-toast__button {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease, background-color 0.15s ease;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.friday-kahf-toast__button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.friday-kahf-toast__button--yes {
+  background: rgba(46, 125, 50, 0.9);
+}
+
+.friday-kahf-toast__button--no {
+  background: rgba(210, 57, 49, 0.9);
+}
+
+@keyframes friday-kahf-enter {
+  from {
+    opacity: 0;
+    transform: translateX(120%) translateY(0) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1);
+  }
+}
+
 // ─── Quran Wrapper ────────────────────────────────────────────────────────────
 
 .quran-wrapper {

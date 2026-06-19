@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 import chaptersData from "../data/chapters.json";
 import usePin from "../hooks/usePin";
 import useReadingProgress from "../hooks/useReadingProgress";
@@ -17,12 +18,18 @@ const SurahForReading = () => {
     const { pin, savePin, clearPin } = usePin();
     const { currentSura: savedSura, updateReadingProgress } = useReadingProgress();
     const { reciters, loading: recitersLoading, selectedReciter, changeReciter } = useReciter();
-    
+    const [searchParams] = useSearchParams();
+    const querySura = parseInt(searchParams.get("surah"), 10);
     const [verses,  setVerses]  = useState([]);
     const [loading, setLoading] = useState(true);
     const [tooltip, setTooltip] = useState({ visible: false, text: "", x: 0, y: 0, arrowX: 0 });
     const [player, setPlayer] = useState(null);
-    const [currentSura, setCurrentSura] = useState(pin?.suraId || savedSura || 1);
+    const [currentSura, setCurrentSura] = useState(
+        () => {
+            if (!Number.isNaN(querySura) && querySura >= 1 && querySura <= 114) return querySura;
+            return pin?.suraId || savedSura || 1;
+        }
+    );
     const [showBanner, setShowBanner] = useState(true);
     const [toastVisible, setToastVisible] = useState(false);
     const [pinning, setPinning] = useState(false);
@@ -54,8 +61,12 @@ const SurahForReading = () => {
             .then((data) => { setVerses(data.result); setLoading(false); });
     }, [currentSura]);
 
-    useEffect(() => {
-        if (pin) setShowBanner(true);
+    useEffect(() => {        if (!Number.isNaN(querySura) && querySura >= 1 && querySura <= 114 && querySura !== currentSura) {
+            setCurrentSura(querySura);
+        }
+    }, [querySura, currentSura]);
+
+    useEffect(() => {        if (pin) setShowBanner(true);
     }, [pin]);
 
     // ── Auto navigate to pin sura when pin changes ──────────────────────────

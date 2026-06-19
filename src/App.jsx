@@ -5,6 +5,7 @@ import QuranPage from "./pages/QuranPage";
 import PlayAudio from "./pages/PlayAudio";
 import SurahsList from './pages/SurahsList';
 import SurahForReading from "./pages/SurahForReading";
+import FridayKahfPrompt from "./components/FridayKahfPrompt";
 // import Test from "./components/Test";
 import { PrayerProvider } from "./components/PrayerContext";
 import RadioApp from "./pages/RadioApp";
@@ -21,6 +22,7 @@ function RootLayout() {
   return (
     <PrayerProvider>
       <div className="app-shell">
+        <FridayKahfPrompt />
         <NavBar />
         <main className="app-shell__content">
           <Outlet />
