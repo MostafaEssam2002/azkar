@@ -392,7 +392,7 @@ $footer-border: rgba(201, 162, 75, 0.25);
   &__bottom {
     position: relative;
     background: $footer-green-dark;
-    padding: 28px 24px 24px;
+    padding: 18px 16px 16px;
     overflow: hidden;
   }
 
@@ -411,6 +411,17 @@ $footer-border: rgba(201, 162, 75, 0.25);
     position: relative;
     max-width: 1280px;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: nowrap;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
   }
 
   &__bottom-divider {
@@ -418,7 +429,12 @@ $footer-border: rgba(201, 162, 75, 0.25);
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 16px;
+    margin: 0;
+    flex: 0 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
   }
 
   &__bottom-divider-line {
@@ -433,14 +449,55 @@ $footer-border: rgba(201, 162, 75, 0.25);
   }
 
   &__bottom-row {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
+    gap: 16px;
+    overflow-x: visible;
 
     @media (max-width: 600px) {
       justify-content: center;
+      text-align: center;
+      width: 100%;
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+
+  &__copyright {
+    text-align: center;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: "unset"
+  }
+
+  &__made-with {
+    flex: 1 1 0;
+    text-align: left;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    color: $footer-gold-light;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (max-width: 600px) {
+    &__bottom-divider {
+      position: static;
+      transform: none;
+      margin: 6px 0;
+    }
+
+    &__copyright,
+    &__made-with {
+      width: 100%;
       text-align: center;
     }
   }
@@ -450,6 +507,9 @@ $footer-border: rgba(201, 162, 75, 0.25);
     margin: 0;
     font-size: 13.5px;
     color: rgba(253, 249, 238, 0.85);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__made-with {
