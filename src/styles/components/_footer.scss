@@ -337,15 +337,19 @@ $footer-border: rgba(201, 162, 75, 0.25);
   // ----- Features strip -----
   &__features {
     max-width: 1280px;
-    margin: 0 auto;
+    margin: 0 auto 18px;
+    padding: 18px 22px;
+    list-style: none;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 24px;
-    padding: 28px 32px;
+    justify-content: space-between;
+    gap: 14px;
     border-radius: 18px;
-    @include footer-glass(rgba(255, 255, 255, 0.55));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(246, 239, 220, 0.92));
     border: 1px solid rgba(201, 162, 75, 0.18);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      0 12px 24px rgba(15, 44, 34, 0.06);
 
     @media (max-width: 768px) {
       justify-content: center;
@@ -357,35 +361,39 @@ $footer-border: rgba(201, 162, 75, 0.25);
     display: flex;
     align-items: center;
     gap: 12px;
-    min-width: 200px;
+    min-width: 180px;
+    flex: 1 1 180px;
   }
 
   &__feature-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    background: $footer-cream-soft;
+    background: linear-gradient(180deg, $footer-cream-soft, rgba(201, 162, 75, 0.12));
     color: $footer-green;
     flex-shrink: 0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
 
   &__feature-text {
     display: flex;
     flex-direction: column;
+    gap: 2px;
   }
 
   &__feature-title {
     font-size: 14.5px;
-    font-weight: 700;
+    font-weight: 800;
     color: $footer-green-dark;
   }
 
   &__feature-subtitle {
     font-size: 12.5px;
     color: $footer-text-muted;
+    font-weight: 600;
   }
 
   // ----- Bottom bar -----
@@ -471,7 +479,7 @@ $footer-border: rgba(201, 162, 75, 0.25);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    flex: "unset"
+    flex: unset;
   }
 
   &__made-with {
