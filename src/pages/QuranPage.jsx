@@ -195,49 +195,49 @@ const QuranPage = () => {
                     {/* Pagination — تظهر فقط لو مفيش بحث أو النتائج أكتر من صفحة */}
                     {totalPages > 1 && (
                         <div className="pagination">
+                            <div className="pagination-controls">
+                                {/* زر السابق */}
+                                <button
+                                    className="pagination-btn prev-btn"
+                                    onClick={handlePrevPage}
+                                    disabled={currentPage === 1}
+                                >
+                                    <i className="fa-solid fa-chevron-right"></i>
+                                    السابق
+                                </button>
 
-                            {/* زر السابق */}
-                            <button
-                                className="pagination-btn prev-btn"
-                                onClick={handlePrevPage}
-                                disabled={currentPage === 1}
-                            >
-                                <i className="fa-solid fa-chevron-right"></i>
-                                السابق
-                            </button>
+                                {/* أرقام الصفحات */}
+                                <div className="pagination-pages">
+                                    {getPageNumbers(currentPage, totalPages).map((page, index) => (
+                                        <button
+                                            key={index}
+                                            className={`page-number ${currentPage === page ? 'active' : ''} ${page === '...' ? 'dots' : ''}`}
+                                            onClick={() => handlePageClick(page)}
+                                            disabled={page === '...'}
+                                        >
+                                            {page}
+                                        </button>
+                                    ))}
+                                </div>
 
-                            {/* أرقام الصفحات */}
-                            <div className="pagination-pages">
-                                {getPageNumbers(currentPage, totalPages).map((page, index) => (
-                                    <button
-                                        key={index}
-                                        className={`page-number ${currentPage === page ? 'active' : ''} ${page === '...' ? 'dots' : ''}`}
-                                        onClick={() => handlePageClick(page)}
-                                        disabled={page === '...'}
-                                    >
-                                        {page}
-                                    </button>
-                                ))}
+                                {/* زر التالي */}
+                                <button
+                                    className="pagination-btn next-btn"
+                                    onClick={handleNextPage}
+                                    disabled={currentPage === totalPages}
+                                >
+                                    التالي
+                                    <i className="fa-solid fa-chevron-left"></i>
+                                </button>
                             </div>
 
-                            {/* زر التالي */}
-                            <button
-                                className="pagination-btn next-btn"
-                                onClick={handleNextPage}
-                                disabled={currentPage === totalPages}
-                            >
-                                التالي
-                                <i className="fa-solid fa-chevron-left"></i>
-                            </button>
-
-                        </div>
-                    )}
-
-                    {/* معلومات الصفحة */}
-                    {filteredReciters.length > 0 && (
-                        <div className="pagination-info">
-                            عرض {startIndex + 1} إلى {Math.min(endIndex, filteredReciters.length)} من {filteredReciters.length} قارئ
-                            {searchQuery && ` (من أصل ${reciters.length})`}
+                            {/* معلومات الصفحة */}
+                            {filteredReciters.length > 0 && (
+                                <div className="pagination-info">
+                                    عرض {startIndex + 1} إلى {Math.min(endIndex, filteredReciters.length)} من {filteredReciters.length} قارئ
+                                    {searchQuery && ` (من أصل ${reciters.length})`}
+                                </div>
+                            )}
                         </div>
                     )}
                 </>

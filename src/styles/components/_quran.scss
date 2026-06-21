@@ -156,15 +156,23 @@
 
 .pagination {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
     margin: 3rem 0 2rem 0;
-    flex-wrap: wrap;
     padding: 2rem 1rem;
     background: linear-gradient(135deg, rgba(29, 94, 79, 0.05) 0%, rgba(29, 94, 79, 0.02) 100%);
     border-radius: 1rem;
     border: 1px solid rgba(29, 94, 79, 0.1);
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .pagination-pages {
@@ -262,7 +270,7 @@
     text-align: center;
     color: #666;
     font-size: clamp(0.7rem, 1.2vw, 0.8rem);
-    margin: 1.5rem 0 0 0;
+    margin: 0;
     font-weight: 500;
     letter-spacing: 0.3px;
 }
