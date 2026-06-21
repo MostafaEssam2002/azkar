@@ -8,7 +8,7 @@ const securityHeadersMiddleware = (req, res, next) => {
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('X-XSS-Protection', '1; mode=block');
   // ✅ HTTP CSP (أكثر تحديداً من meta CSP)
-  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self' https://api.quranpedia.net https://cdn.quranpedia.net https://quranenc.com https://cdn.islamic.network https://api.aladhan.com https://api.quranhub.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; media-src 'self' https://cdn.islamic.network https://quranenc.com https://backup.qurango.net; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'");
+  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self' https://api.quran.com https://alfurqan.online https://api.quranpedia.net https://cdn.quranpedia.net https://quranenc.com https://cdn.islamic.network https://api.aladhan.com https://api.quranhub.com https://api.alquran.cloud; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; media-src 'self' https://api.quran.com https://alfurqan.online https://cdn.islamic.network https://quranenc.com https://backup.qurango.net https://*.mp3quran.net; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'");
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   next();
 };
