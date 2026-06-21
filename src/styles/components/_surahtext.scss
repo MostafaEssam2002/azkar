@@ -91,18 +91,223 @@ $font-sans: sans-serif;
   text-align: center;
 }
 
-.selector {
+.sura-selector__trigger {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   background: $cream;
   border: 1px solid $border-light;
-  border-radius: 8px;
-  padding: 10px 20px;
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  direction: rtl;
+  color: $dark-green;
+  box-shadow: 0 6px 18px rgba(18, 42, 28, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(18, 42, 28, 0.12);
+  }
+}
+
+.sura-selector__trigger-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: $gold;
+  background: $gold-light;
+  flex-shrink: 0;
+}
+
+.sura-selector__trigger-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex: 1;
+}
+
+.sura-selector__trigger-label {
+  font-size: 12px;
+  color: $text-brown;
+  font-family: $font-sans;
+}
+
+.sura-selector__trigger-value {
+  font-size: 16px;
+  font-family: $font-serif;
+  color: $dark-green;
+  font-weight: 700;
+}
+
+.sura-selector__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 24, 17, 0.62);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 99999;
+}
+
+.sura-selector__popup {
+  width: min(560px, 100%);
+  max-height: 82vh;
+  overflow: hidden;
+  background: $cream;
+  border-radius: 18px;
+  border: 1px solid $border-light;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+  direction: rtl;
+}
+
+.sura-selector__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid $border-cream;
+}
+
+.sura-selector__title {
   font-size: 18px;
   font-family: $font-serif;
   color: $dark-green;
+  font-weight: 700;
+}
+
+.sura-selector__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: transparent;
+  color: $text-brown;
   cursor: pointer;
-  direction: rtl;
+  border-radius: 50%;
+
+  &:hover {
+    background: rgba(201, 168, 76, 0.1);
+  }
+}
+
+.sura-selector__search {
+  position: relative;
+  padding: 12px 16px;
+}
+
+.sura-selector__search-icon {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $text-brown;
+  pointer-events: none;
+}
+
+.sura-selector__search-input {
   width: 100%;
-  max-width: 400px;
+  box-sizing: border-box;
+  border: 1px solid $border-light;
+  background: #fff;
+  color: $dark-green;
+  border-radius: 12px;
+  padding: 12px 42px 12px 14px;
+  font-size: 15px;
+  font-family: $font-sans;
+  outline: none;
+
+  &:focus {
+    border-color: $gold;
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+  }
+}
+
+.sura-selector__list {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 0 10px 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.sura-selector__item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: right;
+  background: #fff;
+  border: 1px solid #ece3c9;
+  color: $dark-green;
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    background: #fbf8ee;
+    border-color: $gold;
+  }
+
+  &.is-active {
+    background: $gold-light;
+    border-color: $gold;
+  }
+}
+
+.sura-selector__item-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background: $dark-green;
+  color: $text-cream;
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: $font-sans;
+  font-weight: 700;
+}
+
+.sura-selector__item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.sura-selector__item-arabic {
+  font-size: 18px;
+  font-family: $font-serif;
+  color: $dark-green;
+  line-height: 1.2;
+}
+
+.sura-selector__item-english {
+  font-size: 13px;
+  color: $text-brown;
+  font-family: $font-sans;
+}
+
+.sura-selector__empty {
+  text-align: center;
+  color: $text-brown;
+  font-family: $font-sans;
+  padding: 22px 10px;
 }
 
 // ─── Pin Banner ───────────────────────────────────────────────────────────────
@@ -341,6 +546,10 @@ $font-sans: sans-serif;
   border: 1px solid $border-light;
   box-shadow: 0 4px 24px rgba(100, 80, 20, 0.1);
   position: relative;
+
+  @media (max-width: 480px) {
+    padding: 0 12px;
+  }
 }
 
 .bismillah-inner {
@@ -351,14 +560,21 @@ $font-sans: sans-serif;
   border-bottom: 1px solid $border-cream;
   margin-bottom: 8px;
   letter-spacing: 2px;
+
+  @media (max-width: 480px) {
+    font-size: 22px;
+    padding: 18px 0 6px;
+  }
 }
 
 .quran-text {
-  text-align: justify;
-  line-height: 3.6;
-  font-size: 28px;
+  text-align: right;
+  line-height: 2.4;
+  font-size: clamp(22px, 4.2vw, 28px);
   padding: 24px 20px 16px;
   color: $text-primary;
+  word-spacing: normal;
+  text-wrap: pretty;
 }
 
 // ─── Aya ──────────────────────────────────────────────────────────────────────

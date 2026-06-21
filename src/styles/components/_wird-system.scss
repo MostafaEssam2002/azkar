@@ -150,21 +150,28 @@ $danger:       #dc2626;
 /* ═══════════════════════════════════════════════════════════
    Wird Popup
    ═══════════════════════════════════════════════════════════ */
+.wird-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 18, 12, 0.58);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 99999;
+}
+
 .wird-popup {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    width: 300px;
+    width: min(420px, 100%);
     background: #fff;
     border: 1.5px solid $cream-border;
-    border-radius: 16px;
-    box-shadow: 0 12px 40px rgba(0,0,0,.14);
-    z-index: 500;
+    border-radius: 18px;
+    box-shadow: 0 18px 50px rgba(0,0,0,.22);
     overflow: hidden;
     animation: popupIn .22s cubic-bezier(.34,1.56,.64,1);
 
     @keyframes popupIn {
-        from { opacity: 0; transform: translateY(-10px) scale(.96); }
+        from { opacity: 0; transform: translateY(-14px) scale(.96); }
         to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 }
@@ -231,43 +238,55 @@ $danger:       #dc2626;
     }
 }
 
-.wird-stepper {
+.wird-input-row {
     display: flex;
     align-items: center;
-    gap: 0;
+    gap: 6px;
+}
+
+.wird-step-btn {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid $cream-border;
+    background: $cream;
+    color: $green-mid;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s;
+
+    &:hover { background: #e0f0e8; }
+}
+
+.wird-number-input {
+    width: 90px;
+    height: 38px;
     border: 1.5px solid $cream-border;
     border-radius: 10px;
-    overflow: hidden;
-    width: fit-content;
+    background: #fff;
+    color: $green-dark;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Noto Naskh Arabic', serif;
+    outline: none;
+    box-sizing: border-box;
+    appearance: textfield;
+    -moz-appearance: textfield;
 
-    button {
-        width: 36px;
-        height: 36px;
-        border: none;
-        background: $cream;
-        color: $green-mid;
-        font-size: 20px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: background .15s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &:hover { background: #e0f0e8; }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
 
-    span {
-        min-width: 48px;
-        text-align: center;
-        font-size: 18px;
-        font-weight: 700;
-        color: $green-dark;
-        font-family: 'Noto Naskh Arabic', serif;
-        border-left: 1.5px solid $cream-border;
-        border-right: 1.5px solid $cream-border;
-        padding: 0 8px;
-        line-height: 36px;
+    &:focus {
+        border-color: $green-mid;
+        box-shadow: 0 0 0 3px rgba(45,106,79,.12);
     }
 }
 
@@ -283,6 +302,14 @@ $danger:       #dc2626;
     transition: border-color .2s, box-shadow .2s;
     width: 100%;
     box-sizing: border-box;
+    appearance: textfield;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
     &:focus {
         border-color: $green-mid;

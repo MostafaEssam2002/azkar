@@ -86,10 +86,6 @@ const ZekrTypeEnhanced = ({ type }) => {
               basmala={zekr.basmala}
               id={index}
             />
-            {/* شارة التقدم */}
-            <div className="read-indicator">
-              {tracking.isItemRead(index) && <span className="checkmark">✓</span>}
-            </div>
           </div>
         ))}
       </div>

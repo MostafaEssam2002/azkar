@@ -63,6 +63,8 @@ const HeroSection = ({ onQuranClick, onAdhkarClick }) => {
     { id: 4, image: '/slider/radio.png' },
     { id: 5, image: '/slider/tilawa.png' },
     { id: 6, image: '/slider/wird.png' },
+    { id: 7, image: '/slider/masjed.jpg' },
+    
   ];
 
   const heroHighlights = [
@@ -95,40 +97,42 @@ const HeroSection = ({ onQuranClick, onAdhkarClick }) => {
                 sizes="(max-width: 768px) 100vw, (max-width: 1366px) 100vw, 100vw"
               />
               <div className="home__hero-overlay" />
-              <div className="home__hero-content">
-                <span className="home__hero-badge">منصة أذكار</span>
-                <h1 className="home__greeting">السلام عليكم</h1>
-                <p className="home__sub">
-                  اقرأ • استمع • تعلم • واصنع عادة قرآنية يومية
-                </p>
-                <div className="home__hero-support">
-                  {heroHighlights.map(({ icon: Icon, label }) => (
-                    <span key={label} className="home__hero-support__item">
-                      <Icon size={14} />
-                      {label}
-                    </span>
-                  ))}
+              {slide.id !== 3 && slide.id !== 1 && (
+                <div className="home__hero-content">
+                  <span className="home__hero-badge">منصة ذَكِّرْ</span>
+                  {/* <h1 className="home__greeting">السلام عليكم</h1> */}
+                  {/* <p className="home__sub">
+                    اقرأ • استمع • تعلم • واصنع عادة قرآنية يومية
+                  </p> */}
+                  <div className="home__hero-support">
+                    {heroHighlights.map(({ icon: Icon, label }) => (
+                      <span key={label} className="home__hero-support__item">
+                        <Icon size={14} />
+                        {label}
+                      </span>
+                    ))}
+                  </div>
+                  {/* <div className="home__date">{todayLabel}</div> */}
+                  <div className="home__hero-btns">
+                    <button
+                      className="home__btn home__btn--primary"
+                      onClick={onQuranClick}
+                      type="button"
+                    >
+                      <BookOpen size={18} />
+                      ابدا القراءة
+                    </button>
+                    <button
+                      className="home__btn home__btn--secondary"
+                      onClick={onAdhkarClick}
+                      type="button"
+                    >
+                      <Clock3 size={18} />
+                      أذكار اليوم
+                    </button>
+                  </div>
                 </div>
-                <div className="home__date">{todayLabel}</div>
-                <div className="home__hero-btns">
-                  <button
-                    className="home__btn home__btn--primary"
-                    onClick={onQuranClick}
-                    type="button"
-                  >
-                    <BookOpen size={18} />
-                    ابدا القراءة
-                  </button>
-                  <button
-                    className="home__btn home__btn--secondary"
-                    onClick={onAdhkarClick}
-                    type="button"
-                  >
-                    <Clock3 size={18} />
-                    أذكار اليوم
-                  </button>
-                </div>
-              </div>
+              )}
             </div>
           ))}
         </div>
@@ -136,19 +140,21 @@ const HeroSection = ({ onQuranClick, onAdhkarClick }) => {
 
       <button
         className="home__hero-nav home__hero-nav--prev"
-        onClick={scrollPrev}
+        // onClick={scrollPrev}
+        onClick={scrollNext}
         type="button"
         aria-label="الشريحة السابقة"
-      >
-        ‹
+        >
+        ›
+        
       </button>
       <button
         className="home__hero-nav home__hero-nav--next"
-        onClick={scrollNext}
+        onClick={scrollPrev}
         type="button"
         aria-label="الشريحة التالية"
-      >
-        ›
+        >
+        ‹
       </button>
 
       <div className="home__hero-dots">

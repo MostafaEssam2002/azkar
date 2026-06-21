@@ -107,12 +107,6 @@ const ZekrType = ({ type }) => {
                                 categoryKey={categoryKey}
                                 onCountChange={(currentCount) => handleCounterChange(index, currentCount)}
                             />
-                            {/* شارة التقدم — تظهر عند اكتمال العداد */}
-                            <div className="read-indicator">
-                                {tracking.isItemRead(index) && (
-                                    <span className="checkmark">✓</span>
-                                )}
-                            </div>
                         </div>
                     ))}
                 </div>

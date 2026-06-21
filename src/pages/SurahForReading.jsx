@@ -35,6 +35,8 @@ const SurahForReading = () => {
     const [pinning, setPinning] = useState(false);
     const [shouldScrollToPin, setShouldScrollToPin] = useState(false);
     const toastTimer = useRef(null);
+    const readingAreaRef = useRef(null);
+    const shouldScrollToReadingRef = useRef(false);
     const chapter = chaptersData.chapters.find((c) => c.id === currentSura);
     
     // ── Save reading progress on sura change ─────────────────────────────────
@@ -61,13 +63,45 @@ const SurahForReading = () => {
             .then((data) => { setVerses(data.result); setLoading(false); });
     }, [currentSura]);
 
-    useEffect(() => {        if (!Number.isNaN(querySura) && querySura >= 1 && querySura <= 114 && querySura !== currentSura) {
+    useEffect(() => {
+        if (!Number.isNaN(querySura) && querySura >= 1 && querySura <= 114 && querySura !== currentSura) {
             setCurrentSura(querySura);
         }
     }, [querySura, currentSura]);
 
-    useEffect(() => {        if (pin) setShowBanner(true);
+    useEffect(() => {
+        if (pin) setShowBanner(true);
     }, [pin]);
+
+    const scrollToReadingArea = useCallback(() => {
+        const tryScroll = () => {
+            if (readingAreaRef.current) {
+                const top = readingAreaRef.current.getBoundingClientRect().top + window.scrollY - 90;
+                window.scrollTo({
+                    top: Math.max(0, top),
+                    behavior: "smooth"
+                });
+                return;
+            }
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        };
+
+        requestAnimationFrame(() => {
+            tryScroll();
+            setTimeout(tryScroll, 300);
+            setTimeout(tryScroll, 800);
+        });
+    }, []);
+
+    useEffect(() => {
+        if (!shouldScrollToReadingRef.current || loading || verses.length === 0) return;
+        shouldScrollToReadingRef.current = false;
+        scrollToReadingArea();
+    }, [currentSura, loading, verses.length, scrollToReadingArea]);
 
     // ── Auto navigate to pin sura when pin changes ──────────────────────────
     useEffect(() => {
@@ -170,31 +204,33 @@ const SurahForReading = () => {
                 </div>
             )}
 
-            <QuranView
-                verses={verses}
-                chapter={chapter}
-                currentSura={currentSura}
-                loading={loading}
-                tooltip={tooltip}
-                setTooltip={setTooltip}
-                player={player}
-                setPlayer={setPlayer}
-                pin={pin}
-                selectedReciter={selectedReciter}
-            />
+            <div ref={readingAreaRef}>
+                <QuranView
+                    verses={verses}
+                    chapter={chapter}
+                    currentSura={currentSura}
+                    loading={loading}
+                    tooltip={tooltip}
+                    setTooltip={setTooltip}
+                    player={player}
+                    setPlayer={setPlayer}
+                    pin={pin}
+                    selectedReciter={selectedReciter}
+                />
+            </div>
             
             <SurahNavigation
                 currentSura={currentSura}
                 onPrevious={() => {
                     if (currentSura > 1) {
+                        shouldScrollToReadingRef.current = true;
                         setCurrentSura(currentSura - 1);
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                 }}
                 onNext={() => {
                     if (currentSura < 114) {
+                        shouldScrollToReadingRef.current = true;
                         setCurrentSura(currentSura + 1);
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                 }}
             />
