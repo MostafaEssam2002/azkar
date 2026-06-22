@@ -1,83 +1,27 @@
-import useEmblaCarousel from 'embla-carousel-react';
-import Autoplay from 'embla-carousel-autoplay';
-import { useRef, useCallback, useEffect, useState } from 'react';
 import { BookOpen, Clock3, Headphones, Sparkles } from 'lucide-react';
+import useHeroCarousel from '../../hooks/useHeroCarousel';
+
+const slides = [
+  { id: 1, image: '/slider/azkar.png' },
+  { id: 2, image: '/slider/prayer_times.png' },
+  { id: 3, image: '/slider/quran.png' },
+  { id: 4, image: '/slider/radio.png' },
+  { id: 5, image: '/slider/tilawa.png' },
+  { id: 6, image: '/slider/wird.png' },
+  { id: 7, image: '/slider/masjed.jpg' },
+];
+
+const heroHighlights = [
+  { icon: BookOpen, label: 'اقرأ' },
+  { icon: Headphones, label: 'استمع' },
+  { icon: Sparkles, label: 'تعلم' },
+];
 
 /**
  * @param {{ onQuranClick: Function, onAdhkarClick: Function }} props
  */
 const HeroSection = ({ onQuranClick, onAdhkarClick }) => {
-  const autoplayPlugin = useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: false })
-  );
-
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
-      loop: true,
-      align: 'center',
-      skipSnaps: false,
-      direction: 'rtl',
-    },
-    [autoplayPlugin.current]
-  );
-
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setActiveIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on('select', onSelect);
-    return () => emblaApi.off('select', onSelect);
-  }, [emblaApi, onSelect]);
-
-  const scrollPrev = useCallback(() => {
-    if (!emblaApi) return;
-    emblaApi.scrollPrev();
-    autoplayPlugin.current.play();
-  }, [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    if (!emblaApi) return;
-    emblaApi.scrollNext();
-    autoplayPlugin.current.play();
-  }, [emblaApi]);
-
-  const scrollTo = useCallback(
-    (idx) => {
-      if (!emblaApi) return;
-      emblaApi.scrollTo(idx);
-      autoplayPlugin.current.play();
-    },
-    [emblaApi]
-  );
-
-  const slides = [
-    { id: 1, image: '/slider/azkar.png' },
-    { id: 2, image: '/slider/prayer_times.png' },
-    { id: 3, image: '/slider/quran.png' },
-    { id: 4, image: '/slider/radio.png' },
-    { id: 5, image: '/slider/tilawa.png' },
-    { id: 6, image: '/slider/wird.png' },
-    { id: 7, image: '/slider/masjed.jpg' },
-    
-  ];
-
-  const heroHighlights = [
-    { icon: BookOpen, label: 'اقرأ' },
-    { icon: Headphones, label: 'استمع' },
-    { icon: Sparkles, label: 'تعلم' },
-  ];
-
-  const todayLabel = new Intl.DateTimeFormat('ar-SA', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  }).format(new Date());
+  const { emblaRef, activeIndex, scrollPrev, scrollNext, scrollTo } = useHeroCarousel();
 
   return (
     <div className="home__hero-wrapper">
@@ -100,10 +44,6 @@ const HeroSection = ({ onQuranClick, onAdhkarClick }) => {
               {slide.id !== 3 && slide.id !== 1 && (
                 <div className="home__hero-content">
                   <span className="home__hero-badge">منصة ذَكِّرْ</span>
-                  {/* <h1 className="home__greeting">السلام عليكم</h1> */}
-                  {/* <p className="home__sub">
-                    اقرأ • استمع • تعلم • واصنع عادة قرآنية يومية
-                  </p> */}
                   <div className="home__hero-support">
                     {heroHighlights.map(({ icon: Icon, label }) => (
                       <span key={label} className="home__hero-support__item">
@@ -112,7 +52,6 @@ const HeroSection = ({ onQuranClick, onAdhkarClick }) => {
                       </span>
                     ))}
                   </div>
-                  {/* <div className="home__date">{todayLabel}</div> */}
                   <div className="home__hero-btns">
                     <button
                       className="home__btn home__btn--primary"
@@ -140,20 +79,18 @@ const HeroSection = ({ onQuranClick, onAdhkarClick }) => {
 
       <button
         className="home__hero-nav home__hero-nav--prev"
-        // onClick={scrollPrev}
         onClick={scrollNext}
         type="button"
         aria-label="الشريحة السابقة"
-        >
+      >
         ›
-        
       </button>
       <button
         className="home__hero-nav home__hero-nav--next"
         onClick={scrollPrev}
         type="button"
         aria-label="الشريحة التالية"
-        >
+      >
         ‹
       </button>
 
@@ -161,9 +98,7 @@ const HeroSection = ({ onQuranClick, onAdhkarClick }) => {
         {slides.map((_, idx) => (
           <button
             key={idx}
-            className={`home__hero-dot ${
-              activeIndex === idx ? 'home__hero-dot--active' : ''
-            }`}
+            className={`home__hero-dot ${activeIndex === idx ? 'home__hero-dot--active' : ''}`}
             onClick={() => scrollTo(idx)}
             type="button"
             aria-label={`انتقل إلى الشريحة ${idx + 1}`}

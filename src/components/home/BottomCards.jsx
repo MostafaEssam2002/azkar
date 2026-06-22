@@ -1,4 +1,3 @@
-import React from "react";
 import { ArrowLeft, BookOpen, Quote, Sparkles } from "lucide-react";
 
 /**

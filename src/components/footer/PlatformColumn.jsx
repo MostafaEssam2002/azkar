@@ -1,6 +1,5 @@
 import SectionDivider from "./SectionDivider";
 import { platformLinks } from './../../utils/mappedIcons';
-
 const PlatformColumn = () => (
   <div className="footer__column footer__column--platform">
     <h3 className="footer__heading">أقسام المنصة</h3>
@@ -19,5 +18,4 @@ const PlatformColumn = () => (
     </ul>
   </div>
 );
-
 export default PlatformColumn;
