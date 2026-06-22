@@ -17,7 +17,7 @@ const generateBars = (count = 90) =>
 
 const BAR_HEIGHTS = generateBars();
 
-const AudioPlayer = ({ src, arabicTitle, surahNumber, surahName, reader }) => {
+const AudioPlayer = ({ src, arabicTitle, surahNumber, surahName, reader, onAutoNext, autoPlay = false }) => {
     const audioRef = useRef(null);
     const [playing, setPlaying]       = useState(false);
     const [progress, setProgress]     = useState(0);
@@ -25,6 +25,7 @@ const AudioPlayer = ({ src, arabicTitle, surahNumber, surahName, reader }) => {
     const [duration, setDuration]     = useState("—");
     const [volume, setVolume]         = useState(0.75);
     const [loadError, setLoadError]   = useState(null);
+    const [playMode, setPlayMode]     = useState("repeat");
 
 const fmt = (s) => {
     if (isNaN(s)) return "—";
@@ -38,21 +39,52 @@ const fmt = (s) => {
 
 useEffect(() => {
     const audio = audioRef.current;
+    if (!audio) return;
+
     const onMeta = () => setDuration(fmt(audio.duration));
     const onTime = () => {
       setProgress(audio.duration ? (audio.currentTime / audio.duration) * 100 : 0);
         setCurrentTime(fmt(audio.currentTime));
     };
-    const onEnd = () => setPlaying(false);
+    const onEnd = () => {
+      if (playMode === "repeat") {
+        const audio = audioRef.current;
+        if (audio) {
+          audio.currentTime = 0;
+          audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+          return;
+        }
+      }
+
+      setPlaying(false);
+      if (playMode === "next" && typeof onAutoNext === "function") {
+        onAutoNext();
+      }
+    };
+
+    const tryAutoplay = () => {
+        if (!autoPlay || !audio.paused) return;
+        audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+    };
+
     audio.addEventListener("loadedmetadata", onMeta);
     audio.addEventListener("timeupdate", onTime);
     audio.addEventListener("ended", onEnd);
+    if (autoPlay) {
+        if (audio.readyState >= 2) {
+            tryAutoplay();
+        } else {
+            audio.addEventListener("canplay", tryAutoplay, { once: true });
+        }
+    }
+
     return () => {
         audio.removeEventListener("loadedmetadata", onMeta);
         audio.removeEventListener("timeupdate", onTime);
         audio.removeEventListener("ended", onEnd);
+        audio.removeEventListener("canplay", tryAutoplay);
     };
-}, []);
+}, [autoPlay, onAutoNext, playMode, src]);
 
     const handleAudioError = () => {
         setLoadError("فشل تحميل الصوت. يرجى التحقق من الاتصال أو المحاولة لاحقاً.");
@@ -144,6 +176,63 @@ return (
             {playing ? "⏸" : "▶"}
             </button>
             <button onClick={() => skip(10)}>10s ⏭</button>
+        </div>
+
+        <div
+            className="play-mode-switch"
+            style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 0,
+                marginTop: 10,
+                padding: 3,
+                background: "#f5f1de",
+                borderRadius: 999,
+                border: "1px solid #e3d7a0",
+                boxShadow: "inset 0 1px 2px rgba(0,0,0,.06)",
+                width: "fit-content",
+                marginInline: "auto",
+            }}
+        >
+            <button
+                type="button"
+                onClick={() => setPlayMode("repeat")}
+                style={{
+                    border: 0,
+                    outline: "none",
+                    borderRadius: 999,
+                    padding: "7px 12px",
+                    fontSize: 13,
+                    fontWeight: 700,
+                    color: playMode === "repeat" ? "#3d2f00" : "#7a6a32",
+                    background: playMode === "repeat" ? "linear-gradient(180deg, #f7db74 0%, #e3b93a 100%)" : "transparent",
+                    boxShadow: playMode === "repeat" ? "0 1px 3px rgba(227, 185, 58, .45)" : "none",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                }}
+            >
+                تكرار
+            </button>
+            <button
+                type="button"
+                onClick={() => setPlayMode("next")}
+                style={{
+                    border: 0,
+                    outline: "none",
+                    borderRadius: 999,
+                    padding: "7px 12px",
+                    fontSize: 13,
+                    fontWeight: 700,
+                    color: playMode === "next" ? "#3d2f00" : "#7a6a32",
+                    background: playMode === "next" ? "linear-gradient(180deg, #f7db74 0%, #e3b93a 100%)" : "transparent",
+                    boxShadow: playMode === "next" ? "0 1px 3px rgba(227, 185, 58, .45)" : "none",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                }}
+            >
+                التالي
+            </button>
         </div>
 
           {/* Volume */}

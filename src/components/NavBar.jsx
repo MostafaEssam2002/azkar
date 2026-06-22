@@ -75,10 +75,13 @@ const NavBar = () => {
       className="navbar"
       ref={navRef}
     >
-      {/* ── Logo/Branding (Premium Islamic Icon) ──── */}
+      {/* ── Logo/Branding ───────────────────────────── */}
       <div className="navbar__logo" onClick={() => navigate('/')}>
-        <span className="navbar__logo-icon">✨</span>
-        <span className="navbar__logo-text">ذَكِّرْ</span>
+        <img
+          src="/logo.png"
+          alt="ذَكِّرْ"
+          className="navbar__logo-image"
+        />
       </div>
 
       {/* ── Hamburger button (mobile only) ─────────── */}

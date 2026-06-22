@@ -101,7 +101,6 @@ $border-bright: rgba($gold-bright, 0.6);
 .navbar__logo {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
   margin-right: auto;
   cursor: pointer;
   text-decoration: none;
@@ -115,37 +114,13 @@ $border-bright: rgba($gold-bright, 0.6);
   }
 }
 
-.navbar__logo-icon {
-  font-size: 1.6rem;
-  animation: logo-float 4s ease-in-out infinite;
-  line-height: 1;
+.navbar__logo-image {
+  height: 100px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
-.navbar__logo-text {
-  font-size: 1.15rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-  background: linear-gradient(135deg, $gold-bright 0%, $gold-warm 60%, $gold-soft 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-
-  @supports not (-webkit-text-fill-color: transparent) {
-    color: $gold-warm;
-  }
-}
-
-@keyframes logo-float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-3px);
-  }
-}
 
 // ──────────────────────────────────────────────────────────────
 // Nav List

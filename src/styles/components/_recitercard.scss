@@ -21,7 +21,7 @@
 
 /* ===== IMAGE ===== */
 .card-image {
-    width: clamp(6rem, 15vw, 11.25rem);
+    width: clamp(11rem, 18vw, 14.25rem);//clamp(6rem, 15vw, 11.25rem);
     flex-shrink: 0;
     display: flex;
     align-items: center;

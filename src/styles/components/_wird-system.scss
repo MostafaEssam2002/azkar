@@ -668,6 +668,7 @@ $danger:       #dc2626;
 .pagination {
     display: flex;
     justify-content: center;
+    flex-direction: row;  // أضف دي
     align-items: center;
     gap: 16px;
     padding: 24px 16px 40px;
