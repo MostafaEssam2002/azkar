@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useMemo } from 'react';
 import ReciterCard from '../components/quran/ReciterCard';
 import getData from './../api/getData';
 import localReciters from '../data/reciters.json';
+import { API_CONFIG } from '../config/api';
 
 const QuranPage = () => {
     const ref = useRef(false);
@@ -24,7 +25,7 @@ const QuranPage = () => {
         setLoading(true);
         setError(false);
         try {
-            const res = await getData("/api/reciters");
+            const res = await getData(API_CONFIG.recitersApi);
             const filteredData = filterBySurahClassification(res);
             setReciters(filteredData);
             setUsingFallback(false);

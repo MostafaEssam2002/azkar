@@ -1,4 +1,5 @@
 import AyaItem from "./AyaItem";
+import { API_CONFIG } from "../../config/api";
 
 const TOOLTIP_WIDTH = 520;
 const RECITER_STORAGE_KEY = "selectedReciterIdentifier";
@@ -48,7 +49,7 @@ const QuranView = ({
         if (player?.globalNumber === globalNumber) { setPlayer(null); return; }
         setPlayer({
             globalNumber,
-            src: `https://alfurqan.online/api/v1/audio/${reciter}/${globalNumber}`,
+            src: `${API_CONFIG.alfurqan}/audio/${reciter}/${globalNumber}`,
             ayaText:   aya.arabic_text || aya.text,
             ayaNumber: aya.aya || aya.numberInSurah,
             x,

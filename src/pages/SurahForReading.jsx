@@ -13,6 +13,7 @@ import SuraSelector from './../components/quran/SuraSelector';
 // import ReciterSelector from './../components/quran/ReciterSelector';
 import QuranView from './../components/quran/QuranView';
 import SurahNavigation from './../components/quran/SurahNavigation';
+import { API_CONFIG, buildApiUrl } from '../config/api';
 
 const SurahForReading = () => {
     const { pin, savePin, clearPin } = usePin();
@@ -58,7 +59,7 @@ const SurahForReading = () => {
         setLoading(true);
         setTooltip((prev) => ({ ...prev, visible: false }));
         setPlayer(null);
-        fetch(`https://quranenc.com/api/v1/translation/sura/arabic_moyassar/${currentSura}`)
+        fetch(buildApiUrl(API_CONFIG.quranEnc, `translation/sura/arabic_moyassar/${currentSura}`))
             .then((r) => r.json())
             .then((data) => { setVerses(data.result); setLoading(false); });
     }, [currentSura]);

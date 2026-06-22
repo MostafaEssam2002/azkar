@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, useRef } from 'react';
 import { KEYS } from '../utils/constants';
 import { parseTime, formatCountdown, getNowMinutes, findNextPrayer } from '../utils/utils';
 import { getCachedPrayerTimes, savePrayerTimesToCache } from '../utils/prayerCache';
+import { API_CONFIG, buildApiUrl } from '../config/api';
 export const PrayerContext = createContext();
 // Map each prayer to its specific adhan audio file
 const PRAYER_AUDIO_MAP = {
@@ -157,7 +158,7 @@ export const PrayerProvider = ({ children }) => {
       const dd = String(today.getDate()).padStart(2, '0');
       const mm = String(today.getMonth() + 1).padStart(2, '0');
       const yyyy = today.getFullYear();
-      const url = `https://api.aladhan.com/v1/timingsByCity/${dd}-${mm}-${yyyy}?country=${selectedCountry}&city=${selectedCity}&method=5`;
+      const url = `${buildApiUrl(API_CONFIG.aladhan, 'v1/timingsByCity')}/${dd}-${mm}-${yyyy}?country=${selectedCountry}&city=${selectedCity}&method=5`;
       try {
         const res = await fetch(url);
         const json = await res.json();

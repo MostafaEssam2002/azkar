@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { API_CONFIG, buildApiUrl } from "../config/api";
 
 const FALLBACK_AYAH = {
   text:       "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا",
@@ -55,13 +56,13 @@ function useRandomAyah() {
     setLoading(true);
     try {
       const number = Math.floor(Math.random() * 6236) + 1;
-      const ayahRes = await fetch(`https://api.alquran.cloud/v1/ayah/${number}`);
+      const ayahRes = await fetch(buildApiUrl(API_CONFIG.alquran, `ayah/${number}`));
       const ayahData = await ayahRes.json();
 
       if (ayahData.code === 200) {
         const { data } = ayahData;
         const tafsirRes = await fetch(
-          `https://api.alquran.cloud/v1/ayah/${data.number}/ar.muyassar`
+          buildApiUrl(API_CONFIG.alquran, `ayah/${data.number}/ar.muyassar`)
         );
         const tafsirData = await tafsirRes.json();
 

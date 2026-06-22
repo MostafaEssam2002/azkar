@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import chaptersData from '../data/chapters.json';
 import useWird from './../hooks/useWird';
 import usePin from './../hooks/usePin';
+import { API_CONFIG, buildApiUrl } from '../config/api';
 import QuranView from './../components/quran/QuranView';
 import PinBanner from './../components/quran/PinBanner';
 import SurahHero from './../components/quran/SurahHero';
@@ -113,7 +114,7 @@ const WirdPage = () => {
         }
 
         try {
-            const res  = await fetch(`https://api.quranhub.com/v1/page/${requestedPage}`);
+            const res  = await fetch(buildApiUrl(API_CONFIG.quranHub, `page/${requestedPage}`));
             const data = await res.json();
             const pageData = data.data;
             cache.current[requestedPage] = pageData;
@@ -136,7 +137,7 @@ const WirdPage = () => {
     const fetchTafsir = useCallback(async (suraId) => {
         if (tafsirCache.current[suraId]) return;
         try {
-            const res  = await fetch(`https://quranenc.com/api/v1/translation/sura/arabic_moyassar/${suraId}`);
+            const res  = await fetch(buildApiUrl(API_CONFIG.quranEnc, `translation/sura/arabic_moyassar/${suraId}`));
             const data = await res.json();
             const map  = {};
             if (data.result) data.result.forEach(item => { map[Number(item.aya)] = item.translation; });

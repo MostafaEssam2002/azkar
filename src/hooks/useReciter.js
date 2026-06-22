@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { API_CONFIG } from "../config/api";
 
 const RECITER_STORAGE_KEY = "selectedReciterIdentifier";
 const DEFAULT_RECITER = "husary";
@@ -13,7 +14,7 @@ const useReciter = () => {
 
     useEffect(() => {
         let isMounted = true;
-        fetch("https://alfurqan.online/api/v1/reciters")
+        fetch(API_CONFIG.alfurqan + "/reciters")
             .then((r) => r.json())
             .then((data) => {
                 if (!isMounted) return;
