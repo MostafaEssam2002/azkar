@@ -254,15 +254,29 @@ export default function useWird(currentPage = null) {
 
     /* ── save settings ──────────────────────────────────────────── */
     const saveSettings = useCallback((newSettings) => {
-        setSettings(newSettings);
+        const sanitizedSettings = {
+            ...newSettings,
+            startPage: Math.max(1, Math.min(TOTAL_PAGES, Number(newSettings?.startPage) || 1)),
+            pagesPerDay: Math.max(1, Math.min(TOTAL_PAGES, Number(newSettings?.pagesPerDay) || 1)),
+        };
+
+        setSettings(sanitizedSettings);
+
+        // عند تغيير الإعدادات نمسح الحالة القديمة بالكامل
+        // حتى لا يستمر استخدام الصفحة المحفوظة من الورد السابق
+        localStorage.removeItem(STORAGE_CURRENT_PAGE);
+        localStorage.removeItem("quran_wird_pin");
+
         const today = todayStr();
         const currentMinutes = getCurrentMinutesSinceStart();
+        const startPage = sanitizedSettings.startPage || 1;
+
         setProgress({
-            ...defaultProgress(newSettings.startPage || 1),
+            ...defaultProgress(startPage),
             lastVisitDate: today,
             lastMinutesCheck: currentMinutes,
             lastSettingsUpdateTime: Date.now(),
-            nextPageStart: newSettings.startPage || 1,
+            nextPageStart: startPage,
         });
     }, []);
 
