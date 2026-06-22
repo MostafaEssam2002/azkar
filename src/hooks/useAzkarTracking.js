@@ -13,7 +13,7 @@
  */
 
 import { useState, useEffect, useCallback, useContext, useRef } from 'react';
-import { PrayerContext } from '../components/PrayerContext';
+import { PrayerContext } from '../components/prayer/PrayerContext';
 import { parseTime, getNowMinutes } from '../utils/utils';
 import {
   AZKAR_TYPES,

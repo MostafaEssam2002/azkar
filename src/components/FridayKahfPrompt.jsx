@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { PrayerContext } from "./PrayerContext";
+import { PrayerContext } from "./prayer/PrayerContext";
 import { parseTime, getNowMinutes } from "../utils/utils";
 import { AZKAR_TYPES, calculateCurrentAzkarPeriod } from "../hooks/useAzkarTracking";
 

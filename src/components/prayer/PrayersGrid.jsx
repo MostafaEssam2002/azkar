@@ -1,4 +1,4 @@
-import { PRAYERS_AR, PRAYER_ICONS, KEYS } from '../utils/constants';
+import { PRAYERS_AR, PRAYER_ICONS, KEYS } from '../../utils/constants';
 
 export default function PrayersGrid({ prayerTimes, nextPrayer, error }) {
   const format12Hour = (str) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { PrayerContext } from "../components/PrayerContext";
+import { PrayerContext } from "../components/prayer/PrayerContext";
 import { PRAYERS_AR }    from "../utils/constants";
 import chaptersData       from "../data/chapters.json";
 

@@ -37,7 +37,7 @@ const HeroSection = ({ onQuranClick, onAdhkarClick }) => {
                 draggable={false}
                 loading="eager"
                 decoding="async"
-                fetchpriority="high"
+                fetchPriority="high"
                 sizes="(max-width: 768px) 100vw, (max-width: 1366px) 100vw, 100vw"
               />
               <div className="home__hero-overlay" />

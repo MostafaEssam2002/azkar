@@ -1,16 +1,16 @@
 import { useContext } from "react";
 // Components
-import PrayerHeader from './../components/PrayerHeader';
-import AthanSettings from './../components/AthanSettings';
+import PrayerHeader from './../components/prayer/PrayerHeader';
+import AthanSettings from './../components/prayer/AthanSettings';
 // import LocationSelector from './../components/LocationSelector';
-import NextPrayerCard from './../components/NextPrayerCard';
+import NextPrayerCard from './../components/prayer/NextPrayerCard';
 // import LocationBadge from './../components/LocationBadge';
 import DateBar from './../components/DateBar';
-import PrayersGrid from './../components/PrayersGrid';
+import PrayersGrid from './../components/prayer/PrayersGrid';
 import QuranCard from './../components/QuranCard';
 
 // Context
-import { PrayerContext } from "../components/PrayerContext";
+import { PrayerContext } from "../components/prayer/PrayerContext";
 import { COUNTRIES_DATA } from "../utils/constants";
 
 // Constants

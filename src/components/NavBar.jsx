@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useContext, useState, useEffect, useRef } from "react";
-import { PrayerContext } from "./PrayerContext";
+import { PrayerContext } from "./prayer/PrayerContext";
 import { PRAYERS_AR, PRAYER_ICONS } from "../utils/constants";
 import { useNavigate } from 'react-router-dom';
 const NavBar = () => {

@@ -1,8 +1,8 @@
 import { createContext, useState, useEffect, useRef } from 'react';
-import { KEYS } from '../utils/constants';
-import { parseTime, formatCountdown, getNowMinutes, findNextPrayer } from '../utils/utils';
-import { getCachedPrayerTimes, savePrayerTimesToCache } from '../utils/prayerCache';
-import { API_CONFIG, buildApiUrl } from '../config/api';
+import { KEYS } from '../../utils/constants';
+import { parseTime, formatCountdown, getNowMinutes, findNextPrayer } from '../../utils/utils';
+import { getCachedPrayerTimes, savePrayerTimesToCache } from '../../utils/prayerCache';
+import { API_CONFIG, buildApiUrl } from '../../config/api';
 export const PrayerContext = createContext();
 // Map each prayer to its specific adhan audio file
 const PRAYER_AUDIO_MAP = {

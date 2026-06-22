@@ -1,4 +1,4 @@
-import { PRAYERS_AR, PRAYER_ICONS } from '../utils/constants';
+import { PRAYERS_AR, PRAYER_ICONS } from '../../utils/constants';
 
 export default function NextPrayerCard({
   nextPrayer,

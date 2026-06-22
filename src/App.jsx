@@ -7,13 +7,13 @@ import SurahsList from './pages/SurahsList';
 import SurahForReading from "./pages/SurahForReading";
 import FridayKahfPrompt from "./components/FridayKahfPrompt";
 // import Test from "./components/Test";
-import { PrayerProvider } from "./components/PrayerContext";
 import RadioApp from "./pages/RadioApp";
 import PrayerTimes from './pages/PrayerTimes';
 import ErrorBoundary from "./components/ErrorBoundary";
 import WirdPage from './pages/WirdPage';
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
+import { PrayerProvider } from "./components/prayer/PrayerContext";
 
 function RootLayout() {
   const location = useLocation();

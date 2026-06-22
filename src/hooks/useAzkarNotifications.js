@@ -9,9 +9,10 @@
  */
 
 import { useEffect, useCallback, useContext, useRef, useState } from 'react';
-import { PrayerContext } from '../components/PrayerContext';
+// import { PrayerContext } from '../components/prayer/PrayerContext';
 import { getNowMinutes, parseTime } from '../utils/utils';
 import { AZKAR_TYPES, calculateCurrentAzkarPeriod } from './useAzkarTracking';
+import { PrayerContext } from './../components/prayer/PrayerContext';
 
 const NOTIFICATION_CONFIG = {
   [AZKAR_TYPES.MORNING]: {

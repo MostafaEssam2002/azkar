@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { PrayerContext } from "../PrayerContext";
+import { PrayerContext } from "../prayer/PrayerContext";
 import {
     AZKAR_TYPES,
     isAzkarPeriodActive,
