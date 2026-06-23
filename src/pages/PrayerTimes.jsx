@@ -2,12 +2,10 @@ import { useContext } from "react";
 // Components
 import PrayerHeader from './../components/prayer/PrayerHeader';
 import AthanSettings from './../components/prayer/AthanSettings';
-// import LocationSelector from './../components/LocationSelector';
 import NextPrayerCard from './../components/prayer/NextPrayerCard';
-// import LocationBadge from './../components/LocationBadge';
-import DateBar from './../components/DateBar';
+import DateBar from './../components/prayer/DateBar';
 import PrayersGrid from './../components/prayer/PrayersGrid';
-import QuranCard from './../components/QuranCard';
+import QuranCard from './../components/prayer/QuranCard';
 
 // Context
 import { PrayerContext } from "../components/prayer/PrayerContext";

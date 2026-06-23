@@ -1,13 +1,7 @@
-/**
- * AzkarTracker — مكون لعرض شريط التقدم والإحصائيات
- *
- * يعرض تقدم نوع الأذكار الخاص بالصفحة الحالية (صباح/مساء)
- * وليس فقط الفترة الزمنية النشطة حسب وقت الصلاة
- */
+
 
 import { useEffect, useState } from 'react';
-import { AZKAR_TYPES } from '../hooks/useAzkarTracking';
-import '../styles/components/_azkar-tracker.scss';
+import { AZKAR_TYPES } from '../../hooks/useAzkarTracking';
 
 const formatTimeRemaining = (minutes) => {
   if (minutes <= 0) return 'انتهت الفترة';

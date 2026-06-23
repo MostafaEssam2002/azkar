@@ -1,246 +1,126 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PrayerContext } from "./prayer/PrayerContext";
-import { parseTime, getNowMinutes } from "../utils/utils";
 import { AZKAR_TYPES, calculateCurrentAzkarPeriod } from "../hooks/useAzkarTracking";
+import ToastPrompt from "./ToastPrompt";
+import {
+  KAHF_STORAGE_KEY,
+  SALAWAT_STORAGE_KEY,
+  MORNING_AZKAR_STORAGE_KEY,
+  EVENING_AZKAR_STORAGE_KEY,
+  getFridayKey,
+  isFriday,
+  isAfterFridayMaghrib,
+  setPromptState,
+  shouldShowPrompt,
+  shouldShowDailyReminder,
+} from "../utils/toastHelpers";
 
-const KAHF_STORAGE_KEY = "friday_kahf_prompt";
-const SALAWAT_STORAGE_KEY = "friday_salawat_prompt";
-const MORNING_AZKAR_STORAGE_KEY = "daily_morning_azkar_prompt";
-const EVENING_AZKAR_STORAGE_KEY = "daily_evening_azkar_prompt";
+// ─── Toast Definitions ────────────────────────────────────────────────────────
+// لو حبيت تضيف toast جديد، بس أضف object هنا
 
-const getFridayKey = (date = new Date()) => {
-  return date.toISOString().split("T")[0];
-};
+const TOAST_CONFIGS = [
+  {
+    key: KAHF_STORAGE_KEY,
+    text: "هل قرأت سورة الكهف اليوم؟",
+    yesRoute: null,
+    noRoute: "/quran?surah=18",
+  },
+  {
+    key: SALAWAT_STORAGE_KEY,
+    text: "هل صليت على النبي اليوم؟",
+    yesRoute: null,
+    noRoute: "/azkar/تسابيح?scrollTo=9",
+  },
+  {
+    key: MORNING_AZKAR_STORAGE_KEY,
+    text: "هل تريد قراءة أذكار الصباح الآن؟",
+    yesRoute: "/azkar/أذكار-الصباح",
+    noRoute: null,
+  },
+  {
+    key: EVENING_AZKAR_STORAGE_KEY,
+    text: "هل تريد قراءة أذكار المساء الآن؟",
+    yesRoute: "/azkar/أذكار-المساء",
+    noRoute: null,
+  },
+];
 
-const isFriday = (date = new Date()) => date.getDay() === 5;
-
-const isWithinFridayWindow = (date = new Date(), prayerTimes = {}) => {
-  if (!isFriday(date)) return false;
-  if (!prayerTimes?.Fajr || !prayerTimes?.Maghrib) return true;
-
-  const nowMinutes = getNowMinutes();
-  const fajr = parseTime(prayerTimes.Fajr);
-  const maghrib = parseTime(prayerTimes.Maghrib);
-
-  return nowMinutes >= fajr && nowMinutes <= maghrib;
-};
-
-const isAfterFridayMaghrib = (date = new Date(), prayerTimes = {}) => {
-  if (!isFriday(date) || !prayerTimes?.Maghrib) return false;
-
-  const nowMinutes = getNowMinutes();
-  const maghrib = parseTime(prayerTimes.Maghrib);
-
-  return nowMinutes > maghrib;
-};
-
-const getPromptState = (storageKey) => {
-  if (typeof window === "undefined") return null;
-  try {
-    const raw = window.localStorage.getItem(storageKey);
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
-};
-
-const setPromptState = (storageKey, state) => {
-  try {
-    window.localStorage.setItem(storageKey, JSON.stringify(state));
-  } catch {
-    // ignore storage errors
-  }
-};
-
-const shouldShowPrompt = (storageKey, prayerTimes) => {
-  if (!isFriday()) return false;
-  if (!isWithinFridayWindow(new Date(), prayerTimes)) return false;
-  const state = getPromptState(storageKey);
-  const todayKey = getFridayKey();
-  return state?.date !== todayKey || state?.answered !== "yes";
-};
-
-const shouldShowDailyReminder = (storageKey, period) => {
-  if (!period?.isActive || !period?.type) return false;
-  const state = getPromptState(storageKey);
-  const todayKey = getFridayKey();
-  return state?.date !== todayKey || state?.answered !== "yes";
-};
+// ─── Component ────────────────────────────────────────────────────────────────
 
 const FridayKahfPrompt = () => {
   const navigate = useNavigate();
   const { prayerTimes } = useContext(PrayerContext) || {};
-  const [showKahf, setShowKahf] = useState(false);
-  const [showSalawat, setShowSalawat] = useState(false);
-  const [showMorningReminder, setShowMorningReminder] = useState(false);
-  const [showEveningReminder, setShowEveningReminder] = useState(false);
+
+  // visibility state لكل toast — mapped by storageKey
+  const [visibility, setVisibility] = useState({
+    [KAHF_STORAGE_KEY]: false,
+    [SALAWAT_STORAGE_KEY]: false,
+    [MORNING_AZKAR_STORAGE_KEY]: false,
+    [EVENING_AZKAR_STORAGE_KEY]: false,
+  });
+
+  const setToast = (key, value) =>
+    setVisibility((prev) => ({ ...prev, [key]: value }));
+
+  // ─── Effects ──────────────────────────────────────────────────────────────
 
   useEffect(() => {
-    if (!isFriday()) {
+    const fridayPassed = !isFriday() || isAfterFridayMaghrib(new Date(), prayerTimes);
+
+    if (fridayPassed) {
+      // نظف الـ storage ويخفي الـ friday toasts
       window.localStorage.removeItem(KAHF_STORAGE_KEY);
       window.localStorage.removeItem(SALAWAT_STORAGE_KEY);
-      setShowKahf(false);
-      setShowSalawat(false);
-    } else if (isAfterFridayMaghrib(new Date(), prayerTimes)) {
-      window.localStorage.removeItem(KAHF_STORAGE_KEY);
-      window.localStorage.removeItem(SALAWAT_STORAGE_KEY);
-      setShowKahf(false);
-      setShowSalawat(false);
+      setToast(KAHF_STORAGE_KEY, false);
+      setToast(SALAWAT_STORAGE_KEY, false);
     } else {
-      setShowKahf(shouldShowPrompt(KAHF_STORAGE_KEY, prayerTimes));
-      setShowSalawat(shouldShowPrompt(SALAWAT_STORAGE_KEY, prayerTimes));
+      setToast(KAHF_STORAGE_KEY, shouldShowPrompt(KAHF_STORAGE_KEY, prayerTimes));
+      setToast(SALAWAT_STORAGE_KEY, shouldShowPrompt(SALAWAT_STORAGE_KEY, prayerTimes));
     }
 
     const azkarPeriod = calculateCurrentAzkarPeriod(prayerTimes);
+
     if (azkarPeriod.type === AZKAR_TYPES.MORNING && azkarPeriod.isActive) {
-      setShowMorningReminder(shouldShowDailyReminder(MORNING_AZKAR_STORAGE_KEY, azkarPeriod));
-      setShowEveningReminder(false);
+      setToast(MORNING_AZKAR_STORAGE_KEY, shouldShowDailyReminder(MORNING_AZKAR_STORAGE_KEY, azkarPeriod));
+      setToast(EVENING_AZKAR_STORAGE_KEY, false);
     } else if (azkarPeriod.type === AZKAR_TYPES.EVENING && azkarPeriod.isActive) {
-      setShowEveningReminder(shouldShowDailyReminder(EVENING_AZKAR_STORAGE_KEY, azkarPeriod));
-      setShowMorningReminder(false);
+      setToast(EVENING_AZKAR_STORAGE_KEY, shouldShowDailyReminder(EVENING_AZKAR_STORAGE_KEY, azkarPeriod));
+      setToast(MORNING_AZKAR_STORAGE_KEY, false);
     } else {
-      setShowMorningReminder(false);
-      setShowEveningReminder(false);
+      setToast(MORNING_AZKAR_STORAGE_KEY, false);
+      setToast(EVENING_AZKAR_STORAGE_KEY, false);
     }
   }, [prayerTimes]);
 
-  const handleAnswer = (storageKey, answer, route, setter) => {
-    const todayKey = getFridayKey();
-    setPromptState(storageKey, { date: todayKey, answered: answer });
-    setter(false);
+  // ─── Handlers ─────────────────────────────────────────────────────────────
 
-    if (route) {
-      navigate(route);
-    }
+  const handleAnswer = (storageKey, answer, route) => {
+    setPromptState(storageKey, { date: getFridayKey(), answered: answer });
+    setToast(storageKey, false);
+    if (route) navigate(route);
   };
 
-  const handleDismiss = (storageKey, setter) => {
+  const handleDismiss = (storageKey) => {
     setPromptState(storageKey, { date: getFridayKey(), answered: "dismissed" });
-    setter(false);
+    setToast(storageKey, false);
   };
+
+  // ─── Render ───────────────────────────────────────────────────────────────
 
   return (
     <div className="friday-kahf-toast-stack">
-      {showKahf && (
-        <div className="friday-kahf-toast" dir="rtl">
-          <button
-            type="button"
-            className="friday-kahf-toast__close"
-            aria-label="إغلاق الإشعار"
-            onClick={() => handleDismiss(KAHF_STORAGE_KEY, setShowKahf)}
-          >
-            ×
-          </button>
-          <div className="friday-kahf-toast__text">هل قرأت سورة الكهف اليوم؟</div>
-          <div className="friday-kahf-toast__actions">
-            <button
-              type="button"
-              className="friday-kahf-toast__button friday-kahf-toast__button--no"
-              onClick={() => handleAnswer(KAHF_STORAGE_KEY, "no", "/quran?surah=18", setShowKahf)}
-            >
-              لا
-            </button>
-            <button
-              type="button"
-              className="friday-kahf-toast__button friday-kahf-toast__button--yes"
-              onClick={() => handleAnswer(KAHF_STORAGE_KEY, "yes", null, setShowKahf)}
-            >
-              نعم
-            </button>
-          </div>
-        </div>
-      )}
-
-      {showSalawat && (
-        <div className="friday-kahf-toast" dir="rtl">
-          <button
-            type="button"
-            className="friday-kahf-toast__close"
-            aria-label="إغلاق الإشعار"
-            onClick={() => handleDismiss(SALAWAT_STORAGE_KEY, setShowSalawat)}
-          >
-            ×
-          </button>
-          <div className="friday-kahf-toast__text">هل صليت على النبي اليوم؟</div>
-          <div className="friday-kahf-toast__actions">
-            <button
-              type="button"
-              className="friday-kahf-toast__button friday-kahf-toast__button--no"
-              onClick={() => handleAnswer(SALAWAT_STORAGE_KEY, "no", "/azkar/تسابيح?scrollTo=9", setShowSalawat)}
-            >
-              لا
-            </button>
-            <button
-              type="button"
-              className="friday-kahf-toast__button friday-kahf-toast__button--yes"
-              onClick={() => handleAnswer(SALAWAT_STORAGE_KEY, "yes", null, setShowSalawat)}
-            >
-              نعم
-            </button>
-          </div>
-        </div>
-      )}
-
-      {showMorningReminder && (
-        <div className="friday-kahf-toast" dir="rtl">
-          <button
-            type="button"
-            className="friday-kahf-toast__close"
-            aria-label="إغلاق الإشعار"
-            onClick={() => handleDismiss(MORNING_AZKAR_STORAGE_KEY, setShowMorningReminder)}
-          >
-            ×
-          </button>
-          <div className="friday-kahf-toast__text">هل تريد قراءة أذكار الصباح الآن؟</div>
-          <div className="friday-kahf-toast__actions">
-            <button
-              type="button"
-              className="friday-kahf-toast__button friday-kahf-toast__button--no"
-              onClick={() => handleAnswer(MORNING_AZKAR_STORAGE_KEY, "no", null, setShowMorningReminder)}
-            >
-              لا
-            </button>
-            <button
-              type="button"
-              className="friday-kahf-toast__button friday-kahf-toast__button--yes"
-              onClick={() => handleAnswer(MORNING_AZKAR_STORAGE_KEY, "yes", "/azkar/أذكار-الصباح", setShowMorningReminder)}
-            >
-              نعم
-            </button>
-          </div>
-        </div>
-      )}
-
-      {showEveningReminder && (
-        <div className="friday-kahf-toast" dir="rtl">
-          <button
-            type="button"
-            className="friday-kahf-toast__close"
-            aria-label="إغلاق الإشعار"
-            onClick={() => handleDismiss(EVENING_AZKAR_STORAGE_KEY, setShowEveningReminder)}
-          >
-            ×
-          </button>
-          <div className="friday-kahf-toast__text">هل تريد قراءة أذكار المساء الآن؟</div>
-          <div className="friday-kahf-toast__actions">
-            <button
-              type="button"
-              className="friday-kahf-toast__button friday-kahf-toast__button--no"
-              onClick={() => handleAnswer(EVENING_AZKAR_STORAGE_KEY, "no", null, setShowEveningReminder)}
-            >
-              لا
-            </button>
-            <button
-              type="button"
-              className="friday-kahf-toast__button friday-kahf-toast__button--yes"
-              onClick={() => handleAnswer(EVENING_AZKAR_STORAGE_KEY, "yes", "/azkar/أذكار-المساء", setShowEveningReminder)}
-            >
-              نعم
-            </button>
-          </div>
-        </div>
-      )}
+      {TOAST_CONFIGS.filter((t) => visibility[t.key]).map((t) => (
+        <ToastPrompt
+          key={t.key}
+          storageKey={t.key}
+          text={t.text}
+          yesRoute={t.yesRoute}
+          noRoute={t.noRoute}
+          onAnswer={handleAnswer}
+          onDismiss={handleDismiss}
+        />
+      ))}
     </div>
   );
 };

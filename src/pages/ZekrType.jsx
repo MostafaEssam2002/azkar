@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import AzkarBox from './../components/azkar/AzkarBox';
 import RowZekr from './../components/azkar/RowZekr';
-import AzkarTracker from '../components/AzkarTracker';
+import AzkarTracker from '../components/azkar/AzkarTracker';
 import useAzkarTracking, { AZKAR_TYPES } from '../hooks/useAzkarTracking';
 import useAzkarNotifications from '../hooks/useAzkarNotifications';
 
