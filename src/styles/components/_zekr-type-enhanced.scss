@@ -85,6 +85,40 @@
       }
     }
   }
+
+  .azkar-completion-toast {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  .azkar-completion-card {
+    position: relative;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(18px);
+    color: #fff;
+    padding: 24px 32px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.35);
+    pointer-events: auto;
+  }
+
+  .azkar-completion-card h3 {
+    margin: 0 0 12px;
+    font-size: 26px;
+  }
+
+  .azkar-completion-card p {
+    margin: 0;
+    font-size: 16px;
+    opacity: 0.9;
+  }
 }
 
 // استجابة للشاشات الصغيرة

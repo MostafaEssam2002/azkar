@@ -110,3 +110,19 @@
         font-size: 0.8rem;
     }
 }
+
+/* Mobile override for larger text display */
+@media (max-width: 480px) {
+    .ZekrText {
+        font-size: 1.8rem;
+        line-height: 1.5;
+    }
+
+    .Basmala {
+        font-size: 1.1rem;
+    }
+
+    .ZekrDescription {
+        font-size: 0.95rem;
+    }
+}

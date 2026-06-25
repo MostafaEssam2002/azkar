@@ -28,9 +28,22 @@
 /* موبايل */
 @media (max-width: 480px) {
     .rowZekrContainer {
-        gap: 0.3rem;
-        padding: 0 0.1rem;
-        align-items: center;
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 0 0.8rem;
+        align-items: stretch;
+        justify-content: flex-start;
+    }
+
+    .rowZekrContainer > .ZekrContent {
+        order: 1;
+    }
+
+    .rowZekrContainer > .counterSection,
+    .rowZekrContainer > .counterSectionDecremented {
+        order: 2;
+        width: 100%;
+        max-width: none;
     }
 }
     

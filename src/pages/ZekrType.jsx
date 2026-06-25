@@ -3,8 +3,7 @@ import { useEffect, useState, useCallback, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import AzkarBox from './../components/azkar/AzkarBox';
 import RowZekr from './../components/azkar/RowZekr';
-import AzkarTracker from '../components/azkar/AzkarTracker';
-import useAzkarTracking, { AZKAR_TYPES } from '../hooks/useAzkarTracking';
+import AzkarTracker from '../components/azkar/AzkarTracker';import AzkarCompletion from '../components/azkar/AzkarCompletion';import useAzkarTracking, { AZKAR_TYPES } from '../hooks/useAzkarTracking';
 import useAzkarNotifications from '../hooks/useAzkarNotifications';
 
 const ZekrType = ({ type }) => {
@@ -62,6 +61,16 @@ const ZekrType = ({ type }) => {
 
     // حساب الإحصائيات
     const stats = tracking.getStats(azkar.length);
+    const [showCompletion, setShowCompletion] = useState(false);
+
+    useEffect(() => {
+        if (stats.total > 0 && stats.read === stats.total) {
+            setShowCompletion(true);
+            const timer = setTimeout(() => setShowCompletion(false), 5000);
+            return () => clearTimeout(timer);
+        }
+        return undefined;
+    }, [stats.read, stats.total]);
 
     return (
         <>
@@ -124,6 +133,8 @@ const ZekrType = ({ type }) => {
                         </button>
                     </div>
                 )}
+
+                <AzkarCompletion active={showCompletion} />
             </div>
         </>
     )
