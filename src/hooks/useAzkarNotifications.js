@@ -33,8 +33,8 @@ const LAST_NOTIFICATION_KEY = 'azkar_last_notification';
  * طلب إذن الإشعارات من المتصفح
  */
 const requestNotificationPermission = async () => {
-  if (!('Notification' in window)) {
-    console.log('المتصفح لا يدعم الإشعارات');
+  if (!('Notification' in window) || !('serviceWorker' in navigator)) {
+    console.log('المتصفح لا يدعم إشعارات Service Worker');
     return false;
   }
 
@@ -54,18 +54,23 @@ const requestNotificationPermission = async () => {
 /**
  * إرسال إشعار للمستخدم
  */
-const sendNotification = (type) => {
+const sendNotification = async (type) => {
   const config = NOTIFICATION_CONFIG[type];
   if (!config) return;
 
-  if ('Notification' in window && Notification.permission === 'granted') {
-    new Notification(config.title, {
-      body: config.message,
-      icon: '/images/azkar-icon.png', // يمكن تخصيص الأيقونة
-      badge: '/images/azkar-badge.png',
-      tag: `azkar_${type}`,
-      requireInteraction: true // الإشعار يبقى حتى يتم التفاعل معه
-    });
+  if ('Notification' in window && 'serviceWorker' in navigator && Notification.permission === 'granted') {
+    try {
+      const registration = await navigator.serviceWorker.ready;
+      await registration.showNotification(config.title, {
+        body: config.message,
+        icon: '/images/azkar-icon.png',
+        badge: '/images/azkar-badge.png',
+        tag: `azkar_${type}`,
+        requireInteraction: true
+      });
+    } catch (error) {
+      console.error('فشل إرسال الإشعار:', error);
+    }
   }
 };
 
